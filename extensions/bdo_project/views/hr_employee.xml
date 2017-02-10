@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bdo_project.view_employee_form" model="ir.ui.view">
+            <field name="name">Employee Form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="category_ids" position="replace">
+                    <group>
+                        <div class="col-md-3">
+                            <label for="initial" class="oe_edit_only"/>
+                            <field name="initial"/>
+                        </div>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record id="bdo_project.view_employee_tree" model="ir.ui.view">
+            <field name="name">Employee Tree</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="initial"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

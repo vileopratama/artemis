@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_invoice_view" model="ir.actions.act_window">
+            <field name="name">Project Invoice</field>
+            <field name="res_model">bdo.project.invoice</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to create a new project.<br/>
+                </p>
+            </field>
+        </record>
+
+         <record id="project_invoice_view_form" model="ir.ui.view">
+             <field name="name">Project Invoice Form</field>
+             <field name="model">bdo.project.invoice</field>
+             <field name="arch" type="xml">
+                 <form string="Project Invoice Form">
+                     <header>
+                         <button name="action_paid" states="process" string="Confirm Paid" class="o_sale_confirm" type="object" />
+                         <field name="state" widget="statusbar" statusbar_visible="process,paid"/>
+                     </header>
+                     <sheet>
+                         <div class="oe_title">
+                             <h1>
+                                 <field name="number_invoice" default_focus="1" placeholder="Invoice Number"/>
+                             </h1>
+                         </div>
+                         <group>
+                             <group>
+                                 <field name="partner_id" />
+                                 <field name="date_invoice" widget="datetimepicker" />
+                                 <field name="date_periode_from" widget="datetimepicker" />
+                             </group>
+
+                             <group>
+                                 <field name="date_on_scheduled" widget="datetimepicker" />
+                                 <field name="service" />
+                                 <field name="date_periode_to" widget="datetimepicker" />
+                             </group>
+                         </group>
+
+                         <notebook>
+                             <page string="Notes" autofocus="autofocus">
+                                 <group>
+                                      <field name="remarks"/>
+                                 </group>
+                             </page>
+                         </notebook>
+                     </sheet>
+                 </form>
+             </field>
+         </record>
+
+        <menuitem id="projects_topbar"
+                  name="Projects"
+                  web_icon="bdo_project,static/description/icon.png"
+                  sequence="51"/>
+
+        <menuitem id="project_menu"
+                  name="Projects"
+                  parent="projects_topbar"
+                  sequence="1" />
+
+        <menuitem
+                id="project_menuitem"
+                parent="project_menu"
+                name="Invoices"
+                action="project_invoice_view"
+                sequence="1"/>
+    </data>
+</odoo>

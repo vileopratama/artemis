@@ -13,6 +13,8 @@
     'data': [
         'views/hr_employee.xml',
         'views/bdo_project_invoice.xml',
+        'views/bdo_project_service.xml',
+        'views/bdo_project.xml',
     ],
     'demo': [
         #'demo/demo.xml',

@@ -31,15 +31,19 @@
                          </div>
                          <group>
                              <group>
-                                 <field name="partner_id" />
+                                 <field name="partner_id" context="{'default_customer': 1}"/>
                                  <field name="date_invoice" widget="datetimepicker" />
                                  <field name="date_periode_from" widget="datetimepicker" />
+                                 <field name="currency_id" groups="base.group_multi_currency"/>
+                                 <field name="rate" groups="base.group_multi_currency"/>
                              </group>
 
                              <group>
                                  <field name="date_on_scheduled" widget="datetimepicker" />
                                  <field name="service" />
                                  <field name="date_periode_to" widget="datetimepicker" />
+                                 <field name="amount" widget="monetary" />
+                                 <field name="amount_rate" />
                              </group>
                          </group>
 
@@ -49,27 +53,17 @@
                                       <field name="remarks"/>
                                  </group>
                              </page>
+                             <page string="Attachments">
+                                 <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                 </group>
+                            </page>
                          </notebook>
                      </sheet>
                  </form>
              </field>
          </record>
 
-        <menuitem id="projects_topbar"
-                  name="Projects"
-                  web_icon="bdo_project,static/description/icon.png"
-                  sequence="51"/>
-
-        <menuitem id="project_menu"
-                  name="Projects"
-                  parent="projects_topbar"
-                  sequence="1" />
-
-        <menuitem
-                id="project_menuitem"
-                parent="project_menu"
-                name="Invoices"
-                action="project_invoice_view"
-                sequence="1"/>
+        
     </data>
 </odoo>

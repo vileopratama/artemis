@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		 <record id="project_service_view" model="ir.actions.act_window">
+            <field name="name">Our Service</field>
+            <field name="res_model">bdo.project.service</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to create a new service.<br/>
+                </p>
+            </field>
+        </record>
+		
+		<record id="project_invoice_view_form" model="ir.ui.view">
+             <field name="name">Service Form</field>
+             <field name="model">bdo.project.service</field>
+             <field name="arch" type="xml">
+                 <form string="Project Invoice Form">
+                     <sheet>
+                         <div class="oe_title">
+	                         <label for="name" required="1" class="oe_edit_only"/>
+                             <h1>
+                                 <field name="name" default_focus="1" placeholder="Service Name"/>
+                             </h1>
+                         </div>
+                         <group>
+                             <group>
+                                 <field name="state" widget="radio"/>
+                             </group>
+                         </group>
+
+                         <notebook>
+                             <page string="Notes" autofocus="autofocus">
+                                 <group>
+                                      <field name="description"/>
+                                 </group>
+                             </page>
+                             
+                         </notebook>
+                     </sheet>
+                 </form>
+             </field>
+         </record>
+        
+        <record id="project_invoice_view_tree" model="ir.ui.view">
+            <field name="name">Service Form</field>
+            <field name="model">bdo.project.service</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+	</data>
+</odoo>

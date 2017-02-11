@@ -1,19 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+        <record id="project_service_filter" model="ir.ui.view">
+            <field name="name">Our Service Search</field>
+            <field name="model">bdo.project.service</field>
+            <field name="arch" type="xml">
+                <search string="Our Service Search">
+                    <field name="name" string="Service name"/>
+                    <field name="code" string="Service code"/>
+                    <filter string="Active" name="active" domain="[('state','=','active')]"/>
+                    <filter string="Inactive" name="inactive" domain="[('state','=','inactive')]"/>
+                </search>
+             </field>
+         </record>
+        
 		 <record id="project_service_view" model="ir.actions.act_window">
-            <field name="name">Our Service</field>
-            <field name="res_model">bdo.project.service</field>
-            <field name="view_type">form</field>
-            <field name="domain">[]</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
+             <field name="name">Our Service</field>
+             <field name="res_model">bdo.project.service</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="domain">[]</field>
+             <field name="context">{}</field>
+             <field name="view_id" ref="project_service_view_tree"/>
+             <field name="search_view_id" ref="project_service_filter"/>
+             <field name="help" type="html">
                  <p class="oe_view_nocontent_create">
                     Click to create a new service.<br/>
                 </p>
-            </field>
+             </field>
         </record>
-		
+        
 		<record id="project_service_view_form" model="ir.ui.view">
              <field name="name">Service Form</field>
              <field name="model">bdo.project.service</field>

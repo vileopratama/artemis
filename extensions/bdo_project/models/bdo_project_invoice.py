@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models,fields,api
+from datetime import datetime as dt
 
 class ProjectInvoice(models.Model):
     _name = 'bdo.project.invoice'
@@ -19,6 +20,7 @@ class ProjectInvoice(models.Model):
     partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
     service_id  = fields.Many2one(comodel_name='bdo.project.service',string='Service',required=True)
     date_on_scheduled = fields.Date(string='On Scheduled',required=True)
+    date_month_on_scheduled = fields.Char(string='On Scheduled', compute='_get_date_month_on_scheduled', store=True, readonly=True)
     date_periode_from = fields.Date(string='Periode From', required=True)
     date_periode_to = fields.Date(string='Periode To', required=True)
     remarks = fields.Text(string='Remarks')
@@ -52,4 +54,7 @@ class ProjectInvoice(models.Model):
         for project_invoice in self:
             if(project_invoice.rate and project_invoice.amount):
                 project_invoice.amount_rate = project_invoice.rate * project_invoice.amount
-            
+
+    @api.depends('date_on_scheduled')
+    def _get_date_month_on_scheduled(self):
+        self.date_month_on_scheduled = dt.strptime(self.date_on_scheduled, '%Y-%m-%d').strftime('%M %Y')

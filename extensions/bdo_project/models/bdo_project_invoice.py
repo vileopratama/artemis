@@ -19,10 +19,11 @@ class ProjectInvoice(models.Model):
     ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='pending')
     partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
     service_id  = fields.Many2one(comodel_name='bdo.project.service',string='Service',required=True)
-    date_on_scheduled = fields.Date(string='On Scheduled',required=True)
-    date_month_on_scheduled = fields.Char(string='On Scheduled', compute='_get_date_month_on_scheduled', store=True, readonly=True)
+    date_on_scheduled = fields.Date(string='Scheduled On',required=True)
+    date_month_on_scheduled = fields.Char(string='Scheduled On', compute='_get_date_month_on_scheduled', store=True, readonly=True)
     date_periode_from = fields.Date(string='Periode From', required=True)
     date_periode_to = fields.Date(string='Periode To', required=True)
+    date_periode = fields.Char(string='Month', compute='_get_date_periode', store=True,readonly=True)
     remarks = fields.Text(string='Remarks')
     attachment_ids = fields.Many2many(comodel_name='ir.attachment', string='Attachments')
     currency_id = fields.Many2one(comodel_name='res.currency',string='Currency',default=_get_currency,
@@ -30,7 +31,7 @@ class ProjectInvoice(models.Model):
     rate = fields.Float(string='Current Rate',digits=(12, 2),
                         help='The rate of the currency to the currency of rate 1.')
     amount = fields.Monetary(string='Amount',default=0.0)
-    amount_rate = fields.Float(compute='_compute_amount_rate' ,digits=(12, 2),string='Amount Rate',readonly=True)
+    amount_rate = fields.Float(compute='_compute_amount_rate' ,digits=(12, 2),string='Amount Total',readonly=True)
 
     @api.onchange('currency_id')
     def _onchange_currency_id(self):
@@ -57,4 +58,10 @@ class ProjectInvoice(models.Model):
 
     @api.depends('date_on_scheduled')
     def _get_date_month_on_scheduled(self):
-        self.date_month_on_scheduled = dt.strptime(self.date_on_scheduled, '%Y-%m-%d').strftime('%M %Y')
+        self.date_month_on_scheduled = dt.strptime(self.date_on_scheduled, '%Y-%m-%d').strftime('%B %Y')
+
+    @api.depends('date_periode_from','date_periode_to')
+    def _get_date_periode(self):
+        month_from = dt.strptime(self.date_periode_from, '%Y-%m-%d').strftime('%B %Y')
+        month_to = dt.strptime(self.date_periode_to, '%Y-%m-%d').strftime('%B %Y')
+        self.date_periode = month_from + "-" + month_to

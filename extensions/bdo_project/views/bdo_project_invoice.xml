@@ -72,6 +72,14 @@
                     <field name="partner_id"/>
                     <field name="service_id"/>
                     <field name="date_month_on_scheduled" />
+                    <field name="date_periode" />
+                    <field name="date_invoice" />
+                    <field name="number_invoice" />
+                    <field name="currency_id" />
+                    <field name="amount" />
+                    <field name="rate" />
+                    <field name="amount_rate" />
+                    <field name="remarks" />
                 </tree>
             </field>
         </record>

@@ -21,7 +21,7 @@
                  <form string="Project Invoice Form">
                      <header>
                          <button name="action_paid" states="process" string="Confirm Paid" class="o_sale_confirm" type="object" />
-                         <field name="state" widget="statusbar" statusbar_visible="process,paid"/>
+                         <field name="state" widget="statusbar" statusbar_visible="pending,received"/>
                      </header>
                      <sheet>
                          <div class="oe_title">
@@ -40,7 +40,7 @@
 
                              <group>
                                  <field name="date_on_scheduled" widget="datetimepicker" />
-                                 <field name="service" />
+                                 <field name="service_id" />
                                  <field name="date_periode_to" widget="datetimepicker" />
                                  <field name="amount" widget="monetary" />
                                  <field name="amount_rate" />
@@ -63,6 +63,17 @@
                  </form>
              </field>
          </record>
+        
+        <record id="project_invoice_view_tree" model="ir.ui.view">
+            <field name="name">Project Invoice Tree</field>
+            <field name="model">bdo.project.invoice</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id"/>
+                    <field name="service_id"/>
+                </tree>
+            </field>
+        </record>
 
         
     </data>

@@ -13,11 +13,11 @@ class ProjectInvoice(models.Model):
     number_invoice = fields.Char(string='Invoice Number',required=True)
     date_invoice = fields.Date(string='Date of Invoice', required=True)
     state = fields.Selection([
-        ('process', 'On Process'),
-        ('paid', 'Paid'),
-    ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='process')
+        ('pending', 'Pending'),
+        ('received', 'Received'),
+    ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='pending')
     partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
-    service  = fields.Char(string='Service',required=True)
+    service_id  = fields.Many2one(comodel_name='bdo.project.service',string='Service',required=True)
     date_on_scheduled = fields.Date(string='On Scheduled',required=True)
     date_periode_from = fields.Date(string='Periode From', required=True)
     date_periode_to = fields.Date(string='Periode To', required=True)

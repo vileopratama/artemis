@@ -14,7 +14,7 @@
             </field>
         </record>
 		
-		<record id="project_invoice_view_form" model="ir.ui.view">
+		<record id="project_service_view_form" model="ir.ui.view">
              <field name="name">Service Form</field>
              <field name="model">bdo.project.service</field>
              <field name="arch" type="xml">
@@ -27,6 +27,9 @@
                              </h1>
                          </div>
                          <group>
+                             <group>
+                                 <field name="code"/>
+                             </group>
                              <group>
                                  <field name="state" widget="radio"/>
                              </group>
@@ -45,8 +48,8 @@
              </field>
          </record>
         
-        <record id="project_invoice_view_tree" model="ir.ui.view">
-            <field name="name">Service Form</field>
+        <record id="project_service_view_tree" model="ir.ui.view">
+            <field name="name">Service Tree</field>
             <field name="model">bdo.project.service</field>
             <field name="arch" type="xml">
                 <tree>

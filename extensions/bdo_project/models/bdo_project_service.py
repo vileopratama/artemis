@@ -5,6 +5,7 @@ class ProjectInvoice(models.Model):
 	_name = 'bdo.project.service'
 	
 	name = fields.Char(string='Service Name', required=True)
+	code = fields.Char(string='Service Code', required=True)
 	state = fields.Selection([
 		('active', 'Active'),
 		('inactive', 'Inactive'),

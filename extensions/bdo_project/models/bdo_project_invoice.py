@@ -10,8 +10,8 @@ class ProjectInvoice(models.Model):
         if self.env.user.company_id.currency_id.id:
             currency = self.env.user.company_id.currency_id.id
         return currency
-            
-    number_invoice = fields.Char(string='Invoice Number',required=True)
+
+    name = fields.Char(string='Invoice Number',required=True)
     date_invoice = fields.Date(string='Date of Invoice', required=True)
     state = fields.Selection([
         ('pending', 'Pending'),
@@ -31,9 +31,12 @@ class ProjectInvoice(models.Model):
                         help='The rate of the currency to the currency of rate 1.')
     lines = fields.One2many(comodel_name='bdo.project.invoice.line',inverse_name='invoice_id',
                             string='Invoice Lines', states={'pending': [('readonly', False)]},readonly=True, copy=True)
-    amount = fields.Float(compute='_compute_amount_all', string='Amount', digits=0)
-    amount_total = fields.Float(compute='_compute_amount_all',string='Amount Total', digits=0)
-
+    invoices = fields.One2many(comodel_name='bdo.project.engagement.letter', inverse_name='invoice_id',
+                               string='Invoice Lines', copy=True)
+    amount = fields.Float(compute='_compute_amount_all', string='Amount', digits=0,store=True)
+    amount_total = fields.Float(compute='_compute_amount_all',string='Amount Total', digits=0,store=True)
+    
+    @api.multi
     @api.depends('lines.amount_subtotal')
     def _compute_amount_all(self):
         for invoice in self:
@@ -43,7 +46,7 @@ class ProjectInvoice(models.Model):
             invoice.amount_total = total_eq
 
     _sql_constraints = [
-        ('unique_invoice_number', 'unique (number_invoice)', 'Invoice Number must be unique!'),
+        ('unique_invoice_number', 'unique (name)', 'Invoice Number must be unique!'),
     ]
 
     @api.onchange('currency_id')
@@ -86,9 +89,10 @@ class ProjectInvoiceLine(models.Model):
 
     invoice_id = fields.Many2one(comodel_name='bdo.project.invoice', string='Invoice Ref', ondelete='cascade')
     service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service', required=True,change_default=True)
-    amount = fields.Float(string='Amount',default=1)
-    amount_subtotal = fields.Float(compute='_compute_amount_line_all', digits=0, string='Total')
-
+    amount = fields.Float(string='Amount',default=1,store=True)
+    amount_subtotal = fields.Float(compute='_compute_amount_line_all', digits=0, string='Total',store=True)
+    
+    @api.multi
     @api.depends('amount', 'amount_subtotal','invoice_id.rate')
     def _compute_amount_line_all(self):
         for line in self:

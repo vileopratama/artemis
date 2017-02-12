@@ -1,1 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_engagement_letter_view" model="ir.actions.act_window">
+            <field name="name">Engagement Letter</field>
+            <field name="res_model">bdo.project.engagement.letter</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to create a new engagement letter.<br/>
+                </p>
+            </field>
+        </record>
+		
+		<record id="project_engagement_letter_tree" model="ir.ui.view">
+            <field name="name">Project Engagement Letter Tree</field>
+            <field name="model">bdo.project.engagement.letter</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="date_engagement_letter" />
+	                <field name="client_name" />
+                    <field name="date_expiry_engagement_letter"/>
+                    <field name="date_reminder_engagement_letter" />
+                    <field name="source" />
+                    <field name="type" />
+	                <field name="currency" />
+	                <field name="amount" />
+	                <field name="rate" />
+	                <field name="amount_eq" />
+	                <field name="remarks" />
+                </tree>
+            </field>
+        </record>
+		
+		<menuitem id="project_engagement_letter_menuitem"
+		          parent="project_menu"
+		          name="Engagement Letter"
+		          action="project_engagement_letter_view"
+		          sequence="1"/>
+	</data>
+</odoo>

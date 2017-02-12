@@ -14,7 +14,7 @@
         'views/hr_employee.xml',
         'views/bdo_project_invoice.xml',
         'views/bdo_project_service.xml',
-        'views/bdo_project_engagement letter',
+        'views/bdo_project_engagement letter.xml',
         'views/bdo_project_menuitem.xml',
         'views/res_currency.xml',
         'views/bdo_project_target.xml',

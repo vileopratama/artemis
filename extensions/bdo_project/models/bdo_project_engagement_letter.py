@@ -16,8 +16,8 @@ class ProjectEngagementLetter(models.Model):
 	invoice_id = fields.Many2one(comodel_name='bdo.project.invoice',string='Invoice',required=True, index=True)
 	client_name = fields.Char(related='invoice_id.partner_id.name',string='Company\'s name', store=False)
 	currency = fields.Char(related='invoice_id.currency_id.name', string='Currency', store=False)
-	amount = fields.Monetary(related='invoice_id.amount', string='Amount', store=False)
-	rate = fields.Float(related='invoice_id.amount', string='Amount', store=False,digit=0)
+	amount = fields.Float(related='invoice_id.amount', string='Amount', store=False)
+	rate = fields.Float(related='invoice_id.rate', string='Rate', store=False,digit=0)
 	amount_eq = fields.Float(related='invoice_id.amount_total', string='Amount Total', store=False, digit=0)
 	remarks = fields.Text(string='Remarks')
 	employees = fields.One2many('bdo.project.engagement.letter.employees', 'employee_id', string='EL Lines',

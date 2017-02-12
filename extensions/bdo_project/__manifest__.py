@@ -14,13 +14,15 @@
         'views/hr_employee.xml',
         'views/bdo_project_invoice.xml',
         'views/bdo_project_service.xml',
-        'views/bdo_project.xml',
+        'views/bdo_project_engagement letter',
+        'views/bdo_project_menuitem.xml',
         'views/res_currency.xml',
         'views/bdo_project_target.xml',
     ],
     'demo': [
         
     ],
+    'website' : "http://www.bdo.co.id",
     'application' : True,
     'installable' : True,
     'auto_install' : False,

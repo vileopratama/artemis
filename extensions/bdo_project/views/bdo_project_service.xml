@@ -74,7 +74,14 @@
                      </sheet>
                  </form>
              </field>
-         </record>
+        </record>
+        
+        <menuitem
+                id="project_service_menuitem"
+                parent="project_configuration_menu"
+                name="Our Service"
+                action="project_service_view"
+                sequence="1"/>
         
         
         

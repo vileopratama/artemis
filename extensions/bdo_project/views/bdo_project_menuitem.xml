@@ -1,1 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<menuitem id="projects_topbar"
+                  name="Projects"
+                  web_icon="bdo_project,static/description/icon.png"
+                  sequence="51"/>
+
+        <menuitem id="project_menu"
+                  name="Projects"
+                  parent="projects_topbar"
+                  sequence="1" />
+		
+		<menuitem id="project_configuration_menu"
+                  name="Configuration"
+                  parent="projects_topbar"
+                  sequence="2" />
+		
+	</data>
+</odoo>

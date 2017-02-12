@@ -18,7 +18,6 @@ class ProjectInvoice(models.Model):
         ('received', 'Received'),
     ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='pending')
     partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
-    service_id  = fields.Many2one(comodel_name='bdo.project.service',string='Service',required=True)
     date_on_scheduled = fields.Date(string='Scheduled On',required=True)
     date_month_on_scheduled = fields.Char(string='Scheduled On', compute='_get_date_month_on_scheduled', store=True, readonly=True)
     date_periode_from = fields.Date(string='Periode From', required=True)
@@ -30,8 +29,18 @@ class ProjectInvoice(models.Model):
                                   help='The optional other currency if it is a multi-currency entry.')
     rate = fields.Float(string='Current Rate',digits=(12, 2),
                         help='The rate of the currency to the currency of rate 1.')
-    amount = fields.Monetary(string='Amount',default=0.0)
-    amount_rate = fields.Float(compute='_compute_amount_rate' ,digits=(12, 2),string='Amount Total',readonly=True)
+    lines = fields.One2many(comodel_name='bdo.project.invoice.line',inverse_name='invoice_id',
+                            string='Invoice Lines', states={'pending': [('readonly', False)]},readonly=True, copy=True)
+    amount = fields.Float(compute='_compute_amount_all', string='Amount', digits=0)
+    amount_total = fields.Float(compute='_compute_amount_all',string='Amount Total', digits=0)
+
+    @api.depends('lines.amount_subtotal')
+    def _compute_amount_all(self):
+        for invoice in self:
+            total = sum(line.amount for line in invoice.lines)
+            invoice.amount = total
+            total_eq = sum(line.amount_subtotal for line in invoice.lines)
+            invoice.amount_total = total_eq
 
     _sql_constraints = [
         ('unique_invoice_number', 'unique (number_invoice)', 'Invoice Number must be unique!'),
@@ -69,3 +78,19 @@ class ProjectInvoice(models.Model):
         month_from = dt.strptime(self.date_periode_from, '%Y-%m-%d').strftime('%B %Y')
         month_to = dt.strptime(self.date_periode_to, '%Y-%m-%d').strftime('%B %Y')
         self.date_periode = month_from + "-" + month_to
+        
+class ProjectInvoiceLine(models.Model):
+    _name = 'bdo.project.invoice.line'
+    _description = "Lines of Invoice"
+    _rec_name = "service_id"
+
+    invoice_id = fields.Many2one(comodel_name='bdo.project.invoice', string='Invoice Ref', ondelete='cascade')
+    service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service', required=True,change_default=True)
+    amount = fields.Float(string='Amount',default=1)
+    amount_subtotal = fields.Float(compute='_compute_amount_line_all', digits=0, string='Total')
+
+    @api.depends('amount', 'amount_subtotal','invoice_id.rate')
+    def _compute_amount_line_all(self):
+        for line in self:
+            line.amount = line.amount
+            line.amount_subtotal = (line.invoice_id.rate or 1.0)* line.amount

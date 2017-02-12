@@ -25,30 +25,48 @@
                      </header>
                      <sheet>
                          <div class="oe_title">
+                             <label for="number_invoice" class="oe_edit_only"/>
                              <h1>
                                  <field name="number_invoice" default_focus="1" placeholder="Invoice Number"/>
                              </h1>
                          </div>
+                         <field name="date_invoice"/>
                          <group>
                              <group>
                                  <field name="partner_id" context="{'default_customer': 1}"/>
-                                 <field name="date_invoice" widget="datetimepicker" />
-                                 <field name="date_periode_from" widget="datetimepicker" />
-                                 <field name="currency_id" groups="base.group_multi_currency"/>
-                                 <field name="rate" groups="base.group_multi_currency"/>
+                                 <field name="date_on_scheduled" />
                              </group>
-
                              <group>
-                                 <field name="date_on_scheduled" widget="datetimepicker" />
-                                 <field name="service_id" />
-                                 <field name="date_periode_to" widget="datetimepicker" />
-                                 <field name="amount" widget="monetary" />
-                                 <field name="amount_rate" />
+                                 <field name="date_periode_from" />
+                                  <field name="date_periode_to" />
+                             </group>
+                             <group>
+                                 <field name="currency_id" />
+                                 <field name="rate" />
                              </group>
                          </group>
 
                          <notebook>
-                             <page string="Notes" autofocus="autofocus">
+                             <page string="Our Service" autofocus="autofocus">
+                                  <field name="lines" colspan="4" nolabel="1">
+                                      <tree string="Service lines" editable="bottom">
+                                          <field name="service_id"/>
+                                          <field name="amount" widget="monetary"/>
+                                          <field name="amount_subtotal" />
+                                      </tree>
+                                  </field>
+                                 <group class="oe_subtotal_footer oe_right" colspan="2" name="project_total">
+                                     <field name="amount" widget="monetary"/>
+                                     <div class="oe_subtotal_footer_separator oe_inline">
+                                         <label for="amount_total" />
+                                         <button name="button_dummy" states="pending" string="(update)"
+                                                    class="oe_edit_only oe_link"/>
+                                     </div>
+                                     <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator"/>
+                                 </group>
+                                 <div class="oe_clear"/>
+                             </page>
+                             <page string="Notes">
                                  <group>
                                       <field name="remarks"/>
                                  </group>
@@ -69,20 +87,26 @@
             <field name="model">bdo.project.invoice</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="number_invoice" />
+                    <field name="date_invoice" />
                     <field name="partner_id"/>
-                    <field name="service_id"/>
                     <field name="date_month_on_scheduled" />
                     <field name="date_periode" />
-                    <field name="date_invoice" />
-                    <field name="number_invoice" />
                     <field name="currency_id" />
                     <field name="amount" />
                     <field name="rate" />
-                    <field name="amount_rate" />
+                    <field name="amount_total" />
                     <field name="remarks" />
                 </tree>
             </field>
         </record>
+        
+        <menuitem
+                id="project_menuitem"
+                parent="project_menu"
+                name="Invoices"
+                action="project_invoice_view"
+                sequence="1"/>
 
         
     </data>

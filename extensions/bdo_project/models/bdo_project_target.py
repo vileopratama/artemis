@@ -9,7 +9,7 @@ class ProjectTarget(models.Model):
 	name = fields.Text(string='Description')
 	state = fields.Selection(
 		[('draft', 'Draft'), ('cancel', 'Cancel'),('posted', 'Posted')],'Status', readonly=True, copy=False, default='draft')
-	lines = fields.One2many(comodel_name='bdo.project.target.line', inverse_name='project_target_id',
+	lines = fields.One2many(comodel_name='bdo.project.target.line', inverse_name='target_id',
 	                        string='Target Lines',states={'draft': [('readonly', False)]}, readonly=True, copy=True)
 	amount_total = fields.Float(string='Total', digits=0,compute='_compute_amount_all',readonly=True,store=True)
 	
@@ -25,7 +25,7 @@ class ProjectTargetLine(models.Model):
 	_description = "Lines of Project Target"
 	_rec_name = "currency_id"
 	
-	project_target_id = fields.Many2one(comodel_name='bdo.project.target', string='Target Ref', ondelete='cascade')
+	target_id = fields.Many2one(comodel_name='bdo.project.target', string='Target Ref', ondelete='cascade')
 	currency_id = fields.Many2one(comodel_name='res.currency',string='Currency',change_default=True)
 	rate = fields.Float(string='Rate', digits=0)
 	amount = fields.Float(digits=0, string='Amount')

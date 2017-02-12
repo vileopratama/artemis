@@ -20,10 +20,9 @@ class ProjectEngagementLetter(models.Model):
 	rate = fields.Float(related='invoice_id.rate', string='Rate', store=False,digit=0)
 	amount_eq = fields.Float(related='invoice_id.amount_total', string='Amount Total', store=False, digit=0)
 	remarks = fields.Text(string='Remarks')
-	invoices = fields.One2many(comodel_name='bdo.project.invoice.line',inverse_name='invoice_id',copy=True,
-	                              string="Line Services")
 	employees = fields.One2many('bdo.project.engagement.letter.employees',inverse_name='engagement_letter_id', string='EL Lines',
 	                            copy=True)
+	invoices = fields.One2many(related='invoice_id.lines',string='Invoice Lines',readonly=True)
 	
 class ProjectEngagementLetterEmployees(models.Model):
 	_name = "bdo.project.engagement.letter.employees"
@@ -31,13 +30,5 @@ class ProjectEngagementLetterEmployees(models.Model):
 	_rec_name = "employee_id"
 	
 	engagement_letter_id = fields.Many2one(comodel_name='bdo.project.engagement.letter', string='Employee Ref', ondelete='cascade')
-	employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee',change_default=True)
+	employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee',required=True,change_default=True)
 	acl = fields.Selection([('in-charge', 'In Charge'), ('assistant', 'Assistant')], string='Access Control List')
-	
-class ProjectInvoiceLine(models.Model):
-	_inherit = 'bdo.project.invoice.line'
-	_description = "Lines of Invoice"
-	_rec_name = "service_id"
-	
-	invoice_id = fields.Many2one(comodel_name='bdo.project.engagement.letter',
-	                             related='bdo_project_engagement_letter.invoice_id',string='Invoice Ref',ondelete='cascade')

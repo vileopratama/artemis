@@ -31,8 +31,6 @@ class ProjectInvoice(models.Model):
                         help='The rate of the currency to the currency of rate 1.')
     lines = fields.One2many(comodel_name='bdo.project.invoice.line',inverse_name='invoice_id',
                             string='Invoice Lines', states={'pending': [('readonly', False)]},readonly=True, copy=True)
-    invoices = fields.One2many(comodel_name='bdo.project.engagement.letter', inverse_name='invoice_id',
-                               string='Invoice Lines', copy=True)
     amount = fields.Float(compute='_compute_amount_all', string='Amount', digits=0,store=True)
     amount_total = fields.Float(compute='_compute_amount_all',string='Amount Total', digits=0,store=True)
     

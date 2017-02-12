@@ -40,8 +40,8 @@
 						</group>
 						<notebook>
 							<page string="Teams" autofocus="autofocus">
-								<field name="employees" string="Employee Lines" editable="bottom">
-									<tree string="Employee">
+								<field name="employees" colspan="4" nolabel="1">
+									<tree string="Employee" editable="bottom">
 										<field name="employee_id" />
 										<field name="acl"/>
 									</tree>
@@ -55,11 +55,11 @@
 							</page>
 							
 							<page string="Our Service">
-								<field name="invoices" string="Services Lines" readonly="1">
-									<tree string="Service lines">
-										<field name="service_id" readonly="1"/>
-										<field name="amount" widget="monetary" readonly="1"/>
-										<field name="amount_subtotal" readonly="1" />
+								<field name="invoices" colspan="4" nolabel="1">
+									<tree>
+										<field name="service_id" />
+										<field name="amount" widget="monetary"/>
+										<field name="amount_subtotal" />
 									</tree>
 								</field>
 							</page>

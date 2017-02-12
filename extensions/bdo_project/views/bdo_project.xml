@@ -29,5 +29,6 @@
                 name="Our Service"
                 action="project_service_view"
                 sequence="1"/>
+		
 	</data>
 </odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_currency_search" model="ir.ui.view">
+            <field name="name">res.currency.search</field>
+            <field name="model">res.currency</field>
+            <field name="arch" type="xml">
+                <search string="Currencies">
+                    <field name="name" string="Currency"/>
+                    <field name="active"/>
+                    <filter name="active" string="Active" domain="[('active','=',True)]" help="Show active currencies"/>
+                    <filter name="inactive" string="Inactive" domain="[('active','=',False)]" help="Show inactive currencies"/>
+                </search>
+            </field>
+        </record>
+		
+		<record id="project_currency_tree" model="ir.ui.view">
+            <field name="name">Currencies</field>
+            <field name="model">res.currency</field>
+            <field name="arch" type="xml">
+                <tree string="Currencies">
+                    <field name="name"/>
+                    <field name="symbol"/>
+                    <field name="rate_ids" invisible="1"/>
+                    <field name="date"/>
+                    <field name="rate"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="project_currency_view" model="ir.actions.act_window">
+			<field name="name">Currencies</field>
+			<field name="res_model">res.currency</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="context" eval="{}"/>
+			<field name="domain" eval="[]"/>
+			<field name="search_view_id" ref="bdo_project.project_currency_search"/>
+            <field name="view_id" ref="bdo_project.project_currency_tree"/>
+			<field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to add a new curency
+                </p>
+				<p>
+                    You must define a currency for everything for create invoice through
+                    the project interface.
+                </p>
+            </field>
+		</record>
+		
+		 
+		
+		 <menuitem id="project_currency_menuitem"
+		           parent="project_configuration_menu"
+		           name="Currencies"
+		           action="project_currency_view"
+        sequence="3"/>
+	</data>
+</odoo>

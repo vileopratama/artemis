@@ -33,6 +33,10 @@ class ProjectInvoice(models.Model):
     amount = fields.Monetary(string='Amount',default=0.0)
     amount_rate = fields.Float(compute='_compute_amount_rate' ,digits=(12, 2),string='Amount Total',readonly=True)
 
+    _sql_constraints = [
+        ('unique_invoice_number', 'unique (number_invoice)', 'Invoice Number must be unique!'),
+    ]
+
     @api.onchange('currency_id')
     def _onchange_currency_id(self):
         if self.currency_id.id:

@@ -14,6 +14,18 @@
              </field>
          </record>
         
+        <record id="project_service_view_tree" model="ir.ui.view">
+            <field name="name">Service Tree</field>
+            <field name="model">bdo.project.service</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
 		 <record id="project_service_view" model="ir.actions.act_window">
              <field name="name">Our Service</field>
              <field name="res_model">bdo.project.service</field>
@@ -64,17 +76,7 @@
              </field>
          </record>
         
-        <record id="project_service_view_tree" model="ir.ui.view">
-            <field name="name">Service Tree</field>
-            <field name="model">bdo.project.service</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="sequence" widget="handle"/>
-                    <field name="name"/>
-                    <field name="state"/>
-                </tree>
-            </field>
-        </record>
+        
         
 	</data>
 </odoo>

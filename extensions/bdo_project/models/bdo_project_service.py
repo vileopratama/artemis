@@ -12,3 +12,8 @@ class ProjectInvoice(models.Model):
 	], string='State',default='active')
 	description = fields.Text(string='Description')
 	sequence = fields.Integer()
+	
+	_sql_constraints = [
+		('unique_name', 'unique (name)', 'Service name must be unique!'),
+		('unique_code', 'unique (code)', 'Service code must be unique!'),
+	]

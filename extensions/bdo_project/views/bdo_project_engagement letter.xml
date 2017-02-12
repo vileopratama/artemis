@@ -14,6 +14,61 @@
             </field>
         </record>
 		
+		<record id="project_engagement_letter_form" model="ir.ui.view">
+			<field name="name">Project Engagement Letter Form</field>
+			<field name="model">bdo.project.engagement.letter</field>
+			<field name="arch" type="xml">
+				<form string="Engagement Letter Form">
+					<sheet>
+						<div class="oe_title">
+                             <label for="name" class="oe_edit_only"/>
+                             <h1>
+                                 <field name="name" default_focus="1" placeholder="No. Of EL"/>
+                             </h1>
+                         </div>
+						<field name="date_engagement_letter"/>
+						<group>
+							<group>
+								<field name="invoice_id" />
+								<field name="type" widget="radio" />
+								<field name="source" widget="radio" />
+							</group>
+							<group>
+								<field name="date_expiry_engagement_letter" />
+								<field name="date_reminder_engagement_letter" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Teams" autofocus="autofocus">
+								<field name="employees" string="Employee Lines" editable="bottom">
+									<tree string="Employee">
+										<field name="employee_id" />
+										<field name="acl"/>
+									</tree>
+								</field>
+							</page>
+							
+							<page string="Notes">
+								<group>
+									<field name="remarks" />
+								</group>
+							</page>
+							
+							<page string="Our Service">
+								<field name="invoices" string="Services Lines" readonly="1">
+									<tree string="Service lines">
+										<field name="service_id" readonly="1"/>
+										<field name="amount" widget="monetary" readonly="1"/>
+										<field name="amount_subtotal" readonly="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
 		<record id="project_engagement_letter_tree" model="ir.ui.view">
             <field name="name">Project Engagement Letter Tree</field>
             <field name="model">bdo.project.engagement.letter</field>

@@ -1,3 +1,32 @@
 // Variables
 // --------------------------------------------------
-@brand-primary:			#337AB7;
+@brand-primary :	#ed1a3b;
+@brand-light : #fff;
+@brand-dark : #222;
+@brand-gray : #ccc;
+@brand-light-gray : #f2f2f2;
+@brand-white-gray : #fcfcfc;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+@font-family-sans-serif:  "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+//== Navbar
+//
+//##
+
+//=== Inverted navbar
+// Reset inverted navbar basics
+@navbar-inverse-color : #fff;
+@navbar-inverse-bg : @brand-primary;
+@navbar-inverse-border : darken(@navbar-inverse-bg, 15%);
+
+// Inverted navbar links
+@navbar-inverse-link-color: @brand-light;
+@navbar-inverse-link-hover-color: @brand-light;
+@navbar-inverse-link-hover-bg: darken(@navbar-inverse-bg,20%);
+@navbar-inverse-link-active-color: @navbar-inverse-link-hover-color;
+@navbar-inverse-link-active-bg: darken(@navbar-inverse-bg, 20%);
+@navbar-inverse-link-disabled-color:@brand-gray;
+@navbar-inverse-link-disabled-bg:transparent;

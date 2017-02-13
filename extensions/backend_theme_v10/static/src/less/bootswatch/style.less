@@ -1,12 +1,18 @@
-// Put Loading indicator in the right bottom of the screen
+// Put Loading indicator in the right bottom of the screen 
 .o_loading {
     background-color: darken(@brand-primary, 13.5%) !important;
+    top: inherit;
+    bottom: 0;
+    right: 0;
     padding: 5px 50px;
     border-radius: 0 !important;
     opacity: 0.8;
 }
+
 // Font
-.ui-autocomplete {
+
+.ui-autocomplete
+{
 	font-family: @font-family-sans-serif;
 }
 
@@ -15,6 +21,7 @@ a:hover {
 }
 
 // Adjust menu counter position
+
 //@-moz-document url-prefix() {
 //	.badge {
 //		margin-top: -20px;
@@ -22,19 +29,21 @@ a:hover {
 //}
 
 // Get rid of purple fontcolor
+
 body a {
-	color: @brand-dark;
+	color: @brand-primary;
+
 	&:active, &:focus, &:hover {
 		outline: none;
 	}
 }
 
 .ui-autocomplete .ui-menu-item.ui-state-focus  {
-    background-color: @brand-primary;
+    background-color: @brand-primary;	
 }
 
 .o_control_panel .breadcrumb > li > a {
-    color: @brand-dark;
+    color: @brand-primary;
 }
 
 .o_form_view .o_horizontal_separator {
@@ -58,12 +67,12 @@ body a {
 }
 
 .o_calendar_container .o_calendar_sidebar_container .ui-datepicker table .ui-state-active {
-    background: @brand-gray none repeat scroll 0 0 !important;
-	color: @brand-light !important;
+    background: @brand-primary none repeat scroll 0 0 !important;
+	color: #ffffff !important;
 }
 
 .o_calendar_container .o_calendar_sidebar_container .ui-datepicker table.ui-datepicker-calendar tbody td a {
-    color: @brand-dark;
+    color: @brand-primary;
 }
 
 .o_progressbar {
@@ -75,8 +84,9 @@ body a {
 }
 
 .o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a, .o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
-    color: @brand-dark;
+    color: @brand-primary;
 }
+
 
 // Navbar =========================================
 #oe_main_menu_navbar {
@@ -92,8 +102,8 @@ body a {
 .navbar-nav {
     li {
         a, button {
-            font-size: 14px !important;
-            padding: 14px 10px !important;
+            font-size: 13px !important;
+         //   padding: 14px 10px !important;
             margin-top: 0 !important;
             line-height: 21px !important;
         }
@@ -102,20 +112,15 @@ body a {
         li {
             a, button {
                 padding: 4px 10px !important;
-                font-size: 14px !important;
+                font-size: 13px !important;
 			}
         }
     }
 }
 
-// Control Panel
-.o_control_panel {
-    background: @brand-light;
-}
-
 // Fix color Add file button
 .o_control_panel .o_cp_sidebar .o_hidden_input_file .o_form_binary_form span {
-    color: @brand-gray;
+    color: #333;
 }
 
 // Align green progress indicator
@@ -131,6 +136,7 @@ body a {
 //}
 
 // Bigger font in buttons
+
 .btn-sm, .btn-group-sm > .btn {
     font-size: 13px;
 }
@@ -140,26 +146,28 @@ body a {
 
 .o_form_view .o_form_sheet_bg .o_form_sheet {
 	max-width: 1200px;
-	width: 95%;
 }
 
 // Darker background
 .o_form_view .o_form_sheet_bg {
-    background:url('/bdo_backend_theme/static/src/img/bg-sheet.jpg');
+    background-color: #8f8f8f;
+    background-image: none;
     border: 0 none;
 }
 
+
 .o_web_client > .o_main .o_main_content {
-	background-color: @brand-light;
+	background-color: #8f8f8f;
 }
 
 .o_kanban_view {
-	background-color: @brand-light;
+	background-color: #8f8f8f;
 }
 
 .o_event_left {
     background-color: @brand-primary !important;
 }
+
 
 // Fix background project gantt
 .oe_gantt {
@@ -167,22 +175,22 @@ body a {
 }
 
 // Listview =======================================
+
 .o_list_view.table {
     border: none;
 }
-
 .o_list_view.table thead, .o_list_view.table tfoot, .o_list_view.table td,.o_list_view.table th {
-    border-bottom: 1px solid @brand-gray;
+    border: none;
 }
-
+ 
 .o_list_view.table thead {
-    background-color: darken(@brand-light-gray,5%);
+    background-color: #e2e2e0;
 }
-
+ 
 .o_list_view.table thead > tr > th.o_column_sortable:hover {
-    background-color: darken(@brand-light-gray,40%);
+    background-color: #D6D6D3;
 }
-
+ 
 .o_list_view.table tbody tr.o_group_header {
     background-color: #dfdfdf;
     background-image: none;
@@ -190,11 +198,11 @@ body a {
 }
 
 .table-striped > tbody > tr:nth-of-type(2n+1) {
-    background-color: @brand-light-gray;
+    background-color: #eef0f0;
 }
 
 .o_list_view tfoot {
-    background-color: @brand-light-gray;
+    background-color: @brand-primary;
     color: #ffffff;
     cursor: default;
     font-weight: normal;
@@ -206,7 +214,7 @@ div.o_checkbox {
     position: relative;
     vertical-align: sub;
 }
-
+ 
 div.o_checkbox > input {
     width: 15px;
     height: 15px;
@@ -219,7 +227,7 @@ div.o_checkbox > input {
     right: auto;
     cursor: pointer;
 }
-
+ 
 div.o_checkbox > input + span {
     display: block;
 	width: 15px;
@@ -227,79 +235,58 @@ div.o_checkbox > input + span {
     border: 1px solid #8f8f8f;
     background-color: white;
 }
-
+ 
 div.o_checkbox > input:checked + span {
     background-repeat: no-repeat;
-
+    background-image: url(/backend_theme_v10/static/src/img/checked.svg);
     background-position: center center;
 }
-
+ 
 div.o_checkbox > input:disabled + span {
     opacity: 0.7;
     border: 1px solid #e2e2e0;
 }
-
+ 
  div.o_checkbox > input:focus + span {
     outline: 1px solid @brand-primary;
 }
 
 // Kanban ===========================================
+
 //Project
 .o_kanban_view.o_kanban_dashboard.o_project_kanban .o_project_kanban_boxes .o_project_kanban_box:nth-child(2n+1) {
     background-color: @brand-primary !important;
-}
+    }
 
 // Search filter
 
 .o_searchview .o_searchview_facet .o_searchview_facet_label {
     background-color: @brand-primary;
-    border:1px solid darken(@brand-primary,12%);
-}
+    }
 
-.o_searchview .o_searchview_facet .o_facet_values {
-    background-color: @brand-light;
-    border:1px solid darken(@brand-light,12%);
-}
 
 .o_primary {
     color: @brand-primary !important;
-}
+    }
 
 .o_kanban_view.o_kanban_dashboard.o_salesteam_kanban .o_sales_dashboard > div > table > tbody > tr > td.o_main {
     background-color: @brand-primary !important;
-}
+    }
 
 // Input field
 
 input[type="text"], input[type="password"], input[type="number"],
 textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
-.o_searchview {
+.o_searchview
+{
     border: 0;
     border-radius: 0;
-    border-bottom: 1px solid darken(@brand-light,30%);
-    padding-top:5px;
-    padding-bottom:5px;
+    border-bottom: 1px solid #ccc;
 }
 
 .o_web_client input:focus, .o_web_client textarea:focus, .o_web_client select:focus {
     outline: none;
-	border-bottom: 1px solid @brand-primary;
-}
-
-::-webkit-input-placeholder {
-   color: darken(@brand-light,30%);
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: darken(@brand-light,30%);
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: darken(@brand-light,30%);
-}
-
-:-ms-input-placeholder {
-   color: darken(@brand-light,30%);
+	border-bottom: 2px solid @brand-info;
 }
 
 // Control panel
@@ -317,48 +304,96 @@ textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
 
 // Button header
 .o_form_view > header {
-    background-color: @brand-light-gray;
+    background-color: #ededed;
     background-image: none;
-    border-bottom: 1px solid darken(@brand-light-gray,5%);
+    border-bottom: 1px solid #cacaca;
 }
 
 .o_form_view > header {
-    padding-left: 15px;
-    padding-top: 3px;
-	padding-bottom: 3px;
+    padding-left: 14px;
+    padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+// Status bar
+
+.o_form_view ul.oe_form_status li, .o_form_view ul.oe_form_status_clickable li {
+  background-image: linear-gradient(to bottom, #ededed, #ededed) !important;
+}
+
+.o_form_view ul.oe_form_status li > .arrow, .o_form_view ul.oe_form_status_clickable li > .arrow {
+  margin-left: 5px !important;
+}
+
+.o_form_view ul.oe_form_status li > .arrow span, .o_form_view ul.oe_form_status_clickable li > .arrow span {
+  margin-left: -20px !important;
+  box-shadow: 2px 0px 1px rgba(255, 255, 255, 0.2), inset -3px 3px 0px rgba(0, 0, 0, 0.2) !important;
+  background-color: #ededed !important;
+  background: -moz-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -o-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -webkit-gradient(linear, left top, right bottom, from(#ededed), to(#ededed)) !important;
+  background: -ms-linear-gradient(top, #ededed, #ededed) !important;
+  -moz-border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border-radius: 0px !important;
+
+}
+
+.o_form_view ul.oe_form_status li.oe_active > .arrow span, .o_form_view ul.oe_form_status_clickable li.oe_active > .arrow span {
+  box-shadow: 2px 0px 1px rgba(255, 255, 255, 0.2), inset -3px 3px 0px @brand-info !important;
+  background-color: #ededed !important;
+  background: -moz-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -o-linear-gradient(135deg, #ededed, #ededed) !important;
+  background: -webkit-gradient(linear, left top, right bottom, from(#ededed), to(#ededed)) !important;
+  background: -ms-linear-gradient(top, #ededed, #ededed) !important;
 }
 
 
-// Toggle left menu bar
-.ul_toggle_leftmenu {
-    padding-left: 0px;
-    list-style: outside none none;
-    list-style-type: none;
-    list-style-image: none;
-    list-style-position: outside;
-    margin-bottom: 0px !important;
-    max-width: 50px;
-}
-.toggle_leftmenu {
-    color: #FFF !important;
-    padding: 14px 14px;
+.o_form_view ul.oe_form_status li.oe_active > .label, .o_form_view ul.oe_form_status_clickable li.oe_active > .label {
+  color: @brand-info !important;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #ededed !important;
 }
 
-.toggle_leftmenu:hover {
-    color: #FFF !important;
-    cursor: pointer;
-    background-color: darken(@brand-primary, 13.5%);
+.o_form_view ul.oe_form_status li:first-child > .label, .o_form_view ul.oe_form_status_clickable li:first-child > .label {
+  border-left: 0px solid #cacaca  !important;
 }
 
+// Chat window
 
-
-// =========================================
-// Make formwidth wider to screen
-
-.o_form_view .o_form_sheet_bg .o_form_sheet {
-	min-width : 90%;
-	max-width: 1200px;
+.o_chat_window .o_chat_header {
+    background-color: @brand-primary !important;
 }
 
+// Explorer 11 fix to use fullscreen
 
-// Kanban ===========================================
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	.oe-view-manager-view-kanban, .oe-view-manager-view-form, .oe-view-manager-view-list, .oe-view-manager-view-calendar, .oe-view-manager-view-pivot, .oe-view-manager-view-graph {
+        width: 100% !important;
+	}
+
+	// Fix user preference height	
+	.modal .modal-content .modal-body .oe-view-manager-content {
+		position: static;
+		height: 400px;
+	}
+	
+	// Fix salesboard width
+	.oe-view-manager-view-sales_team_dashboard {
+		width: 100%;
+	}
+
+}
+
+// Better contrast navnar sub-menu
+
+.dropdown-header {
+  font-weight: bolder;
+  background-color: @dropdown-border;
+}
+
+// Better contrast no-content
+.oe_view_nocontent {
+color: #333;
+}

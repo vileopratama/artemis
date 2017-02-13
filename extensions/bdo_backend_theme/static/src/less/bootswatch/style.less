@@ -1,3 +1,18 @@
+// Put Loading indicator in the right bottom of the screen
+.o_loading {
+    position:absolute;
+     top:0px;
+     right:0px;
+     width:100%;
+     height:100%;
+     background-color:#666;
+     background-image:url('/bdo_backend_theme/static/src/img/ajax-loader.gif');
+     background-repeat:no-repeat;
+     background-position:center;
+     z-index:10000000;
+     opacity: 0.4;
+     filter: alpha(opacity=40); /* For IE8 and earlier */
+}
 
 // Toggle left menu bar
 .ul_toggle_leftmenu {
@@ -16,5 +31,43 @@
 .toggle_leftmenu:hover {
     color: #FFF !important;
     cursor: pointer;
+    background-color: darken(@brand-primary, 13.5%);
+}
 
+// Navbar =========================================
+#oe_main_menu_navbar {
+    .box-shadow(0px 0px 8px #666666);
+    border: none;
+    .navbar-collapse {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+}
+
+#oe_main_menu_navbar,
+.navbar-nav {
+    li {
+        a, button {
+            font-size: 14px !important;
+            padding: 14px 10px !important;
+            margin-top: 0 !important;
+            line-height: 21px !important;
+        }
+    }
+    .dropdown-menu {
+        li {
+            a, button {
+                padding: 4px 10px !important;
+                font-size: 14px !important;
+			}
+        }
+    }
+}
+
+// =========================================
+// Make formwidth wider to screen
+
+.o_form_view .o_form_sheet_bg .o_form_sheet {
+	min-width : 90%;
+	max-width: 1200px;
 }

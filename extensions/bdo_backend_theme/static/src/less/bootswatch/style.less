@@ -74,9 +74,7 @@ body a {
     background-color: @brand-primary;
 }
 
-.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a, .o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
-    color: @brand-dark;
-}
+
 
 // Navbar =========================================
 #oe_main_menu_navbar {
@@ -245,8 +243,29 @@ div.o_checkbox > input:disabled + span {
 
 // Kanban =========================================================================================================
 
-.o_kanban_card_header {
+.o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped .o_kanban_card_header,
+.o_kanban_view.o_kanban_dashboard.o_kanban_grouped .o_kanban_card_header {
+    background-color: @brand-primary !important;
+}
 
+.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a,
+.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
+    color: @brand-light;
+    font-weight:normal;
+    font-size:13px;
+    text-transform:uppercase;
+}
+.o_kanban_view .o_secondary {
+    color: @brand-light;
+}
+
+.o_kanban_manage_button_section .oe_kanban_color_0 a {
+    color: @brand-light;
+}
+
+.o_kanban_view > .o_kanban_record,
+.o_kanban_view > .oe_kanban_color_0 {
+    box-shadow:0px 0px 1px 1px @brand-primary;
 }
 
 //Project
@@ -448,9 +467,22 @@ textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
     background-color: @brand-light;
 }
 
+.o_web_client > .o_main .o_sub_menu .o_sub_menu_content {
+    margin-top:20px;
+}
+
+.o_web_client > .o_main .o_sub_menu .o_sub_menu_content .oe_secondary_menu_section {
+    color : @brand-light-dark;
+    text-transform: uppercase;
+}
+
 //.o_web_client > .o_main .o_sub_menu .o_sub_menu_content .oe_secondary_submenu {
 //    line-height: 2em
 //}
+
+.o_web_client > .o_main .o_sub_menu .o_sub_menu_content .oe_secondary_submenu > li > a {
+    padding: 10px 10px 10px 18px;
+}
 
 .o_mail_thread .o_thread_message .o_thread_message_core.o_mail_note {
     padding:10px;

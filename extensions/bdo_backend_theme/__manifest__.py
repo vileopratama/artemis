@@ -17,6 +17,10 @@
     'data':[
         'views/webclient_templates.xml',
         ],
+    'qweb': [
+        'static/src/xml/base.xml',
+        'static/src/xml/dashboard.xml',
+    ],
     'installable': True,
     'application' : False,
     'auto_install' : False

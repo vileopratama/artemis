@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+	<t t-extend="DashboardShare">
+		<t t-jquery="div[class='o_web_settings_dashboard_header']">
+			this.text("Development");
+		</t>
+		
+		<t t-jquery="small">
+			this.text("Developer menu for help us development application");
+		</t>
+		
+		<t t-jquery="div[class='user-heading']">
+			this.text("<h3>BDO Customer Relationship Management</h3>");
+		</t>
+		
+		<t t-jquery="div[class='col-xs-4']">
+			this.parent().remove();
+		</t>
+		
+		<t t-jquery="div[id='settings']">
+			this.remove();
+		</t>
+	</t>
+</templates>

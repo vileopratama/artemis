@@ -20,6 +20,12 @@
              </xpath>
         </template>
         
+        <template id="layout" inherit_id="web.layout">
+            <xpath expr="//title" position="replace">
+                <title t-esc="title or 'BDO'"/>
+            </xpath>
+        </template>
+        
         <template id="menu_secondary" inherit_id="web.menu_secondary">
             <xpath expr="//a[@class='o_sub_menu_logo']" position="replace" />
             

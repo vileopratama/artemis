@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_existing_clients_list_report_view" model="ir.actions.act_window">
+            <field name="name">BUSINESS SERVICE OUTSOURCING</field>
+            <field name="res_model">report.existing.clients.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+        </record>
+		
+		<record id="project_existing_clients_list_report_pivot" model="ir.ui.view">
+            <field name="model">report.existing.clients.list</field>
+            <field name="arch" type="xml">
+                <pivot string="Summary Analysis" disable_linking="False">
+                    <field name="client_name" type="row"/>
+	                <field name="source" type="row"/>
+	                <field name="el_number" type="row"/>
+	                <field name="amount_total" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+		
+		<menuitem id="project_existing_clients_list_report"
+		          parent="project_report_menu"
+		          name="Clients List"
+		          action="project_existing_clients_list_report_view"
+		          sequence="10"/>
+	</data>
+</odoo>

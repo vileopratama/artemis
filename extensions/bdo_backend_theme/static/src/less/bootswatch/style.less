@@ -248,24 +248,15 @@ div.o_checkbox > input:disabled + span {
     background-color: @brand-primary !important;
 }
 
-.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_ungrouped a,
-.o_web_client .o_kanban_view.o_kanban_dashboard.o_kanban_grouped a {
+.o_kanban_card_header_title > .o_primary > a {
     color: @brand-light;
     font-weight:normal;
     font-size:13px;
     text-transform:uppercase;
 }
-.o_kanban_view .o_secondary {
-    color: @brand-light;
-}
 
-.o_kanban_manage_button_section .oe_kanban_color_0 a {
+.o_kanban_card_header_title > .o_secondary {
     color: @brand-light;
-}
-
-.o_kanban_view > .o_kanban_record,
-.o_kanban_view > .oe_kanban_color_0 {
-    box-shadow:0px 0px 1px 1px @brand-primary;
 }
 
 //Project
@@ -507,4 +498,13 @@ textarea, select, .o_form_view.o_form_editable .o_form_field_many2manytags,
 .datepicker .table-condensed > tbody > tr > td.active, .datepicker .table-condensed > tbody > tr > td .active {
     background-color:@brand-primary;
     color: @brand-light;
+}
+
+
+// =========================================
+// Button
+.oe_highlight {
+    color: @brand-dark;
+    background-color: darken(@brand-light,20%);
+    border-color: darken(@brand-light,20%);
 }

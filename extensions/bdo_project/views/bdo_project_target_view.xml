@@ -24,7 +24,7 @@
 					</header>
 					<sheet>
 						<group col="4" colspan="4" name="project_fields">
-							<field name="period"/>
+							<field name="date_period"/>
 							<field name="name"/>
 						</group>
 						<notebook colspan="4">
@@ -66,12 +66,27 @@
 			</field>
 		</record>-->
 		
+		<record id="project_invoice_view_search" model="ir.ui.view">
+		    <field name="model">bdo.project.target</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Project Invoice">
+				    <field name="year_period"/>
+				    <field name="name"/>
+				    <group expand="0" string="Group By">
+					    <filter string="Month" domain="[]" context="{'group_by':'date_period'}"/>
+					    <filter string="Year"  domain="[]" context="{'group_by':'year_period'}"/>
+				    </group>
+			    </search>
+		    </field>
+	    </record>
+		
 		<record id="project_target_tree" model="ir.ui.view">
             <field name="name">Project Target</field>
             <field name="model">bdo.project.target</field>
             <field name="arch" type="xml">
                 <tree string="Project Target">
-                    <field name="period"/>
+                    <field name="date_period"/>
+	                <field name="year_period"/>
                     <field name="name"/>
 	                <field name="amount_total"/>
                 </tree>
@@ -83,7 +98,7 @@
 			<field name="model">bdo.project.target</field>
 			<field name="arch" type="xml">
 				<graph string="Project Target Chart">
-					<field name="period" type="row"/>
+					<field name="date_period" type="row"/>
 					<field name="amount_total" type="measure"/>
 				</graph>
 			</field>

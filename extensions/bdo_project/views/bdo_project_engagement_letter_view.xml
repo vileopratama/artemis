@@ -34,6 +34,7 @@
 								<field name="source" widget="radio" />
 							</group>
 							<group>
+								<field name="employee_id" />
 								<field name="date_expiry_engagement_letter" />
 								<field name="date_reminder_engagement_letter" />
 							</group>
@@ -69,6 +70,22 @@
 			</field>
 		</record>
 		
+		<record id="project_invoice_view_search" model="ir.ui.view">
+		    <field name="model">bdo.project.engagement.letter</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Engagement Letter">
+				    <field name="name"/>
+				    <field name="client_name"/>
+				    <field name="currency"/>
+				    <group expand="0" string="Group By">
+					    <filter string="Type" domain="[]" context="{'group_by':'type'}"/>
+					    <filter string="Source" domain="[]" context="{'group_by':'source'}"/>
+					    <filter string="Month" domain="[]" context="{'group_by':'date_period'}"/>
+				    </group>
+			    </search>
+		    </field>
+	    </record>
+		
 		<record id="project_engagement_letter_tree" model="ir.ui.view">
             <field name="name">Project Engagement Letter Tree</field>
             <field name="model">bdo.project.engagement.letter</field>
@@ -85,7 +102,6 @@
 	                <field name="amount" />
 	                <field name="rate" />
 	                <field name="amount_eq" />
-	                <field name="remarks" />
                 </tree>
             </field>
         </record>

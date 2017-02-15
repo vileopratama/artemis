@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*-
 from odoo import models,fields,api
+from datetime import datetime as dt
 
 class ProjectTarget(models.Model):
 	_name = 'bdo.project.target'
-	_order = 'period desc'
+	_order = 'date_period desc'
 	
-	period = fields.Date(string = 'Period',required = True)
+	date_period = fields.Date(string = 'Period',required = True)
+	year_period = fields.Char(string='Year',compute='_get_year_period',size=4,store=True,readonly=True)
 	name = fields.Text(string='Description')
 	state = fields.Selection(
 		[('draft', 'Draft'), ('cancel', 'Cancel'),('posted', 'Posted')],'Status', readonly=True, copy=False, default='draft')
 	lines = fields.One2many(comodel_name='bdo.project.target.line', inverse_name='target_id',
 	                        string='Target Lines',states={'draft': [('readonly', False)]}, readonly=True, copy=True)
 	amount_total = fields.Float(string='Total', digits=0,compute='_compute_amount_all',readonly=True,store=True)
+	
+	@api.depends('date_period')
+	def _get_year_period(self):
+		year = dt.strptime(self.date_period, '%Y-%m-%d').strftime('%Y')
+		self.year_period = year
 	
 	@api.multi
 	@api.depends('lines.amount_rate')

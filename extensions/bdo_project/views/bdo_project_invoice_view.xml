@@ -20,7 +20,8 @@
              <field name="arch" type="xml">
                  <form string="Project Invoice Form">
                      <header>
-                         <button name="action_paid" states="process" string="Confirm Paid" class="o_sale_confirm" type="object" />
+                         <button name="do_received" states="pending" string="Set to Received" type="object" class="oe_highlight" confirm="Are you sure want to received ?"/>
+	                     <button name="do_pending"  states="received" string="Set to Pending" type="object" class="oe_highlight" confirm="Are you sure want back to pending ?"/>
                          <field name="state" widget="statusbar" statusbar_visible="pending,received"/>
                      </header>
                      <sheet>
@@ -30,19 +31,22 @@
                                  <field name="name" default_focus="1" placeholder="Invoice Number"/>
                              </h1>
                          </div>
-                         <field name="date_invoice"/>
+                         <field name="date_invoice" placeholder="Invoice Date"/>
                          <group>
                              <group>
-                                 <field name="partner_id" context="{'default_customer': 1}"/>
+                                 <field name="partner_id"/>
                                  <field name="date_on_scheduled" />
                              </group>
                              <group>
-                                 <field name="date_periode_from" />
-                                  <field name="date_periode_to" />
+                                 <field name="date_period_from" />
+                                  <field name="date_period_to" />
                              </group>
                              <group>
                                  <field name="currency_id" />
                                  <field name="rate" />
+                             </group>
+                             <group>
+                                 <field name="tax_invoice_number" />
                              </group>
                          </group>
 
@@ -81,6 +85,24 @@
                  </form>
              </field>
          </record>
+	    
+	    <record id="project_invoice_view_search" model="ir.ui.view">
+		    <field name="model">bdo.project.invoice</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Project Invoice">
+				    <field name="partner_id"/>
+				    <field name="name"/>
+				    <field name="currency_id"/>
+				    <filter string="Pending" domain="[('state','=','pending')]"/>
+				    <filter string="Received" domain="[('state','=','received')]"/>
+				    <group expand="0" string="Group By">
+					    <filter string="Client" domain="[]" context="{'group_by':'partner_id'}"/>
+					    <filter string="Currency" domain="[]" context="{'group_by':'currency_id'}"/>
+					    <filter string="Invoice Month" domain="[]" context="{'group_by':'date_invoice'}"/>
+				    </group>
+			    </search>
+		    </field>
+	    </record>
         
         <record id="project_invoice_view_tree" model="ir.ui.view">
             <field name="name">Project Invoice Tree</field>
@@ -91,12 +113,12 @@
                     <field name="date_invoice" />
                     <field name="partner_id"/>
                     <field name="date_month_on_scheduled" />
-                    <field name="date_periode" />
+                    <field name="date_period" />
                     <field name="currency_id" />
                     <field name="amount" />
                     <field name="rate" />
                     <field name="amount_total" />
-                    <field name="remarks" />
+	                <field name="state" />
                 </tree>
             </field>
         </record>
@@ -107,7 +129,6 @@
                 name="Invoices"
                 action="project_invoice_view"
                 sequence="1"/>
-
         
     </data>
 </odoo>

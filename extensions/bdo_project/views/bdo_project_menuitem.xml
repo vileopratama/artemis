@@ -11,10 +11,15 @@
                   parent="projects_topbar"
                   sequence="1" />
 		
+		<menuitem id="project_report_menu"
+                  name="Reports"
+                  parent="projects_topbar"
+                  sequence="2" />
+		
 		<menuitem id="project_configuration_menu"
                   name="Configuration"
                   parent="projects_topbar"
-                  sequence="2" />
+                  sequence="3" />
 		
 	</data>
 </odoo>

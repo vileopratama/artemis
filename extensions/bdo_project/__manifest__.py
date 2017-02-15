@@ -12,12 +12,16 @@
     'depends': ['base','hr'],
     'data': [
         'views/bdo_project_menuitem.xml',
-        'views/hr_employee.xml',
-        'views/bdo_project_invoice.xml',
-        'views/bdo_project_service.xml',
-        'views/bdo_project_engagement letter.xml',
-        'views/res_currency.xml',
-        'views/bdo_project_target.xml',
+        'views/hr_employee_view.xml',
+        'views/bdo_project_invoice_view.xml',
+        'views/bdo_project_service_view.xml',
+        'views/bdo_project_engagement_letter_view.xml',
+        'views/res_currency_view.xml',
+        'views/bdo_project_target_view.xml',
+        'reports/bdo_project_menuitem.xml',
+        'reports/bdo_existing_clients_list_report.xml',
+        'reports/bdo_project_summary_report.xml',
+        'reports/bdo_project_billing_summary_report.xml',
     ],
     'demo': [
         

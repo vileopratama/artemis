@@ -23,7 +23,16 @@ class ProjectEngagementLetter(models.Model):
 	employees = fields.One2many('bdo.project.engagement.letter.employees',inverse_name='engagement_letter_id', string='EL Lines',
 	                            copy=True)
 	invoices = fields.One2many(related='invoice_id.lines',string='Invoice Lines',readonly=True)
+	employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True, store=True)
 	
+	@api.multi
+	@api.depends('employees.employee_id')
+	def _compute_acl(self):
+		for el in self:
+			for line in el.employees:
+				if line.acl == 'in-charge':
+					el.employee_id = line.employee_id
+			
 class ProjectEngagementLetterEmployees(models.Model):
 	_name = "bdo.project.engagement.letter.employees"
 	_description = "Employee of Project"

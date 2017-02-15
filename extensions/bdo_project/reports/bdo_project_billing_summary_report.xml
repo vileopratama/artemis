@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_billing_summary_report_view" model="ir.actions.act_window">
+            <field name="name">BUSINESS SERVICE OUTSOURCING</field>
+            <field name="res_model">report.existing.clients.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+        </record>
+		
+		<menuitem id="project_billng_summary_report"
+		          parent="project_report_menu"
+		          name="Billing Summary"
+		          action="project_billing_summary_report_view"
+		          sequence="15"/>
+	</data>
+</odoo>

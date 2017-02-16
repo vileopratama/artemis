@@ -5,7 +5,7 @@
             <field name="name">BUSINESS SERVICE OUTSOURCING</field>
             <field name="res_model">report.existing.clients.list</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,gantt</field>
+            <field name="view_mode">tree,graph,gantt</field>
         </record>
 
         <record id="project_billing_summary_report_gantt" model="ir.ui.view">

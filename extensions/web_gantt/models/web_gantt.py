@@ -13,7 +13,6 @@ class view(models.Model):
         ('calendar', 'Calendar'),
         ('diagram', 'Diagram'),
         ('gantt', 'Gantt'),
-        ('gantt8', 'Gantt8'),
         ('kanban', 'Kanban'),
         ('sales_team_dashboard', 'Sales Team Dashboard'),
         ('search', 'Search'),

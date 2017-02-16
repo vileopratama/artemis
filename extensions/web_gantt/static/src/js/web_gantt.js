@@ -187,7 +187,7 @@ var GanttView = View.extend({
             gantt.addProject(project);
         });
         gantt.setEditable(true);
-        gantt.setImagePath("/web_gantt8/static/lib/dhtmlxGantt/codebase/imgs/");
+        gantt.setImagePath("/web_gantt/static/lib/dhtmlxGantt/codebase/imgs/");
         gantt.attachEvent("onTaskEndDrag", function(task) {
             self.on_task_changed(task);
         });
@@ -258,6 +258,6 @@ var GanttView = View.extend({
         }).open();
     }
 });
-core.view_registry.add('gantt8', GanttView);
+core.view_registry.add('gantt', GanttView);
 
 });

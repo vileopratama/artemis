@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools
+from lxml import etree
 
 class ExistingClientsListReport(models.Model):
 	_name = "report.existing.clients.list"
@@ -7,10 +8,22 @@ class ExistingClientsListReport(models.Model):
 	_order = 'client_name asc'
 	
 	client_name = fields.Char(string='Company\'s Name', readonly=True)
+	type = fields.Selection(
+		[('recurring services', 'Recurring Services'), ('non-recurring services', 'Non-Recurring Services')],
+		string='Type', readonly=True)
 	source = fields.Char(string='Source', readonly=True)
+	date_engagement_letter = fields.Date(string='Date of EL',readonly=True)
 	el_number = fields.Char(string='No. Of EL', readonly=True)
-	amount_total = fields.Float(string='Revenue (IDR)', readonly=True)
-	
+	date_expiry_engagement_letter = fields.Date(string='Expiry of EL',readonly=True)
+	currency_id = fields.Many2one(comodel_name='res.currency',string='Currency',readonly=True)
+	amount_rate = fields.Float(string='Rate', digits=(16, 2), readonly=True)
+	amount = fields.Float(string='Annual Fee (Original)',digits=(16,2), readonly=True)
+	amount_total = fields.Float(string='Annual Fee (IDR)',digits=(16,2),readonly=True)
+	employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,
+								  store=True)
+	date_reminder_engagement_letter = fields.Date(string='Reminder Client', readonly=True)
+	remarks = fields.Text(string='Remarks')
+
 	@api.model_cr
 	def init(self):
 		tools.drop_view_if_exists(self._cr, 'report_existing_clients_list')
@@ -19,9 +32,18 @@ class ExistingClientsListReport(models.Model):
 				SELECT
 					bpi.id as id,
 					rp.name as client_name,
+					bpel.type as type,
+					bpel.date_engagement_letter as date_engagement_letter,
 					bpel.source as source,
 					bpel.name as el_number,
-					bpi.amount_total as amount_total
+					bpel.date_expiry_engagement_letter as date_expiry_engagement_letter,
+					bpi.currency_id as currency_id,
+					bpi.rate as amount_rate,
+					bpi.amount as amount,
+					bpi.amount_total as amount_total,
+					bpel.employee_id as employee_id,
+					bpel.date_reminder_engagement_letter as date_reminder_engagement_letter,
+					bpel.remarks as remarks
 				FROM
 					bdo_project_invoice as bpi
 				INNER JOIN
@@ -30,3 +52,11 @@ class ExistingClientsListReport(models.Model):
 					bdo_project_engagement_letter bpel ON (bpel.invoice_id = bpi.id)
 			)
 		""")
+
+	@api.model
+	def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
+		view_id = self.env['ir.ui.view'].search([('name', '=', 'report.existing.clients.list.tree')], limit=1)
+		return super( ExistingClientsListReport, self).fields_view_get(view_id=view_id, view_type=view_type,
+																	   toolbar=toolbar,submenu=submenu)
+
+

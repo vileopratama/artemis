@@ -52,21 +52,8 @@
 				</form>
 			</field>
 		</record>
-		
-		<!---<record id="project_target_line_tree" model="ir.ui.view">
-			<field name="name">Project Target Line Tree</field>
-            <field name="model">bdo.project.target.line</field>
-			<field name="arch" type="xml">
-				<tree string="Lines">
-					<field name="currency_id" readonly="1"/>
-					<field name="rate" readonly="1" sum="Total Rate"/>
-					<field name="amount" readonly="1" widget="monetary"/>
-					<field name="amount_rate" readonly="1" sum="Sum of amount rate"/>
-				</tree>
-			</field>
-		</record>-->
-		
-		<record id="project_invoice_view_search" model="ir.ui.view">
+
+		<record id="project_target_view_search" model="ir.ui.view">
 		    <field name="model">bdo.project.target</field>
 		    <field name="arch" type="xml">
 			    <search string="Search Project Invoice">
@@ -83,12 +70,13 @@
 		<record id="project_target_tree" model="ir.ui.view">
             <field name="name">Project Target</field>
             <field name="model">bdo.project.target</field>
+			<field name="search_view_id" ref="bdo_project.project_target_view_search" />
             <field name="arch" type="xml">
                 <tree string="Project Target">
                     <field name="date_period"/>
 	                <field name="year_period"/>
                     <field name="name"/>
-	                <field name="amount_total"/>
+	                <field name="amount_total" sum="BSO Target"/>
                 </tree>
             </field>
         </record>

@@ -11,6 +11,7 @@
     'version': '10.0.1.0.1',
     'depends': ['base','hr'],
     'data': [
+        'security/ir.model.access.csv',
         'views/bdo_project_menuitem.xml',
         'views/hr_employee_view.xml',
         'views/bdo_project_invoice_view.xml',

@@ -1,0 +1,1 @@
+the module adds view gantt8 -- ported view from odoo 8.

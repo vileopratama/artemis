@@ -7,7 +7,19 @@
             <field name="view_type">form</field>
             <field name="view_mode">pivot</field>
         </record>
-		
+
+        <record id="project_billing_summary_report_gantt" model="ir.ui.view">
+            <field name="res_model">report.existing.clients.list</field>
+            <field name="type">gantt8</field>
+            <field name="arch" type="xml">
+                <gantt>
+
+                </gantt>
+            </field>
+        </record>
+
+
+
 		<menuitem id="project_billng_summary_report"
 		          parent="project_report_menu"
 		          name="Billing Summary"

@@ -5,15 +5,15 @@
             <field name="name">BUSINESS SERVICE OUTSOURCING</field>
             <field name="res_model">report.existing.clients.list</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,graph,gantt</field>
+            <field name="view_mode">tree,gantt</field>
         </record>
 
         <record id="project_billing_summary_report_gantt" model="ir.ui.view">
             <field name="model">report.existing.clients.list</field>
-            <field name="type">gantt8</field>
+            <field name="type">gantt</field>
             <field name="arch" type="xml">
-                <gantt date_start="date_engagement_letter"  progress="progress_rate" string="Projects">
-                </gantt>
+                <gantt create="0" date_start="date_engagement_letter" date_stop="date_engagement_letter"  progress="progress_rate" string="Projects">
+                 </gantt>
             </field>
         </record>
 

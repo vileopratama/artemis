@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools
-from lxml import etree
 
 class ExistingClientsListReport(models.Model):
 	_name = "report.existing.clients.list"
@@ -52,11 +51,4 @@ class ExistingClientsListReport(models.Model):
 					bdo_project_engagement_letter bpel ON (bpel.invoice_id = bpi.id)
 			)
 		""")
-
-	@api.model
-	def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
-		view_id = self.env['ir.ui.view'].search([('name', '=', 'report.existing.clients.list.tree')], limit=1)
-		return super( ExistingClientsListReport, self).fields_view_get(view_id=view_id, view_type=view_type,
-																	   toolbar=toolbar,submenu=submenu)
-
 

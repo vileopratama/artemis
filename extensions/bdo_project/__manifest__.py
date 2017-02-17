@@ -23,6 +23,8 @@
         'reports/bdo_existing_clients_list_report.xml',
         'reports/bdo_project_summary_report.xml',
         'reports/bdo_project_billing_summary_report.xml',
+        'reports/bdo_list_of_tax_invoices_report.xml',
+        'reports/bdo_schedule_invoices_report.xml',
     ],
     'demo': [
         

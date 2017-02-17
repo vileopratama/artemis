@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-jquery="div.container img">
+        this.remove();
+    </t>
+</templates>

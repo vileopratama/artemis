@@ -20,6 +20,7 @@
     'qweb': [
         'static/src/xml/base.xml',
         'static/src/xml/dashboard.xml',
+        'views/database_manager.xml',
     ],
     'installable': True,
     'application' : False,

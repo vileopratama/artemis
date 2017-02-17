@@ -23,8 +23,9 @@
             <field name="model">report.project.summary</field>
             <field name="arch" type="xml">
                 <graph string="Summary Analysis" type="line">
-	                <field name="total_target" type="row"/>
-	                <field name="total_amount" operator="+"/>
+                    <field name="date_period" interval="year" type="row"/>
+                    <field name="total_target" type="measure" operator="+"/>
+	                <field name="total_amount" type="measure" operator="+"/>
                 </graph>
             </field>
         </record>

@@ -128,7 +128,7 @@
                 parent="project_menu"
                 name="Invoices"
                 action="project_invoice_view"
-                sequence="1"/>
+                sequence="2"/>
         
     </data>
 </odoo>

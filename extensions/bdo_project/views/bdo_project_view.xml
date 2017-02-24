@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="bdo_project_view" model="ir.actions.act_window">
+            <field name="name">Project</field>
+            <field name="res_model">bdo.project</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to create a new project.<br/>
+                </p>
+            </field>
+        </record>
+		
+		<record id="bdo_project_form" model="ir.ui.view">
+			<field name="name">Project Form</field>
+			<field name="model">bdo.project</field>
+			<field name="arch" type="xml">
+				<form string="Project Form">
+					<sheet>
+						<div class="oe_title">
+                             <label for="name" class="oe_edit_only"/>
+                             <h1>
+                                 <field name="code" default_focus="1" placeholder="Project Code"/>
+                             </h1>
+                         </div>
+						<field name="date_engagement"/>
+						<group>
+							<group>
+								<field name="partner_id"/>
+								<field name="name" />
+								<field name="type" widget="radio" />
+								<field name="source" widget="radio" />
+								<field name="conflict_check" widget="radio" />
+							</group>
+							<group>
+								<field name="employee_id" />
+								<field name="date_expiry_engagement" />
+								<field name="date_reminder" />
+								<field name="currency_id" />
+								<field name="rate" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Services" autofocus="autofocus">
+								<field name="lines" colspan="4" nolabel="1">
+									<field name="service_id"/>
+									<field name="amount" widget="monetary"/>
+									<field name="amount_equivalent" />
+								</field>
+							</page>
+							
+							<page string="Member Teams">
+								<field name="employees" colspan="4" nolabel="1">
+									<tree string="Employee" editable="bottom">
+										<field name="employee_id" />
+										<field name="acl"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Attachments">
+                                 <group>
+                                    <field name="attachment_ids" widget="many2many_binary"/>
+                                 </group>
+                            </page>
+							<page string="Notes">
+								<group>
+									<field name="remarks" />
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="bdo_project_search" model="ir.ui.view">
+		    <field name="model">bdo.project</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Engagement Letter">
+				    <field name="code"/>
+				    <field name="name"/>
+				    <field name="partner_id"/>
+				    <filter string="Recurring Services" domain="[('type','=','recurring services')]"/>
+				    <filter string="Non-Recurring Services" domain="[('type','=','non-recurring services')]"/>
+				    <filter string="Local" domain="[('source','=','local')]"/>
+				    <filter string="Global" domain="[('source','=','global')]"/>
+				    <filter string="Conflict Check" domain="[('conflict_check','=','yes')]"/>
+				    <group expand="0" string="Group By">
+					    <filter string="Type" domain="[]" context="{'group_by':'type'}"/>
+					    <filter string="Source" domain="[]" context="{'group_by':'source'}"/>
+					    <filter string="Currency" domain="[]" context="{'group_by':'currency_id'}"/>
+					    <filter string="Month" domain="[]" context="{'group_by':'date_period'}"/>
+				    </group>
+			    </search>
+		    </field>
+	    </record>
+		
+		<record id="bdo_project_tree" model="ir.ui.view">
+            <field name="name">Project</field>
+            <field name="model">bdo.project</field>
+            <field name="arch" type="xml">
+                <tree>
+					<field name="code" />
+                    <field name="name" />
+					<field name="source" />
+	                <field name="type" />
+                    <field name="date_engagement" />
+	                <field name="partner_id" />
+                    <field name="date_expiry_engagement"/>
+                    <field name="date_reminder" />
+	                <field name="currency_id" />
+	                <field name="amount_total" />
+	                <field name="rate" />
+	                <field name="amount_equivalent" />
+                </tree>
+            </field>
+        </record>
+		
+		<menuitem id="bdo_project_menuitem"
+		          parent="project_menu"
+		          name="Project"
+		          action="bdo_project_view"
+		          sequence="1"/>
+	</data>
+</odoo>

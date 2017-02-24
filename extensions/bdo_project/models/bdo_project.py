@@ -6,6 +6,12 @@ class Project(models.Model):
 	_order = 'code asc'
 	_description = 'BDO Project'
 	
+	def _get_currency(self):
+		currency = False
+		if self.env.user.company_id.currency_id.id:
+			currency = self.env.user.company_id.currency_id.id
+		return currency
+	
 	code = fields.Char(string='Project Code',size=60,help='This Project Code can reference to Timesheeet Project Code')
 	partner_id = fields.Many2one(comodel_name='res.partner', string='Client', required=True, index=True)
 	type = fields.Selection([('recurring services', 'Recurring Services'),('non-recurring services', 'Non-Recurring Services')],
@@ -14,9 +20,9 @@ class Project(models.Model):
 	date_engagement = fields.Date(string='Date of engagement', index=True, default=fields.Datetime.now)
 	name = fields.Char(string='No. Of EL', size=60)
 	date_expiry_engagement = fields.Date(string='Expiry date', index=True, default=fields.Datetime.now)
-	currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True)
+	currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,default=_get_currency)
 	conflict_check = fields.Selection([('yes', 'Yes'), ('no', 'No')],string='Conflict Check', default='no')
-	lines = fields.One2many(comodel_name='bdo.project.lines', inverse_name='project_id', index=True,string='Project Lines',copy=True)
+	lines = fields.One2many(comodel_name='bdo.project.lines', inverse_name='project_id',string='Project Lines')
 	amount_total = fields.Float(string='Amount Total')
 	rate = fields.Float(string='Rate')
 	amount_equivalent = fields.Float(string='Amount Total Equiv')
@@ -43,6 +49,33 @@ class Project(models.Model):
 	#rate = fields.Float(related='invoice_id.rate', string='Rate', store=False,digit=0)
 	#amount_eq = fields.Float(related='invoice_id.amount_total', string='Amount Total', store=False, digit=0,copy=True)
 	#invoices = fields.One2many(related='invoice_id.lines',string='Invoice Lines',readonly=True)
+	
+	_sql_constraints = [
+		('unique_code', 'unique (code)', 'Project code must be unique!'),
+	]
+	
+	@api.onchange('currency_id')
+	def _onchange_currency_id(self):
+		if self.currency_id:
+			date = self._context.get('date') or fields.Datetime.now()
+			company_id = self._context.get('company_id') or self.env['res.users']._get_company().id
+			query = """SELECT c.id, (SELECT r.rate FROM res_currency_rate r
+	                                          WHERE r.currency_id = c.id AND r.name <= %s
+	                                            AND (r.company_id IS NULL OR r.company_id = %s)
+	                                       ORDER BY r.company_id, r.name DESC
+	                                          LIMIT 1) AS rate
+	                           FROM res_currency c
+	                           WHERE c.id = %s"""
+			self.env.cr.execute(query, (date, company_id, self.currency_id.id))
+			currency_rates = dict(self._cr.fetchall())
+			for project in self:
+				project.rate = currency_rates.get(project.currency_id.id) or 1.0
+	
+	@api.depends('currency_id','rate')
+	def _compute_amount_rate(self):
+		for project in self:
+			if (project.rate and project.currency_id):
+				project.amount_equivalent = project.rate * project.amount_total
 
 	@api.multi
 	@api.depends('employees.employee_id')

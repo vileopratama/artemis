@@ -19,6 +19,11 @@
 			<field name="model">bdo.project</field>
 			<field name="arch" type="xml">
 				<form string="Project Form">
+					<header>
+                         <button name="set_active" states="inactive" string="Set to Active" type="object" class="oe_highlight" confirm="Are you sure want to active ?"/>
+	                     <button name="set_inactive"  states="active" string="Set to Inactive" type="object" class="oe_highlight" confirm="Are you sure want to inactive ?"/>
+                         <field name="state" widget="statusbar" statusbar_visible="active,inactive"/>
+                     </header>
 					<sheet>
 						<div class="oe_title">
                              <label for="name" class="oe_edit_only"/>
@@ -46,15 +51,27 @@
 						<notebook>
 							<page string="Services" autofocus="autofocus">
 								<field name="lines" colspan="4" nolabel="1">
-									<field name="service_id"/>
-									<field name="amount" widget="monetary"/>
-									<field name="amount_equivalent" />
+									<tree editable="bottom">
+										<field name="service_id"/>
+										<field name="amount" widget="monetary"/>
+										<field name="amount_equivalent" />
+									</tree>
 								</field>
+								<group class="oe_subtotal_footer oe_right" colspan="2" name="project_total">
+									<field name="amount_total" widget="monetary"/>
+									<div class="oe_subtotal_footer_separator oe_inline">
+										<label for="amount_equivalent" />
+										<button name="button_dummy" string="(update)"
+                                                    class="oe_edit_only oe_link"/>
+									</div>
+									<field name="amount_equivalent" nolabel="1" class="oe_subtotal_footer_separator"/>
+								</group>
+								<div class="oe_clear"/>
 							</page>
 							
 							<page string="Member Teams">
 								<field name="employees" colspan="4" nolabel="1">
-									<tree string="Employee" editable="bottom">
+									<tree editable="bottom">
 										<field name="employee_id" />
 										<field name="acl"/>
 									</tree>

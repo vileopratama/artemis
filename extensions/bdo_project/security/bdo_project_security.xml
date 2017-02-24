@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data noupdate="1">
+	<data>
 		<record model="ir.module.category" id="module_category_bdo_crm">
             <field name="name">BDO CRM</field>
 			<field name="description">Manage CRM Module for Project BDO</field>
-            <field name="sequence">102</field>
-            <field name="visible" eval="0" />
+            <field name="sequence">7</field>
         </record>
 		
-		<record id="group_bdo_crm_coordinator" model="res.groups"> <!-- Group ID to be linked @ ir.model.access.csv -->
+		<record id="group_bdo_crm_coordinator" model="res.groups">
             <field name="name">Coordinator</field>
             <field name="category_id" ref="module_category_bdo_crm" />
         </record>
 		
-		<record id="group_bdo_crm_incharge" model="res.groups"> <!-- Group ID to be linked @ ir.model.access.csv -->
+		<record id="group_bdo_crm_incharge" model="res.groups">
             <field name="name">In Charge</field>
             <field name="category_id" ref="module_category_bdo_crm" />
         </record>
 		
-		<record id="group_bdo_crm_assistant" model="res.groups"> <!-- Group ID to be linked @ ir.model.access.csv -->
+		<record id="group_bdo_crm_assistant" model="res.groups">
             <field name="name">Assistant</field>
             <field name="category_id" ref="module_category_bdo_crm" />
         </record>

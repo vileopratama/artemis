@@ -23,14 +23,15 @@ class Project(models.Model):
 	currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,default=_get_currency)
 	conflict_check = fields.Selection([('yes', 'Yes'), ('no', 'No')],string='Conflict Check', default='no')
 	lines = fields.One2many(comodel_name='bdo.project.lines', inverse_name='project_id',string='Project Lines')
-	amount_total = fields.Float(string='Amount Total')
+	amount_total = fields.Float(string='Amount Total',readonly=True,store=True)
 	rate = fields.Float(string='Rate')
-	amount_equivalent = fields.Float(string='Amount Total Equiv')
+	amount_equivalent = fields.Float(string='Amount Total Equiv',readonly=True,store=True)
 	employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,store=True)
 	date_reminder = fields.Date(string='Reminder Date', index=True, default=fields.Datetime.now)
 	employees = fields.One2many('bdo.project.employees', inverse_name='project_id', string='Team Member')
 	remarks = fields.Text(string='Remarks')
 	attachment_ids = fields.Many2many(comodel_name='ir.attachment', string='Attachments')
+	state = fields.Selection([('active', 'Active'), ('inactive', 'In-Active')], 'Status', readonly=True,default='active')
 	#state = fields.Selection([('draft', 'New'), ('cancel', 'Cancelled'),  ('done', 'Posted')],'Status', readonly=True,
 	                         #copy=False, default='draft')
 	
@@ -53,6 +54,17 @@ class Project(models.Model):
 	_sql_constraints = [
 		('unique_code', 'unique (code)', 'Project code must be unique!'),
 	]
+	
+	@api.multi
+	@api.depends('lines.amount_equivalent')
+	def _compute_amount_all(self):
+		for project in self:
+			total = sum(line.amount for line in project.lines)
+			#total amount original currency
+			project.amount = total
+			#total amount equiv currency
+			total_equiv = sum(line.amount_equivalent for line in project.lines)
+			project.amount_equivalent = total_equiv
 	
 	@api.onchange('currency_id')
 	def _onchange_currency_id(self):
@@ -84,6 +96,14 @@ class Project(models.Model):
 			for line in el.employees:
 				if line.acl == 'in-charge':
 					el.employee_id = line.employee_id
+	
+	@api.multi
+	def set_active(self):
+		return self.write({'state': 'active'})
+	
+	@api.multi
+	def set_inactive(self):
+		return self.write({'state': 'inactive'})
 					
 class ProjectLines(models.Model):
     _name = 'bdo.project.lines'
@@ -93,7 +113,14 @@ class ProjectLines(models.Model):
     project_id = fields.Many2one(comodel_name='bdo.project', string='Project Ref', ondelete='cascade')
     service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service', required=True,change_default=True)
     amount = fields.Float(string='Amount',default=1,store=True)
-    amount_equivalent = fields.Float(digits=0, string='Total',store=True)
+    amount_equivalent = fields.Float(digits=0, string='Total',store=True,readonly=True)
+
+    @api.multi
+    @api.depends('amount','project_id.rate')
+    def _compute_amount_line_all(self):
+	    for line in self:
+		    line.amount = line.amount
+		    line.amount_equivalent = (line.project_id.rate or 1.0) * line.amount
 			
 class ProjectEmployees(models.Model):
 	_name = "bdo.project.employees"

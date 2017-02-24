@@ -96,7 +96,7 @@
 		<record id="bdo_project_search" model="ir.ui.view">
 		    <field name="model">bdo.project</field>
 		    <field name="arch" type="xml">
-			    <search string="Search Engagement Letter">
+			    <search string="Search">
 				    <field name="code"/>
 				    <field name="name"/>
 				    <field name="partner_id"/>
@@ -140,6 +140,7 @@
 		          parent="project_menu"
 		          name="Project"
 		          action="bdo_project_view"
+				  groups="bdo_project.group_bdo_crm_coordinator"
 		          sequence="1"/>
 	</data>
 </odoo>

@@ -1,3 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_bdo_project_invoice_user,bdo.project.invoice.user,model_bdo_project_invoice,base.group_system,1,0,0,0
-access_bdo_project_report_existing_clients_list_user,bdo.project.report.existing.clients.list.user,model_report_existing_clients_list,base.group_system,1,0,0,0
+access_bdo_project_coordinator,bdo.project.coordinator,model_bdo_project,group_bdo_crm_coordinator,1,1,1,1
+access_bdo_project_employee_coordinator,bdo.project.employees.coordinator,model_bdo_project_employees,group_bdo_crm_coordinator,1,1,1,1

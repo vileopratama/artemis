@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-		<menuitem id="projects_topbar"
+		<menuitem id="bdo_projects_root"
                   name="Projects"
                   web_icon="bdo_project,static/description/icon.png"
-                  sequence="51"/>
+                  sequence="51"
+				  groups="bdo_project.group_bdo_crm_coordinator"
+		/>
 
         <menuitem id="project_menu"
                   name="Projects"
-                  parent="projects_topbar"
+                  parent="bdo_projects_root"
+                  groups="bdo_project.group_bdo_crm_coordinator"
                   sequence="1" />
 		
 		<menuitem id="project_report_menu"
                   name="Reports"
-                  parent="projects_topbar"
+                  parent="bdo_projects_root"
                   sequence="2" />
 		
 		<menuitem id="project_configuration_menu"
                   name="Configuration"
-                  parent="projects_topbar"
+                  parent="bdo_projects_root"
                   sequence="3" />
 		
 	</data>

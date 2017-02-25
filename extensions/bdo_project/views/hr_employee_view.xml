@@ -7,6 +7,7 @@
             <field name="inherit_id" ref="hr.view_employee_form"/>
             <field name="type">form</field>
             <field name="arch" type="xml">
+                <field name="user_id" position="replace" />
                 <field name="category_ids" position="replace">
                     <group>
                         <div class="col-md-3">
@@ -15,7 +16,9 @@
                         </div>
                     </group>
                 </field>
+
             </field>
+
         </record>
 
         <record id="bdo_project.view_employee_tree" model="ir.ui.view">

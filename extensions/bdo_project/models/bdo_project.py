@@ -14,7 +14,8 @@ class Project(models.Model):
 
     code = fields.Char(string='Project Code', size=60,required=True,
                        help='This Project Code can reference to Timesheeet Project Code')
-    partner_id = fields.Many2one(comodel_name='res.partner', string='Client', required=True, index=True)
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Client', required=True, index=True,
+                                 domain=[('is_company','=',True)])
     type = fields.Selection(
         [('recurring services', 'Recurring Services'), ('non-recurring services', 'Non-Recurring Services')],
         string='Type',required=True, default='recurring services')
@@ -32,7 +33,7 @@ class Project(models.Model):
     rate = fields.Float(string='Rate')
     amount_equivalent = fields.Float(compute='_compute_amount_all',string='Amount Total Equiv', readonly=True, store=True)
     employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,
-                                  store=True,required=True)
+                                  store=True)
     date_reminder = fields.Date(string='Reminder Date', index=True, default=fields.Datetime.now)
     employees = fields.One2many('bdo.project.employees', inverse_name='project_id', string='Team Member')
     remarks = fields.Text(string='Remarks')
@@ -94,14 +95,25 @@ class Project(models.Model):
 class ProjectLines(models.Model):
     _name = 'bdo.project.lines'
     _description = "Project Line Invoice"
-    _rec_name = "service_id"
+    _rec_name = "project_id"
 
     project_id = fields.Many2one(comodel_name='bdo.project', string='Project Ref', ondelete='cascade')
+    client_name = fields.Char(related='project_id.partner_id.name',string='Client')
+    date_engagement = fields.Date(related='project_id.date_engagement',string='Date of engagement')
     service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service', required=True,
                                  change_default=True,domain = [('state','=','active')])
+    currency_id = fields.Char(related='project_id.currency_id.name',string='Currency')
     amount = fields.Float(string='Amount', default=1, store=True)
     amount_equivalent = fields.Float(compute='_compute_amount_line_all',digits=0,string='Amount Equivalent', store=True,
                                      readonly=True)
+
+    @api.multi
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.client_name + ' > ' + record.service_id.name
+            result.append((record.id, name))
+        return result
 
     @api.onchange('amount')
     def _onchange_amount(self):
@@ -121,5 +133,5 @@ class ProjectEmployees(models.Model):
     _rec_name = "employee_id"
 
     project_id = fields.Many2one(comodel_name='bdo.project', string='Employee Ref', ondelete='cascade')
-    employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee', required=True, change_default=True)
+    employee_id = fields.Many2one(comodel_name='hr.employee', string='Employee',change_default=True)
     acl = fields.Selection([('in-charge', 'In Charge'), ('assistant', 'Assistant')], string='Access Control List')

@@ -5,21 +5,21 @@
                   name="Projects"
                   web_icon="bdo_project,static/description/icon.png"
                   sequence="51"
-				  groups="bdo_project.group_bdo_crm_coordinator"
+				  groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge,base.group_system"
 		/>
 
-        <menuitem id="project_menu"
+        <menuitem id="bdo_project_menu"
                   name="Projects"
                   parent="bdo_projects_root"
-                  groups="bdo_project.group_bdo_crm_coordinator"
+                  groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge,base.group_system"
                   sequence="1" />
 		
-		<menuitem id="project_report_menu"
+		<menuitem id="bdo_project_report_menu"
                   name="Reports"
                   parent="bdo_projects_root"
                   sequence="2" />
 		
-		<menuitem id="project_configuration_menu"
+		<menuitem id="bdo_project_configuration_menu"
                   name="Configuration"
                   parent="bdo_projects_root"
                   sequence="3" />

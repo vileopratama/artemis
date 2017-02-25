@@ -77,8 +77,8 @@
         </record>
         
         <menuitem
-                id="project_service_menuitem"
-                parent="project_configuration_menu"
+                id="bdo_project_service_menuitem"
+                parent="bdo_project_configuration_menu"
                 name="Our Service"
                 action="project_service_view"
                 sequence="1"/>

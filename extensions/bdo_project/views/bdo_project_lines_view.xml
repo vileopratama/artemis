@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bdo_project_line_tree" model="ir.ui.view">
+            <field name="name">Project Services</field>
+            <field name="model">bdo.project.lines</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="client_name"/>
+                    <field name="date_engagement"/>
+                    <field name="service_id"/>
+                    <field name="amount"/>
+                    <field name="amount_equivalent"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="bdo_project_line_form" model="ir.ui.view">
+             <field name="model">bdo.project.lines</field>
+             <field name="arch" type="xml">
+                 <form string="Project Target">
+					<sheet>
+                        <div class="oe_title">
+                            <label for="client_name"/>
+                             <h1>
+                                 <field name="client_name" readonly="1"/>
+                             </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date_engagement" readonly="1"/>
+                                <field name="service_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="currency_id" readonly="1"/>
+                                <field name="amount" readonly="1"/>
+                                <field name="amount_equivalent" readonly="1"/>
+                            </group>
+                        </group>
+					</sheet>
+				</form>
+             </field>
+         </record>
+    </data>
+</odoo>

@@ -140,7 +140,7 @@
 		          parent="project_menu"
 		          name="Project"
 		          action="bdo_project_view"
-				  groups="bdo_project.group_bdo_crm_coordinator"
+				  groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge"
 		          sequence="1"/>
 	</data>
 </odoo>

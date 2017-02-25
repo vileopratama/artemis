@@ -94,9 +94,10 @@
 		
 		<menuitem
                 id="project_target_menuitem"
-                parent="project_menu"
-                name="Project Target"
-                action="project_target_view"
+                parent="bdo_project_menu"
+                name="Target"
+                action="bdo_project_target_view"
+				groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge"
                 sequence="5"/>
 	</data>
 </odoo>

@@ -31,7 +31,7 @@ class ProjectTarget(models.Model):
     def _month_betwwen(self,date_from,date_to):
         date_from = dt.strptime(date_from,"%Y-%m-%d")
         date_to = dt.strptime(date_to,"%Y-%m-%d")
-        return abs((date_to - date_from).month)
+        return abs((date_to - date_from).days)
 
     @api.onchange('date_period_start','date_period_end')
     def _onchange_date_period(self):

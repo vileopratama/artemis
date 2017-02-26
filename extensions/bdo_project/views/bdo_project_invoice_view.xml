@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="project_invoice_view" model="ir.actions.act_window">
+        <record id="bdo_project_invoice_view" model="ir.actions.act_window">
             <field name="name">Project Invoice</field>
             <field name="res_model">bdo.project.invoice</field>
             <field name="view_type">form</field>
             <field name="domain">[]</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar</field>
             <field name="help" type="html">
                  <p class="oe_view_nocontent_create">
-                    Click to create a new project.<br/>
+                    Please create a target for new invoice<br/>
                 </p>
             </field>
         </record>
 
-         <record id="project_invoice_view_form" model="ir.ui.view">
+        <record id="bdo_project_invoice_view_calendar" model="ir.ui.view">
+            <field name="model">bdo.project.invoice</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Invoice"
+                          date_start="date_payment_due" color="name" mode="month"
+                          display="[name]">
+                     <field name="name"/>
+                </calendar>
+            </field>
+        </record>
+
+         <!--<record id="project_invoice_view_form" model="ir.ui.view">
              <field name="name">Project Invoice Form</field>
              <field name="model">bdo.project.invoice</field>
              <field name="arch" type="xml">
-                 <form string="Project Invoice Form">
+                 <form string="Project Invoice Form" create="0">
                      <header>
                          <button name="do_received" states="pending" string="Set to Received" type="object" class="oe_highlight" confirm="Are you sure want to received ?"/>
 	                     <button name="do_pending"  states="received" string="Set to Pending" type="object" class="oe_highlight" confirm="Are you sure want back to pending ?"/>
@@ -84,22 +96,21 @@
                      </sheet>
                  </form>
              </field>
-         </record>
+         </record>-->
 	    
 	    <record id="project_invoice_view_search" model="ir.ui.view">
 		    <field name="model">bdo.project.invoice</field>
 		    <field name="arch" type="xml">
 			    <search string="Search Project Invoice">
-				    <field name="partner_id"/>
 				    <field name="name"/>
-				    <field name="currency_id"/>
+				    <!--<field name="currency_id"/>
 				    <filter string="Pending" domain="[('state','=','pending')]"/>
 				    <filter string="Received" domain="[('state','=','received')]"/>
 				    <group expand="0" string="Group By">
 					    <filter string="Client" domain="[]" context="{'group_by':'partner_id'}"/>
 					    <filter string="Currency" domain="[]" context="{'group_by':'currency_id'}"/>
 					    <filter string="Invoice Month" domain="[]" context="{'group_by':'date_invoice'}"/>
-				    </group>
+				    </group>-->
 			    </search>
 		    </field>
 	    </record>
@@ -108,26 +119,21 @@
             <field name="name">Project Invoice Tree</field>
             <field name="model">bdo.project.invoice</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree create="0">
                     <field name="name" />
                     <field name="date_invoice" />
-                    <field name="partner_id"/>
-                    <field name="date_month_on_scheduled" />
-                    <field name="date_period" />
-                    <field name="currency_id" />
-                    <field name="amount" />
-                    <field name="rate" />
-                    <field name="amount_total" />
-	                <field name="state" />
+                    <field name="total_due" />
+                    <field name="date_payment_due" />
                 </tree>
             </field>
         </record>
         
         <menuitem
-                id="project_menuitem"
-                parent="project_menu"
+                id="bdo_project_invoice_menuitem"
+                parent="bdo_project_menu"
                 name="Invoices"
-                action="project_invoice_view"
+                action="bdo_project_invoice_view"
+                groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge"
                 sequence="2"/>
         
     </data>

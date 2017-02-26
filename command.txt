@@ -1,0 +1,1 @@
+python odoo-bin -r odoo -w 123 --addons-path=addons,extensions --xmlrpc-port=80 -u bdo_project

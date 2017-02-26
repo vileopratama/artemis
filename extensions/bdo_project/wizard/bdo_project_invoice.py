@@ -3,8 +3,8 @@ from odoo import fields, models,api
 from datetime import timedelta, datetime
 
 
-class ProjectInvoice(models.TransientModel):
-    _name = 'bdo.project.invoice'
+class ProjectInvoice(models.Model):
+    _inherit = 'bdo.project.invoice'
     _description = 'Project Target to Invoice'
 
     def _default_project_target_id(self):

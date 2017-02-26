@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-		<record id="bdo_project_target_view" model="ir.actions.act_window">
-            <field name="name">Project Target</field>
-            <field name="res_model">bdo.project.target</field>
-            <field name="view_type">form</field>
-			<field name="view_mode">tree,form,graph</field>
-			<field name="search_view_id" ref="bdo_project_target_view_search" />
-            <field name="domain">[]</field>
-            <field name="help" type="html">
-                 <p class="oe_view_nocontent_create">
-                    Click to create a new target project.<br/>
-                </p>
-            </field>
-        </record>
-		
-		<record id="bdo_project_target_form" model="ir.ui.view">
+		<record id="bdo_project_target_view_search" model="ir.ui.view">
+		    <field name="model">bdo.project.target</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Project Target">
+				    <field name="project_line_id"/>
+					<filter string="My Target" domain="[('user_id.id', '=', uid)]" />
+			    </search>
+		    </field>
+	    </record>
+
+        <record id="bdo_project_target_form" model="ir.ui.view">
 			<field name="name">Project Target Form</field>
 			<field name="model">bdo.project.target</field>
+            <field name="act_window_id" ref="bdo_project_target_view"/>
 			<field name="arch" type="xml">
 				<form string="Project Target">
 					<header>
@@ -63,28 +60,18 @@
 								</group>
 							</page>
 						</notebook>
-
 					</sheet>
 				</form>
 			</field>
 		</record>
 
-		<record id="bdo_project_target_view_search" model="ir.ui.view">
-		    <field name="model">bdo.project.target</field>
-		    <field name="arch" type="xml">
-			    <search string="Search Project Target">
-				    <field name="project_line_id"/>
-					<filter string="My Target" domain="[('user_id.id', '=', uid)]" />
-			    </search>
-		    </field>
-	    </record>
-		
-		<record id="bdo_project_target_tree" model="ir.ui.view">
+        <record id="bdo_project_target_tree" model="ir.ui.view">
             <field name="name">Project Target</field>
             <field name="model">bdo.project.target</field>
-			<field name="search_view_id" ref="bdo_project.bdo_project_target_view_search" />
+			<field name="view_id" ref="bdo_project_target_form" />
+            <field name="act_window_id" ref="bdo_project_target_view"/>
             <field name="arch" type="xml">
-                <tree string="Project Target">
+                <tree string="Project Target" decoration-info="state == 'draft'">
 					<field name="partner_id"/>
 					<field name="service_id"/>
                     <field name="date_on_scheduled"/>
@@ -93,8 +80,24 @@
 					<field name="currency_id"/>
 	                <field name="amount"/>
 					<field name="amount_equivalent"/>
+                    <field name="state"/>
 					<field name="employee_id"/>
                 </tree>
+            </field>
+        </record>
+
+		<record id="bdo_project_target_view" model="ir.actions.act_window">
+            <field name="name">Project Target</field>
+            <field name="res_model">bdo.project.target</field>
+            <field name="view_type">form</field>
+			<field name="view_mode">tree,form,graph</field>
+			<field name="search_view_id" ref="bdo_project_target_view_search" />
+            <field name="view_id" ref="bdo_project_target_tree" />
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                 <p class="oe_view_nocontent_create">
+                    Click to create a new target project.<br/>
+                </p>
             </field>
         </record>
 		
@@ -114,7 +117,7 @@
                 parent="bdo_project_menu"
                 name="Target"
                 action="bdo_project_target_view"
-				groups="bdo_project.group_bdo_crm_incharge"
+				groups="bdo_project.group_bdo_crm_coordinator,bdo_project.group_bdo_crm_incharge"
                 sequence="5"/>
 	</data>
 </odoo>

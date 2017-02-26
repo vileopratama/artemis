@@ -88,9 +88,8 @@ class ProjectInvoice(models.Model):
         month_from = dt.strptime(self.date_period_from, '%Y-%m-%d').strftime('%B %Y')
         month_to = dt.strptime(self.date_period_to, '%Y-%m-%d').strftime('%B %Y')
         self.date_period = month_from + "-" + month_to
-	    
-   
-	
+
+
 class ProjectInvoiceLine(models.Model):
     _name = 'bdo.project.invoice.line'
     _description = "Lines of Invoice"
@@ -101,9 +100,7 @@ class ProjectInvoiceLine(models.Model):
     amount = fields.Float(string='Amount',default=1,store=True)
     amount_subtotal = fields.Float(compute='_compute_amount_line_all', digits=0, string='Total',store=True)
 
-    _sql_constraints = [
-	    ('unique_service_id', 'unique (invoice_id,service_id)', 'Service cannot multiple in this line!')
-    ]
+    _sql_constraints = [('unique_service_id', 'unique (invoice_id,service_id)', 'Service cannot multiple in this line!')]
     
     @api.multi
     @api.depends('amount', 'amount_subtotal','invoice_id.rate')

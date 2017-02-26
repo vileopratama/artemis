@@ -8,24 +8,26 @@ class ProjectTarget(models.Model):
     _name = 'bdo.project.target'
     _order = 'date_period_start desc'
 
-    project_line_id = fields.Many2one(comodel_name='bdo.project.lines',string='Project Code',required=True)
+    project_line_id = fields.Many2one(comodel_name='bdo.project.lines',string='Project Code',required=True,
+                                      states={'draft': [('readonly', False)]},readonly=True)
     employee_id = fields.Many2one(comodel_name='hr.employee',string='PIC',readonly=True,
                                   default=lambda self: self.env.user.employee_id.id)
     user_id = fields.Many2one(comodel_name='res.users',default=lambda self: self.env.user.id,string='PIC',
                               readonly=True)
-    date_on_scheduled = fields.Date(string='Scheduled on', required=True)
-    date_period_start = fields.Date(string='From', required=True)
-    date_period_end = fields.Date(string='To', required=True)
+    date_on_scheduled = fields.Date(string='Scheduled on', required=True,states={'draft': [('readonly', False)]},
+                                    readonly=True)
+    date_period_start = fields.Date(string='From', required=True,states={'draft': [('readonly', False)]},readonly=True)
+    date_period_end = fields.Date(string='To', required=True,states={'draft': [('readonly', False)]},readonly=True)
     date_period_month_total = fields.Integer(compute='_compute_period_month_total',string='Total Month',readonly=True,store=True)
     year_period = fields.Char(string='Year', size=4, store=True, readonly=True)
     amount = fields.Float(compute='_compute_period_month_total',string='Amount',readonly=True, store=True,digits=(16, 2))
     amount_equivalent = fields.Float(compute='_compute_period_month_total',string='Amount Equivalent', readonly=True, store=True,digits=(16, 2))
-    remarks = fields.Text(string='Remarks')
+    remarks = fields.Text(string='Remarks',states={'draft': [('readonly', False)]},readonly=True)
     state = fields.Selection(
         [('draft', 'Draft'),('invoice', 'Invoice'),('paid','Paid')], 'Status', readonly=True, copy=False,
         default='draft')
-    total_due = fields.Integer(string='Term of payment (days)')
-    date_payment_due = fields.Date(compute=' _compute_date_due',string='Expected payment date',readonly=True,store=True)
+    total_due = fields.Integer(string='Term of payment (days)',readonly=True)
+    date_payment_due = fields.Date(string='Expected payment date',readonly=True,store=True)
     date_payment_actual = fields.Date(string='Actual payment date', readonly=True,store=True)
 
     #related field
@@ -53,7 +55,7 @@ class ProjectTarget(models.Model):
                 month_total = self._month_between(target.date_period_start, target.date_period_end)
                 target.date_period_month_total = month_total
                 target.amount = (koef * month_total) * target.amount_project_total
-                target.amount_equivalent = (koef * month_total) * target.amount_project_total
+                target.amount_equivalent = (koef * month_total) * target.amount_project_equivalent
 
 
     def _month_between(self,date_from,date_to):
@@ -73,5 +75,11 @@ class ProjectTarget(models.Model):
                 month_total = self._month_between(target.date_period_start, target.date_period_end)
                 target.date_period_month_total = month_total
                 target.amount = (koef * month_total) * target.amount_project_total
-                target.amount_equivalent = (koef * month_total) * target.amount_project_total
+                target.amount_equivalent = (koef * month_total) * target.amount_project_equivalent
+
+    def action_set_invoice(self):
+        self.write({'state': 'invoice'})
+
+    def action_set_paid(self):
+        self.write({'state': 'paid'})
 

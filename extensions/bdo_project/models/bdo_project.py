@@ -46,6 +46,14 @@ class Project(models.Model):
     ]
 
     @api.multi
+    def name_get(self):
+        result = []
+        for record in self:
+            name =  record.code + ' > ' + record.partner_id.name
+            result.append((record.id, name))
+        return result
+
+    @api.multi
     @api.depends('lines.amount_equivalent')
     def _compute_amount_all(self):
         for project in self:

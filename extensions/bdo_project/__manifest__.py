@@ -25,6 +25,7 @@
         'views/bdo_project_lines_view.xml',
         'views/res_currency_view.xml',
         'views/bdo_project_target_view.xml',
+        'wizard/bdo_project_invoice.xml',
         #'reports/bdo_project_menuitem.xml',
         #'reports/bdo_existing_clients_list_report.xml',
         ##'reports/bdo_project_summary_report.xml',

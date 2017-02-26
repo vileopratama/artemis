@@ -6,6 +6,7 @@
             <field name="res_model">bdo.project.target</field>
             <field name="view_type">form</field>
 			<field name="view_mode">tree,form,graph</field>
+			<field name="search_view_id" ref="bdo_project_target_view_search" />
             <field name="domain">[]</field>
             <field name="help" type="html">
                  <p class="oe_view_nocontent_create">
@@ -20,11 +21,13 @@
 			<field name="arch" type="xml">
 				<form string="Project Target">
 					<header>
-						<field name="state" widget="statusbar" statusbar_visible="pending,received" />
+						<button name="%(action_project_invoice)d" string="Invoice" class="oe_highlight" type="action" states="draft" />
+						<field name="state" widget="statusbar" statusbar_visible="draft,invoice,paid" />
 					</header>
 					<sheet>
 						<group colspan="12">
-							 <field name="project_line_id" options="{'no_create':True,'no_edit':True}" default_focus="1" placeholder="Project Code"/>
+							<field name="project_line_id" options="{'no_create':True,'no_edit':True}" default_focus="1" placeholder="Project Code"/>
+							<field name="user_id" />
 						</group>
 
 						<group>
@@ -32,16 +35,17 @@
 								<field name="date_on_scheduled" />
 								<field name="date_period_start" />
 								<field name="date_period_end" />
-								<field name="total_due" />
-								<field name="date_payment_due" />
+								<field name="date_period_month_total" />
+								<field name="amount" />
+								<field name="amount_equivalent" />
 							</group>
 							<group>
 								<field name="partner_id" />
 								<field name="service_id" />
 								<field name="date_engagement" />
 								<field name="currency_id" />
-								<field name="amount" />
-								<field name="amount_equivalent" />
+								<field name="amount_project_total" />
+								<field name="amount_project_equivalent" />
 							</group>
 						</group>
 
@@ -49,6 +53,13 @@
 							<page name="bdo_project_target_notes" string="Notes">
 								<group>
 									<field name="remarks" />
+								</group>
+							</page>
+							<page name="bdo_project_target_invoice" string="Invoice" autofocus="1">
+								<group>
+									<field name="total_due" />
+									<field name="date_payment_due" />
+									<field name="date_payment_actual" />
 								</group>
 							</page>
 						</notebook>
@@ -63,7 +74,7 @@
 		    <field name="arch" type="xml">
 			    <search string="Search Project Target">
 				    <field name="project_line_id"/>
-
+					<filter string="My Target" domain="[('user_id.id', '=', uid)]" />
 			    </search>
 		    </field>
 	    </record>
@@ -74,11 +85,15 @@
 			<field name="search_view_id" ref="bdo_project.bdo_project_target_view_search" />
             <field name="arch" type="xml">
                 <tree string="Project Target">
-					<field name="project_line_id"/>
+					<field name="partner_id"/>
+					<field name="service_id"/>
                     <field name="date_on_scheduled"/>
 	                <field name="date_period_start"/>
 					<field name="date_period_end"/>
+					<field name="currency_id"/>
 	                <field name="amount"/>
+					<field name="amount_equivalent"/>
+					<field name="employee_id"/>
                 </tree>
             </field>
         </record>

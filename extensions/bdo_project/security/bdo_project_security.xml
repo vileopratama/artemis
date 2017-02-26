@@ -21,6 +21,21 @@
             <field name="name">Assistant</field>
             <field name="category_id" ref="module_category_bdo_crm" />
         </record>
-		
 	</data>
+
+    <data>
+        <record id="bdo_project_rule_project_target_coordinator" model="ir.rule">
+            <field name="name">user: modify own target only</field>
+            <field name="model_id" ref="model_bdo_project_target"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('bdo_project.group_bdo_crm_coordinator'))]"/>
+        </record>
+
+        <record id="bdo_project_rule_project_target_incharge" model="ir.rule">
+            <field name="name">user: modify own target only</field>
+            <field name="model_id" ref="model_bdo_project_target"/>
+            <field name="domain_force">[('user_id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('bdo_project.group_bdo_crm_incharge'))]"/>
+        </record>
+    </data>
 </odoo>

@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record id="bbr" model="hr.employee">
+            <field name="initial">BBR</field>
+            <field name="name">Bryan</field>
+        </record>
+        <record id="ddp" model="hr.employee">
+            <field name="initial">DDP</field>
+            <field name="name">Dea Diandini Primordia</field>
+        </record>
+        <record id="ddp" model="hr.employee">
+            <field name="initial">ELZ</field>
+            <field name="name">Eliza</field>
+        </record>
+        <record id="evz" model="hr.employee">
+            <field name="initial">EVZ</field>
+            <field name="name">Evans</field>
+        </record>
+        <record id="fer" model="hr.employee">
+            <field name="initial">FER</field>
+            <field name="name">Ferdiansyah</field>
+        </record>
+        <record id="fis" model="hr.employee">
+            <field name="initial">FIS</field>
+            <field name="name">Feby Nur Istaini</field>
+        </record>
+        <record id="hat" model="hr.employee">
+            <field name="initial">HAT</field>
+            <field name="name">Henni Apriani Taslim</field>
+        </record>
+        <record id="mbu" model="hr.employee">
+            <field name="initial">MBU</field>
+            <field name="name">Mayang Sariningbumi</field>
+        </record>
+        <record id="mel" model="hr.employee">
+            <field name="initial">MEL</field>
+            <field name="name">Melisa</field>
+        </record>
+        <record id="pjd" model="hr.employee">
+            <field name="initial">PJD</field>
+            <field name="name">Putri Juwita Dizar</field>
+        </record>
+        <record id="rku" model="hr.employee">
+            <field name="initial">RKU</field>
+            <field name="name">Rommy Kurniawan</field>
+        </record>
+        <record id="rku" model="hr.employee">
+            <field name="initial">RMI</field>
+            <field name="name">Rangga Iman</field>
+        </record>
+        <record id="sis" model="hr.employee">
+            <field name="initial">SIS</field>
+            <field name="name">Sherlyn Iswadi</field>
+        </record>
+        <record id="unn" model="hr.employee">
+            <field name="initial">UNN</field>
+            <field name="name">Umpita Nauli Nababan</field>
+        </record>
+        <record id="vsa" model="hr.employee">
+            <field name="initial">VSA</field>
+            <field name="name">Viani Saputra</field>
+        </record>
+    </data>
+</odoo>

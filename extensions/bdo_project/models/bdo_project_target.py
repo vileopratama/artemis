@@ -5,11 +5,12 @@ import math
 
 
 class ProjectTarget(models.Model):
-    _name = 'bdo.project.target'
+    _name = 'bdo.project.invoice'
     _order = 'date_period_start desc'
 
     project_line_id = fields.Many2one(comodel_name='bdo.project.lines',string='Project Code',required=True,
                                       states={'draft': [('readonly', False)]},readonly=True)
+    name = fields.Char(string='Invoice No',readonly=True)
     employee_id = fields.Many2one(comodel_name='hr.employee',string='PIC',readonly=True,
                                   default=lambda self: self.env.user.employee_id.id)
     user_id = fields.Many2one(comodel_name='res.users',default=lambda self: self.env.user.id,string='PIC',
@@ -26,11 +27,10 @@ class ProjectTarget(models.Model):
     state = fields.Selection(
         [('draft', 'Draft'),('invoice', 'Invoice'),('paid','Paid')], 'Status', readonly=True, copy=False,
         default='draft')
+    date_invoice = fields.Date(string='Date Invoice', readonly=True, store=True)
     total_due = fields.Integer(string='Term of payment (days)',readonly=True)
     date_payment_due = fields.Date(string='Expected payment date',readonly=True,store=True)
-    date_payment_actual = fields.Date(string='Actual payment date', readonly=True,store=True)
-
-    #related field
+    number_invoice = fields.Char(string='Invoice No.',readonly=True,store=True)
     partner_id = fields.Char(related='project_line_id.client_name',string='Name of the Company',readonly=True)
     service_id = fields.Char(related='project_line_id.service_id.name',string='Service',readonly=True)
     date_engagement = fields.Date(related='project_line_id.date_engagement', string='Date of engagement',readonly=True)
@@ -77,9 +77,16 @@ class ProjectTarget(models.Model):
                 target.amount = (koef * month_total) * target.amount_project_total
                 target.amount_equivalent = (koef * month_total) * target.amount_project_equivalent
 
-    def action_set_invoice(self):
-        self.write({'state': 'invoice'})
+    def action_set_invoice(self,data):
+        args = {
+            'state':'invoice',
+            'date_invoice' : data.get('date_invoice',fields.Date.today()),
+            'name' : data.get('name',''),
+            'total_due':data.get('total_due',0),
+            'date_payment_due':data.get('date_payment_due', fields.Date.today()),
+            'number_invoice':data.get('payment_name','')
+        }
+        self.write(args)
 
-    def action_set_paid(self):
-        self.write({'state': 'paid'})
+
 

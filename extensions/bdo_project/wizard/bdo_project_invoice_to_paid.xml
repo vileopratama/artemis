@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_project_invoice_to_paid" model="ir.ui.view">
+        <field name="name">bdo.project.invoice.paid.form</field>
+        <field name="model">bdo.project.invoice.paid</field>
+        <field name="arch" type="xml">
+            <form string="Set Invoice">
+                <sheet>
+                    <group>
+                        <field name="date_payment_actual" />
+                        <field name="tax_invoice_number" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="check" string="Set Invoice" type="object" class="btn-primary"/>
+                    <button special="cancel" string="Cancel" class="btn-default"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_project_invoice_to_paid" model="ir.actions.act_window">
+        <field name="name">Invoice</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bdo.project.invoice.paid</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_project_invoice_to_paid" />
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -2,7 +2,7 @@
 <odoo>
 	<data>
 		<record id="bdo_project_target_view_search" model="ir.ui.view">
-		    <field name="model">bdo.project.target</field>
+		    <field name="model">bdo.project.invoice</field>
 		    <field name="arch" type="xml">
 			    <search string="Search Project Target">
 				    <field name="project_line_id"/>
@@ -13,12 +13,11 @@
 
         <record id="bdo_project_target_form" model="ir.ui.view">
 			<field name="name">Project Target Form</field>
-			<field name="model">bdo.project.target</field>
-            <field name="act_window_id" ref="bdo_project_target_view"/>
+			<field name="model">bdo.project.invoice</field>
 			<field name="arch" type="xml">
 				<form string="Project Target">
 					<header>
-						<button name="%(action_project_invoice)d" string="Invoice" class="oe_highlight" type="action" states="draft" />
+						<button name="%(action_project_target_to_invoice)d" string="Set Invoice" class="oe_highlight" type="action" states="draft" />
 						<field name="state" widget="statusbar" statusbar_visible="draft,invoice,paid" />
 					</header>
 					<sheet>
@@ -54,9 +53,10 @@
 							</page>
 							<page name="bdo_project_target_invoice" string="Invoice" autofocus="1">
 								<group>
+									<field name="name" />
+									<field name="date_invoice" />
 									<field name="total_due" />
 									<field name="date_payment_due" />
-									<field name="date_payment_actual" />
 								</group>
 							</page>
 						</notebook>
@@ -67,9 +67,7 @@
 
         <record id="bdo_project_target_tree" model="ir.ui.view">
             <field name="name">Project Target</field>
-            <field name="model">bdo.project.target</field>
-			<field name="view_id" ref="bdo_project_target_form" />
-            <field name="act_window_id" ref="bdo_project_target_view"/>
+            <field name="model">bdo.project.invoice</field>
             <field name="arch" type="xml">
                 <tree string="Project Target" decoration-info="state == 'draft'">
 					<field name="partner_id"/>
@@ -88,7 +86,7 @@
 
 		<record id="bdo_project_target_view" model="ir.actions.act_window">
             <field name="name">Project Target</field>
-            <field name="res_model">bdo.project.target</field>
+            <field name="res_model">bdo.project.invoice</field>
             <field name="view_type">form</field>
 			<field name="view_mode">tree,form,graph</field>
 			<field name="search_view_id" ref="bdo_project_target_view_search" />
@@ -103,7 +101,7 @@
 		
 		<record id="bdo_project_target_graph" model="ir.ui.view">
 			<field name="name">Project Graph</field>
-			<field name="model">bdo.project.target</field>
+			<field name="model">bdo.project.invoice</field>
 			<field name="arch" type="xml">
 				<graph string="Project Target Chart">
 					<field name="date_period_end" type="row"/>

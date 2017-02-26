@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_project_invoice" model="ir.ui.view">
-        <field name="name">bdo.project.invoice.form</field>
-        <field name="model">bdo.project.invoice</field>
-        <field name="act_window_id" ref="action_project_invoice"/>
+    <record id="view_project_target_to_invoice" model="ir.ui.view">
+        <field name="name">bdo.project.invoice.logs.form</field>
+        <field name="model">bdo.project.invoice.logs</field>
         <field name="arch" type="xml">
             <form string="Set Invoice">
                 <sheet>
                     <group>
-                        <field name="project_target_id" />
+                        <field name="project_invoice_id" />
                         <field name="name" />
                         <field name="date_invoice" />
                         <field name="total_due" />
@@ -23,13 +22,13 @@
         </field>
     </record>
 
-    <record id="action_project_invoice" model="ir.actions.act_window">
+    <record id="action_project_target_to_invoice" model="ir.actions.act_window">
         <field name="name">Invoice</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">bdo.project.invoice</field>
+        <field name="res_model">bdo.project.invoice.logs</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_project_invoice"/>
+        <field name="view_id" ref="view_project_target_to_invoice" />
         <field name="target">new</field>
     </record>
 </odoo>

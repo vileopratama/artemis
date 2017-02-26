@@ -1,12 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="bdo_project_invoice_view_search" model="ir.ui.view">
+		    <field name="model">bdo.project.invoice</field>
+		    <field name="arch" type="xml">
+			    <search string="Search Project Invoice">
+				    <field name="name"/>
+                    <filter string="Invoice" name="state" domain="[('state','=','invoice')]"/>
+			    </search>
+		    </field>
+	    </record>
+
+         <record id="bdo_project_invoice_form" model="ir.ui.view">
+			<field name="model">bdo.project.invoice</field>
+            <field name="inherit_id" ref="bdo_project.bdo_project_target_form" />
+			<field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="%(action_project_invoice_to_paid)d" string="Set to Paid" class="oe_highlight" type="action" states="invoice" />
+                </xpath>
+            </field>
+         </record>
+
+        <record id="project_invoice_view_tree" model="ir.ui.view">
+            <field name="name">Project Invoice Tree</field>
+            <field name="model">bdo.project.invoice</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="name" />
+                    <field name="date_invoice" />
+                    <field name="total_due" />
+                    <field name="date_payment_due" />
+                    <field name="partner_id"/>
+					<field name="service_id"/>
+                    <field name="date_on_scheduled"/>
+	                <field name="date_period_start"/>
+					<field name="date_period_end"/>
+					<field name="currency_id"/>
+	                <field name="amount"/>
+					<field name="amount_equivalent"/>
+                    <field name="state"/>
+					<field name="employee_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+
         <record id="bdo_project_invoice_view" model="ir.actions.act_window">
             <field name="name">Project Invoice</field>
             <field name="res_model">bdo.project.invoice</field>
             <field name="view_type">form</field>
             <field name="domain">[]</field>
+            <field name="context">{'search_default_state': 1}</field>
             <field name="view_mode">tree,form,calendar</field>
+            <field name="view_id" ref="project_invoice_view_tree" />
+            <field name="search_view_id" ref="bdo_project_invoice_view_search" />
             <field name="help" type="html">
                  <p class="oe_view_nocontent_create">
                     Please create a target for new invoice<br/>
@@ -26,108 +74,6 @@
             </field>
         </record>
 
-         <!--<record id="project_invoice_view_form" model="ir.ui.view">
-             <field name="name">Project Invoice Form</field>
-             <field name="model">bdo.project.invoice</field>
-             <field name="arch" type="xml">
-                 <form string="Project Invoice Form" create="0">
-                     <header>
-                         <button name="do_received" states="pending" string="Set to Received" type="object" class="oe_highlight" confirm="Are you sure want to received ?"/>
-	                     <button name="do_pending"  states="received" string="Set to Pending" type="object" class="oe_highlight" confirm="Are you sure want back to pending ?"/>
-                         <field name="state" widget="statusbar" statusbar_visible="pending,received"/>
-                     </header>
-                     <sheet>
-                         <div class="oe_title">
-                             <label for="name" class="oe_edit_only"/>
-                             <h1>
-                                 <field name="name" default_focus="1" placeholder="Invoice Number"/>
-                             </h1>
-                         </div>
-                         <field name="date_invoice" placeholder="Invoice Date"/>
-                         <group>
-                             <group>
-                                 <field name="partner_id"/>
-                                 <field name="date_on_scheduled" />
-                             </group>
-                             <group>
-                                 <field name="date_period_from" />
-                                  <field name="date_period_to" />
-                             </group>
-                             <group>
-                                 <field name="currency_id" />
-                                 <field name="rate" />
-                             </group>
-                             <group>
-                                 <field name="tax_invoice_number" />
-                             </group>
-                         </group>
-
-                         <notebook>
-                             <page string="Our Service" autofocus="autofocus">
-                                  <field name="lines" colspan="4" nolabel="1">
-                                      <tree string="Service lines" editable="bottom">
-                                          <field name="service_id"/>
-                                          <field name="amount" widget="monetary"/>
-                                          <field name="amount_subtotal" />
-                                      </tree>
-                                  </field>
-                                 <group class="oe_subtotal_footer oe_right" colspan="2" name="project_total">
-                                     <field name="amount" widget="monetary"/>
-                                     <div class="oe_subtotal_footer_separator oe_inline">
-                                         <label for="amount_total" />
-                                         <button name="button_dummy" states="pending" string="(update)"
-                                                    class="oe_edit_only oe_link"/>
-                                     </div>
-                                     <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator"/>
-                                 </group>
-                                 <div class="oe_clear"/>
-                             </page>
-                             <page string="Notes">
-                                 <group>
-                                      <field name="remarks"/>
-                                 </group>
-                             </page>
-                             <page string="Attachments">
-                                 <group>
-                                    <field name="attachment_ids" widget="many2many_binary"/>
-                                 </group>
-                            </page>
-                         </notebook>
-                     </sheet>
-                 </form>
-             </field>
-         </record>-->
-	    
-	    <record id="project_invoice_view_search" model="ir.ui.view">
-		    <field name="model">bdo.project.invoice</field>
-		    <field name="arch" type="xml">
-			    <search string="Search Project Invoice">
-				    <field name="name"/>
-				    <!--<field name="currency_id"/>
-				    <filter string="Pending" domain="[('state','=','pending')]"/>
-				    <filter string="Received" domain="[('state','=','received')]"/>
-				    <group expand="0" string="Group By">
-					    <filter string="Client" domain="[]" context="{'group_by':'partner_id'}"/>
-					    <filter string="Currency" domain="[]" context="{'group_by':'currency_id'}"/>
-					    <filter string="Invoice Month" domain="[]" context="{'group_by':'date_invoice'}"/>
-				    </group>-->
-			    </search>
-		    </field>
-	    </record>
-        
-        <record id="project_invoice_view_tree" model="ir.ui.view">
-            <field name="name">Project Invoice Tree</field>
-            <field name="model">bdo.project.invoice</field>
-            <field name="arch" type="xml">
-                <tree create="0">
-                    <field name="name" />
-                    <field name="date_invoice" />
-                    <field name="total_due" />
-                    <field name="date_payment_due" />
-                </tree>
-            </field>
-        </record>
-        
         <menuitem
                 id="bdo_project_invoice_menuitem"
                 parent="bdo_project_menu"

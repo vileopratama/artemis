@@ -3,24 +3,24 @@ from odoo import fields, models,api
 from datetime import timedelta, datetime
 
 
-class ProjectInvoice(models.Model):
-    _inherit = 'bdo.project.invoice'
-    _description = 'Project Target to Invoice'
+class ProjectInvoice(models.TransientModel):
+    _name = 'bdo.project.invoice.logs'
+    _description = 'Project Target to Invoice Logs'
 
-    def _default_project_target_id(self):
+    def _default_project_invoice_id(self):
         active_id = self.env.context.get('active_id')
         if active_id:
-            project = self.env['bdo.project.target'].browse(active_id)
+            project = self.env['bdo.project.invoice'].browse(active_id)
             return project.id
         return False
 
-    project_target_id = fields.Many2one('bdo.project.target', string='Project Target', required=True,
-                                        readonly=True,store=True, default=_default_project_target_id)
+    project_invoice_id = fields.Many2one('bdo.project.invoice', string='Project Target', required=True,
+                                        readonly=True,store=True, default=_default_project_invoice_id)
     name = fields.Char(string='Invoice No',required=True)
     date_invoice = fields.Date(string='Invoice Date',required=True)
     total_due = fields.Integer(string='Term of payment (days)',required=True)
     date_payment_due = fields.Date(compute='_compute_date_due', string='Expected payment date',
-                                   readonly=True, store=True,required=True)
+                                   readonly=True, store=True)
 
     _sql_constraints = [
         ('unique_name', 'unique (name)', 'Invoice number must be unique!'),
@@ -46,11 +46,11 @@ class ProjectInvoice(models.Model):
     @api.multi
     def check(self):
         self.ensure_one()
-        target = self.env['bdo.project.target'].browse(self.env.context.get('active_id', False))
+        target = self.env['bdo.project.invoice'].browse(self.env.context.get('active_id', False))
         project_target_id = target.id
         data = self.read()[0]
         if project_target_id:
-            target.action_set_invoice()
+            target.action_set_invoice(data)
             return {'type': 'ir.actions.act_window_close'}
         return self.launch_set_invoice()
 
@@ -59,7 +59,7 @@ class ProjectInvoice(models.Model):
             'name': _('Set Invoice'),
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'bdo.project.invoice',
+            'res_model': 'bdo.project.invoice.logs',
             'view_id': False,
             'target': 'new',
             'views': False,

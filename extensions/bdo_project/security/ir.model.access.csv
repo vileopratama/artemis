@@ -7,7 +7,6 @@ access_bdo_project_service_incharge,bdo.project.service.incharge,model_bdo_proje
 access_bdo_project_incharge,bdo.project.incharge,model_bdo_project,group_bdo_crm_incharge,1,0,0,0
 access_bdo_project_employee_incharge,bdo.project.employees.incharge,model_bdo_project_employees,group_bdo_crm_incharge,1,0,0,0
 access_bdo_project_lines_incharge,bdo.project.lines.incharge,model_bdo_project_lines,group_bdo_crm_incharge,1,0,0,0
-access_bdo_project_target_coordinator,bdo.project.target.coordinator,model_bdo_project_target,group_bdo_crm_coordinator,1,0,0,0
-access_bdo_project_target_incharge,bdo.project.target.incharge,model_bdo_project_target,group_bdo_crm_incharge,1,1,1,1
 access_bdo_project_invoice_coordinator,bdo.project.invoice.coordinator,model_bdo_project_invoice,group_bdo_crm_coordinator,1,0,0,0
 access_bdo_project_invoice_incharge,bdo.project.invoice.incharge,model_bdo_project_invoice,group_bdo_crm_incharge,1,1,1,1
+access_bdo_project_invoice_logs_incharge,bdo.project.invoice.logs.incharge,model_bdo_project_invoice_logs,group_bdo_crm_incharge,1,1,1,1

@@ -4,6 +4,7 @@ from odoo import models, fields, api
 
 class Project(models.Model):
     _name = 'bdo.project'
+    _inherit = ['mail.thread']
     _description = 'BDO Project'
 
     def _get_currency(self):
@@ -33,6 +34,8 @@ class Project(models.Model):
     rate = fields.Float(string='Rate')
     amount_equivalent = fields.Float(compute='_compute_amount_all',string='Amount Total Equiv', readonly=True, store=True)
     employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,
+                                  store=True)
+    user_id = fields.Many2one(comodel_name='res.users', string='User Related', compute='_compute_acl', readonly=True,
                                   store=True)
     date_reminder = fields.Date(string='Reminder Date', index=True, default=fields.Datetime.now)
     employees = fields.One2many('bdo.project.employees', inverse_name='project_id', string='Team Member')
@@ -98,7 +101,11 @@ class Project(models.Model):
             for line in el.employees:
                 if line.acl == 'in-charge':
                     el.employee_id = line.employee_id
-
+                    users = self.env['res.users'].search([('employee_id','=',line.employee_id.id)],limit=1)
+                    #for user in users:
+                    el.user_id = users
+                   
+                    
 
 class ProjectLines(models.Model):
     _name = 'bdo.project.lines'
@@ -114,6 +121,8 @@ class ProjectLines(models.Model):
     amount = fields.Float(string='Amount', default=1, store=True)
     amount_equivalent = fields.Float(compute='_compute_amount_line_all',digits=0,string='Amount Equivalent', store=True,
                                      readonly=True)
+    employee_id = fields.Integer(related='project_id.employee_id.id',string='Sync Employee ID')
+    user_id = fields.Integer(related='project_id.user_id.id', string='Related User')
 
     @api.multi
     def name_get(self):

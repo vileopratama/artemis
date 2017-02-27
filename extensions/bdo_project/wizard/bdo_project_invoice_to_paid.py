@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, models,api
-from datetime import timedelta, datetime
 
 
 class ProjectInvoice(models.TransientModel):
     _name = 'bdo.project.invoice.paid'
+    _inherit = ['mail.thread']
     _description = 'Project Invoice to Paid'
 
     def _default_project_invoice_id(self):

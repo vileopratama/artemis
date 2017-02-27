@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from odoo import models, fields, api
 from datetime import datetime as dt
 import math
@@ -6,8 +7,10 @@ import math
 
 class ProjectTarget(models.Model):
     _name = 'bdo.project.invoice'
+    _inherit = ['mail.thread']
     _order = 'date_period_start desc'
-
+    
+    
     project_line_id = fields.Many2one(comodel_name='bdo.project.lines',string='Project Code',required=True,
                                       states={'draft': [('readonly', False)]},readonly=True)
     name = fields.Char(string='Invoice No',readonly=True)

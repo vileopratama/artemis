@@ -4,6 +4,7 @@ from odoo import models, fields
 
 class ProjectInvoice(models.Model):
     _name = 'bdo.project.service'
+    _inherit = ['mail.thread']
 
     name = fields.Char(string='Service Name', required=True)
     code = fields.Char(string='Service Code', required=True)

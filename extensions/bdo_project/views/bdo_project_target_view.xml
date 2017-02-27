@@ -5,8 +5,13 @@
 		    <field name="model">bdo.project.invoice</field>
 		    <field name="arch" type="xml">
 			    <search string="Search Project Target">
-				    <field name="project_line_id"/>
-					<filter string="My Target" domain="[('user_id.id', '=', uid)]" />
+				    <field name="partner_id"/>
+				    <field name="service_id"/>
+				     <group expand="0" string="Group By">
+					     <filter string="Scheduled" domain="[]" context="{'group_by':'date_on_scheduled'}"/>
+					     <filter string="Service" domain="[]" context="{'group_by':'service_id'}"/>
+					     <filter string="Client" domain="[]" context="{'group_by':'partner_id'}"/>
+				     </group>
 			    </search>
 		    </field>
 	    </record>
@@ -22,7 +27,8 @@
 					</header>
 					<sheet>
 						<group colspan="12">
-							<field name="project_line_id" options="{'no_create':True,'no_edit':True}" default_focus="1" placeholder="Project Code"/>
+							<field name="project_line_id" options="{'no_create':True,'no_edit':True}"
+							       domain="[('user_id', 'in', [uid])]" default_focus="1" placeholder="Project Code"/>
 							<field name="user_id" />
 						</group>
 
@@ -61,6 +67,10 @@
 							</page>
 						</notebook>
 					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
 				</form>
 			</field>
 		</record>
@@ -76,8 +86,8 @@
 	                <field name="date_period_start"/>
 					<field name="date_period_end"/>
 					<field name="currency_id"/>
-	                <field name="amount"/>
-					<field name="amount_equivalent"/>
+	                <field name="amount" />
+					<field name="amount_equivalent" sum="Amount Equivalent Total"/>
                     <field name="state"/>
 					<field name="employee_id"/>
                 </tree>

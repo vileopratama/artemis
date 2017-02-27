@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="customer_1" model="res.partner">
+            <field name="name">Badan Pelaksana Kegiatan Usaha Hulu Minyak Gas Bumi</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_2" model="res.partner">
+            <field name="name">BDO (Nina Gross)</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_3" model="res.partner">
+            <field name="name">BDO AG</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_4" model="res.partner">
+            <field name="name">BDO East Coast Partnership - Melbourne</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_5" model="res.partner">
+            <field name="name">BDO Governance Advisory SDN BHD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_6" model="res.partner">
+            <field name="name">BDO Limited</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_7" model="res.partner">
+            <field name="name">BDO LLP</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_8" model="res.partner">
+            <field name="name">BDO Tax Limited</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_9" model="res.partner">
+            <field name="name">BDO USA, LLP</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_10" model="res.partner">
+            <field name="name">BHLN Creador SDN BHD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_11" model="res.partner">
+            <field name="name">BHLN Facebook Singapore PTE LTD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_12" model="res.partner">
+            <field name="name">Birdwood Enterprise LTD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_13" model="res.partner">
+            <field name="name">But Sita Telecomunications / Societe Intr.</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_14" model="res.partner">
+            <field name="name">China National Tachnical Import Export Corp.</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_15" model="res.partner">
+            <field name="name">CNBC</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_16" model="res.partner">
+            <field name="name">Gamesa Wind</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_17" model="res.partner">
+            <field name="name">Ironclad Performance Wear Corporation</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_18" model="res.partner">
+            <field name="name">LC Waikiki</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_19" model="res.partner">
+            <field name="name">OIA International SCM Co</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_20" model="res.partner">
+            <field name="name">Persek KAP Tanubrata Sutanto Fahmi &amp; Rekan</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_21" model="res.partner">
+            <field name="name">PPD Development (S) PTE LTD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_22" model="res.partner">
+            <field name="name">PT Allightsykes</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_23" model="res.partner">
+            <field name="name">PT Altron Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_24" model="res.partner">
+            <field name="name">PT Apple Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_25" model="res.partner">
+            <field name="name">PT Audatex Solusi Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_26" model="res.partner">
+            <field name="name">PT Bakrie Sumatera Plantations Tbk</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_27" model="res.partner">
+            <field name="name">PT Bank KEB Hana</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_28" model="res.partner">
+            <field name="name">PT Bank Perkreditan Rakyat Karyajatnika</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_29" model="res.partner">
+            <field name="name">PT Bank Shinhan</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_30" model="res.partner">
+            <field name="name">PT BHP Billiton Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_31" model="res.partner">
+            <field name="name">PT Bima Multi Finance</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_32" model="res.partner">
+            <field name="name">PT Biomin Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_33" model="res.partner">
+            <field name="name">PT Blue Coat Systems Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_34" model="res.partner">
+            <field name="name">PT BNI Divisi Local Corporate &amp; MNC 2</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_35" model="res.partner">
+            <field name="name">PT Brandtone Indonesia Data Services</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_36" model="res.partner">
+            <field name="name">PT BT Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_37" model="res.partner">
+            <field name="name">PT Cahaya Berlian Lestari</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_38" model="res.partner">
+            <field name="name">PT CFX Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_39" model="res.partner">
+            <field name="name">PT Comba Telecom</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_40" model="res.partner">
+            <field name="name">PT Dahlia Dewantara</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_41" model="res.partner">
+            <field name="name">PT Dam Karya Prima</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_42" model="res.partner">
+            <field name="name">PT Draegerindo Jaya</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_43" model="res.partner">
+            <field name="name">PT Forisa Nusapersada</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_44" model="res.partner">
+            <field name="name">PT Gading Prima Autoland</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_45" model="res.partner">
+            <field name="name">PT Indonesia Konsorsium Investama</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_46" model="res.partner">
+            <field name="name">PT Juloi Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_47" model="res.partner">
+            <field name="name">PT Kalteng Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_48" model="res.partner">
+            <field name="name">PT KSB Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_49" model="res.partner">
+            <field name="name">PT Lahai Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_50" model="res.partner">
+            <field name="name">PT Maruwai Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_51" model="res.partner">
+            <field name="name">PT Mindray Medical Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_52" model="res.partner">
+            <field name="name">PT Motorola Mobility Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_53" model="res.partner">
+            <field name="name">PT Mphasis Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_54" model="res.partner">
+            <field name="name">PT Multi Sanggar Utama</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_55" model="res.partner">
+            <field name="name">PT Pari Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_56" model="res.partner">
+            <field name="name">PT Persada Sokka Tama</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_57" model="res.partner">
+            <field name="name">PT Ratah Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_58" model="res.partner">
+            <field name="name">PT Reycom Document Solusi</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_59" model="res.partner">
+            <field name="name">PT Sinergi Daya Prima</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_60" model="res.partner">
+            <field name="name">PT Sita Information Networking Computing</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_61" model="res.partner">
+            <field name="name">PT Sumber Barito Coal</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_62" model="res.partner">
+            <field name="name">PT SUN Microsystem Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_63" model="res.partner">
+            <field name="name">PT Suryalaya Anindita International</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_64" model="res.partner">
+            <field name="name">PT Tempa Bersama</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_65" model="res.partner">
+            <field name="name">PT Triumph Motorcycles Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_66" model="res.partner">
+            <field name="name">PT Wolters Kluwers Financial Services Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_67" model="res.partner">
+            <field name="name">SUEK AG</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_68" model="res.partner">
+            <field name="name">System S.p.A</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_69" model="res.partner">
+            <field name="name">Taman Safari Indonesia</field>
+            <field name="is_company">TRUE</field>
+        </record>
+		<record id="customer_70" model="res.partner">
+            <field name="name">Twitter Asia Pacific PTE LTD</field>
+            <field name="is_company">TRUE</field>
+        </record>
+	</data>
+</odoo>

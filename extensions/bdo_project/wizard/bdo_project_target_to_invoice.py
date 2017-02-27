@@ -5,6 +5,7 @@ from datetime import timedelta, datetime
 
 class ProjectInvoice(models.TransientModel):
     _name = 'bdo.project.invoice.logs'
+    _inherit = ['mail.thread']
     _description = 'Project Target to Invoice Logs'
 
     def _default_project_invoice_id(self):

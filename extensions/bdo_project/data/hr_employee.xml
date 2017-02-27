@@ -60,5 +60,9 @@
             <field name="initial">VSA</field>
             <field name="name">Viani Saputra</field>
         </record>
+        <record id="dpr" model="hr.employee">
+            <field name="initial">DPR</field>
+            <field name="name">Dina Pranasari</field>
+        </record>
     </data>
 </odoo>

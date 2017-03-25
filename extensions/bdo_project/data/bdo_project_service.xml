@@ -9,10 +9,10 @@
             <field name="code">AB</field>
             <field name="name">Annual Bookeeping</field>
         </record>
-        <record id="bdo_project_service_mc" model="bdo.project.service">
+        <!--<record id="bdo_project_service_mc" model="bdo.project.service">
             <field name="code">MC</field>
             <field name="name">Monthly Compliance</field>
-        </record>
+        </record>-->
         <record id="bdo_project_service_ab" model="bdo.project.service">
             <field name="code">AC</field>
             <field name="name">Annual Compliance</field>

@@ -10,3 +10,4 @@ access_bdo_project_lines_incharge,bdo.project.lines.incharge,model_bdo_project_l
 access_bdo_project_invoice_coordinator,bdo.project.invoice.coordinator,model_bdo_project_invoice,group_bdo_crm_coordinator,1,0,0,0
 access_bdo_project_invoice_incharge,bdo.project.invoice.incharge,model_bdo_project_invoice,group_bdo_crm_incharge,1,1,1,1
 access_bdo_project_invoice_logs_incharge,bdo.project.invoice.logs.incharge,model_bdo_project_invoice_logs,group_bdo_crm_incharge,1,1,1,1
+access_report_project_summary_coordinator,report.project.summary.coordinator,model_report_project_summary,group_bdo_crm_coordinator,1,1,1,1

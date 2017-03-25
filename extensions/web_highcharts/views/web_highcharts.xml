@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="web_highcharts assets" inherit_id="web.assets_backend">
+            <xpath expr=".">
+                <script type="text/javascript" src="web_highcharts/static/lib/highcharts.js"></script>
+                <script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_widget.js" />
+                <script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_view.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>

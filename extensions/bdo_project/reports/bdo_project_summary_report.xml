@@ -5,34 +5,35 @@
             <field name="name">Summary Analysis</field>
             <field name="res_model">report.project.summary</field>
             <field name="view_type">form</field>
-            <field name="view_mode">pivot,graph</field>
+            <field name="view_mode">tree,xchart</field>
         </record>
 		
-		<record id="project_summary_report_pivot" model="ir.ui.view">
+		<record id="project_summary_report_tree" model="ir.ui.view">
+            <field name="Summary Analyst Tree"></field>
             <field name="model">report.project.summary</field>
             <field name="arch" type="xml">
-                <pivot string="Summary Analysis" disable_linking="False">
-                    <field name="date_period" interval="year" type="row"/>
-                    <field name="total_target" type="measure"/>
-	                <field name="total_amount" type="measure"/>
-                </pivot>
+                <tree>
+                    <field name="month_invoice" />
+                    <field name="total_target"/>
+                    <field name="total_amount"/>
+                </tree>
             </field>
         </record>
 		
 		<record id="project_summary_report_graph" model="ir.ui.view">
             <field name="model">report.project.summary</field>
             <field name="arch" type="xml">
-                <graph string="Summary Analysis" type="line">
-                    <field name="date_period" interval="year" type="row"/>
-                    <field name="total_target" type="measure" operator="+"/>
-	                <field name="total_amount" type="measure" operator="+"/>
-                </graph>
+                <xchart string="Summary Analysis" type="pie">
+                    <field name="month_invoice" type="row"/>
+                    <field name="total_target" type="measure"/>
+                    <field name="total_amount" type="measure"/>
+                </xchart>
             </field>
         </record>
 		
-		<menuitem id="project_summary_report"
-		          parent="project_report_menu"
-		          name="Summary"
+		<menuitem id="bdo_project_summary_report"
+		          parent="bdo_project_report_menu"
+		          name="Summary Analyst"
 		          action="project_summary_report_view"
 		          sequence="1"/>
 	</data>

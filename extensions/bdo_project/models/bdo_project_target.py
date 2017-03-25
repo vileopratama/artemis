@@ -13,6 +13,7 @@ class ProjectTarget(models.Model):
     
     project_line_id = fields.Many2one(comodel_name='bdo.project.lines',string='Project Code',required=True,
                                       states={'draft': [('readonly', False)]},readonly=True)
+    date_invoice = fields.Date(string='Date Invoice',store=True)
     name = fields.Char(string='Invoice No',readonly=True)
     employee_id = fields.Many2one(comodel_name='hr.employee',string='PIC',readonly=True,
                                   default=lambda self: self.env.user.employee_id.id)
@@ -30,7 +31,7 @@ class ProjectTarget(models.Model):
     state = fields.Selection(
         [('draft', 'Draft'),('invoice', 'Invoice'),('paid','Paid')], 'Status', readonly=True, copy=False,
         default='draft')
-    date_invoice = fields.Date(string='Date Invoice', readonly=True, store=True)
+
     total_due = fields.Integer(string='Term of payment (days)',readonly=True)
     date_payment_due = fields.Date(string='Expected payment date',readonly=True,store=True)
     number_invoice = fields.Char(string='Invoice No.',readonly=True,store=True)

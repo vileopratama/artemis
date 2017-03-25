@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <data noupdate="0">
         <record id="bbr" model="hr.employee">
             <field name="initial">BBR</field>
             <field name="name">Bryan</field>

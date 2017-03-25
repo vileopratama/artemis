@@ -10,9 +10,7 @@
     'category': 'BDO CRM',
     'version': '10.0.1.0.1',
     'depends': [
-        'base',
-        'hr',
-        'crm',
+        'base','hr','crm',
     ],
     'data': [
         'security/bdo_project_security.xml',
@@ -33,7 +31,7 @@
         'data/res_partner.xml',
         #'reports/bdo_project_menuitem.xml',
         #'reports/bdo_existing_clients_list_report.xml',
-        #'reports/bdo_project_summary_report.xml',
+        'reports/bdo_project_summary_report.xml',
         #'reports/bdo_project_billing_summary_report.xml',
         #'reports/bdo_list_of_tax_invoices_report.xml',
         #'reports/bdo_schedule_invoices_report.xml',

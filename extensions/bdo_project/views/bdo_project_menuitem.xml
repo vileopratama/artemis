@@ -23,6 +23,7 @@
                   name="Configuration"
                   parent="bdo_projects_root"
                   sequence="3" />
-		
+
+
 	</data>
 </odoo>

@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="mb" model="bdo.project.service">
+    <data noupdate="1">
+        <record id="bdo_project_service_mb" model="bdo.project.service">
             <field name="code">MB</field>
             <field name="name">Monthly Bookeeping</field>
         </record>
-        <record id="ab" model="bdo.project.service">
+        <record id="bdo_project_service_ab" model="bdo.project.service">
             <field name="code">AB</field>
             <field name="name">Annual Bookeeping</field>
         </record>
-        <record id="mc" model="bdo.project.service">
+        <record id="bdo_project_service_mc" model="bdo.project.service">
             <field name="code">MC</field>
             <field name="name">Monthly Compliance</field>
         </record>
-        <record id="ab" model="bdo.project.service">
+        <record id="bdo_project_service_ab" model="bdo.project.service">
             <field name="code">AC</field>
             <field name="name">Annual Compliance</field>
         </record>
-        <record id="cs" model="bdo.project.service">
+        <record id="bdo_project_service_cs" model="bdo.project.service">
             <field name="code">CS</field>
             <field name="name">Corp Secretarial</field>
         </record>
-        <record id="pyr" model="bdo.project.service">
+        <record id="bdo_project_service_pyr" model="bdo.project.service">
             <field name="code">PYR</field>
             <field name="name">Payroll</field>
         </record>
-        <record id="tsr" model="bdo.project.service">
+        <record id="bdo_project_service_tsr" model="bdo.project.service">
             <field name="code">TSR</field>
             <field name="name">Treasury</field>
         </record>
-        <record id="sfs" model="bdo.project.service">
+        <record id="bdo_project_service_sfs" model="bdo.project.service">
             <field name="code">SFS</field>
             <field name="name">SFS</field>
         </record>
-        <record id="buf" model="bdo.project.service">
+        <record id="bdo_project_service_buf" model="bdo.project.service">
             <field name="code">BUF</field>
             <field name="name">BDO UK fees</field>
         </record>
-         <record id="wp" model="bdo.project.service">
+         <record id="bdo_project_service_wp" model="bdo.project.service">
             <field name="code">WP</field>
             <field name="name">Work Permit</field>
         </record>
-         <record id="ahq" model="bdo.project.service">
+         <record id="bdo_project_service_ahq" model="bdo.project.service">
             <field name="code">AHQ</field>
             <field name="name">Ad hoc - Qtrly Rep</field>
         </record>

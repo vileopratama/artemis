@@ -10,7 +10,7 @@
     'category': 'BDO CRM',
     'version': '10.0.1.0.1',
     'depends': [
-        'base','web_highcharts','hr','crm',
+        'base','web_highcharts','web_highcharts_pie','hr','crm',
     ],
     'data': [
         'security/bdo_project_security.xml',

@@ -14,7 +14,7 @@ var _t = core._t;
 var QWeb = core.qweb;
 
 var ChartView = View.extend({
-    className: 'o_graphxs',
+    className: 'o_graph',
     display_name: _lt('Xchart'),
     icon: 'fa-bar-chart',
     require_fields: true,

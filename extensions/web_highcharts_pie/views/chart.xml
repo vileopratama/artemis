@@ -3,6 +3,7 @@
     <data>
         <template id="assets_backend" name="web_highcharts_pie_assets" inherit_id="web.assets_backend">
             <xpath expr=".">
+                <link rel="stylesheet" href="/web_highcharts_pie/static/src/css/chart.css"/>
                 <script type="text/javascript" src="/web_highcharts_pie/static/src/js/chart_widget.js" />
                 <script type="text/javascript" src="/web_highcharts_pie/static/src/js/chart_view.js" />
             </xpath>

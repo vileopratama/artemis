@@ -1,3 +1,8 @@
 .o_chart_pie{
     height:100%;
 }
+
+.o_chart_pie .o_graph_svg_container {
+    height: 100%;
+    overflow: auto;
+}

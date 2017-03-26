@@ -9,7 +9,7 @@ var _lt = core._lt;
 var _t = core._t;
 
 var PieChartView = View.extend({
-    template: "ChartPieView",
+    //template: "ChartPieView",
     className: 'o_chart_pie',
     display_name: _lt('ChartPie'),
     view_type: "chart-pie",

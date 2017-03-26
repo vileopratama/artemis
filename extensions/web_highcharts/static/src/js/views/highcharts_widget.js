@@ -71,6 +71,8 @@ return Widget.extend({
                 values[j] = this.sanitize_value(data_pt.value[j], data_pt.grouped_on[j]);
             }
             value = is_count ? data_pt.length : data_pt.aggregates[this.measure];
+            console.log('labels :' + values);
+            console.log('Value :' + value);
             this.data.push({
                 labels: values,
                 value: value

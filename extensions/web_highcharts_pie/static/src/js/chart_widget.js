@@ -67,7 +67,7 @@ return Widget.extend({
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     },
-                    size: '75%'
+                    //size: '75%'
                 }
             },
 
@@ -80,7 +80,7 @@ return Widget.extend({
                     verticalAlign: 'top',
                     y: -40
                 },
-                center: ['20%', '50%']
+                //center: ['20%', '50%']
             }]
 
         });

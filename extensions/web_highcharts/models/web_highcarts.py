@@ -16,6 +16,6 @@ class view(models.Model):
         ('kanban', 'Kanban'),
         ('sales_team_dashboard', 'Sales Team Dashboard'),
         ('search', 'Search'),
-        ('xchart', 'XChart'),
+        ('xchart', 'Xchart'),
         ('qweb', 'QWeb')], string='View Type'
 )

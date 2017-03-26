@@ -194,6 +194,61 @@ return Widget.extend({
         return chart;
     },
     display_pie: function () {
+        var measure = this.fields[this.measure].string;
+        console.log('measure : ' +measure);
+        console.log('data : ' +this.data[1].value);
+
+        var chart = new Highcharts.Chart({
+
+        chart: {
+            renderTo: $('.o_graph_svg_container')[0],
+            type: 'pie',
+            options3d: {
+                    enabled: true,
+                    alpha: 45,
+                    beta: 0
+            }
+        },
+
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+
+        plotOptions: {
+            pie: {
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                },
+                size: '75%'
+            }
+        },
+
+        series: [{
+            name: 'Browser share Month 2017',
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            title: {
+                align: 'left',
+                text: '<b>Pie 1</b><br>Subtext',
+                verticalAlign: 'top',
+                y: -40
+            },
+            center: ['20%', '50%']
+        }, {
+            name: 'Browser share Month 2018',
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            title: {
+                align: 'center',
+                text: '<b>Pie 2</b><br>Subtext',
+                verticalAlign: 'top',
+                y: -40
+            },
+            center: ['70%', '50%']
+        }]
+
+    });
+
+
         /*var data = [],
             all_negative = true,
             some_negative = false,

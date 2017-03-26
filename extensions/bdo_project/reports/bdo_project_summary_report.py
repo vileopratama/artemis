@@ -20,7 +20,7 @@ class ProjectSummaryReport(models.Model):
 				SELECT
 					MIN(bpi.id) as id,
 					EXTRACT(MONTH FROM bpi.date_invoice) as month_invoice,
-					SUM(amount_equivalent) as total_target,
+					SUM(amount_equivalent + 1000000) as total_target,
 					SUM(amount_equivalent) as total_amount
 				FROM
 					bdo_project_invoice as bpi

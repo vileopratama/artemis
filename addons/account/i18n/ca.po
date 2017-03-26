@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-03 14:29+0000\n"
-"PO-Revision-Date: 2017-02-03 14:29+0000\n"
+"POT-Creation-Date: 2017-02-14 10:20+0000\n"
+"PO-Revision-Date: 2017-02-14 10:20+0000\n"
 "Last-Translator: Bàrbara Partegàs <barbararof@gmail.com>, 2016\n"
 "Language-Team: Catalan (https://www.transifex.com/odoo/teams/41243/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -580,6 +580,16 @@ msgid ""
 msgstr ""
 "<span>(*) Aquesta configuració està relacionada amb la companyia en la que "
 "heu iniciat la sessió.</span>"
+
+#. module: account
+#: model:ir.ui.view,arch_db:account.account_invoice_report_duplicate
+msgid "<span>invoice</span>"
+msgstr ""
+
+#. module: account
+#: model:ir.ui.view,arch_db:account.account_invoice_report_duplicate
+msgid "<span>refund</span>"
+msgstr ""
 
 #. module: account
 #: model:ir.ui.view,arch_db:account.account_invoice_report_duplicate
@@ -2923,10 +2933,17 @@ msgstr "Tanca"
 
 #. module: account
 #. openerp-web
-#: code:addons/account/static/src/xml/account_reconciliation.xml:227
+#: code:addons/account/static/src/xml/account_reconciliation.xml:229
 #, python-format
 msgid "Close the statement"
 msgstr "Tanca l'extracte"
+
+#. module: account
+#. openerp-web
+#: code:addons/account/static/src/xml/account_reconciliation.xml:228
+#, python-format
+msgid "Close the statements"
+msgstr "Tancar els extractes"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_bank_statement_date_done
@@ -9586,7 +9603,7 @@ msgid ""
 "This allows you to manage the revenue recognition on selling products. It keeps track of the installments occurred on those revenue recognitions, and creates account moves for those installment lines\n"
 "-This installs the module account_deferred_revenue."
 msgstr ""
-"Això permet a gestionar els ingressos en productes venuts. Manté la traçabilitat de les quotes que han passat en aquests reconeixements d'ingressos, i crea el compte de línia de moviments.\n"
+"Això permet gestionar els ingressos en productes venuts. Manté la traçabilitat de les quotes que han passat en aquests reconeixements d'ingressos, i crea el compte de línia de moviments.\n"
 "-Això instal·la el mòdul account_deferred_revenue."
 
 #. module: account
@@ -9719,6 +9736,17 @@ msgid ""
 msgstr ""
 "Aquesta etiqueta serà visible a l'informe per mostrar el saldo calculat pel "
 "filtre de comparació introduït."
+
+#. module: account
+#. openerp-web
+#: code:addons/account/static/src/xml/account_reconciliation.xml:273
+#, python-format
+msgid ""
+"This move's amount is higher than the transaction's amount. Click to "
+"register a partial payment and keep the payment balance open."
+msgstr ""
+"La quantitat d'aquest moviment és major que la de la transacció. Faci clic "
+"per registrar un pagament parcial i mantingui el saldo de pagament obert."
 
 #. module: account
 #: model:ir.model.fields,help:account.field_accounting_report_debit_credit
@@ -10065,6 +10093,13 @@ msgstr "Tipus"
 #, python-format
 msgid "Undistributed Profits/Losses"
 msgstr "Pèrdues/guanys no distribuïts"
+
+#. module: account
+#. openerp-web
+#: code:addons/account/static/src/xml/account_reconciliation.xml:278
+#, python-format
+msgid "Undo the partial reconciliation."
+msgstr "Desfer la conciliació parcial"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_invoice_line_price_unit

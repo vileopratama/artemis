@@ -6,9 +6,9 @@ class ProjectSummaryReport(models.Model):
     _name = "report.project.summary"
     _description = "Project Summary"
     _auto = False
-    _order = 'month_invoice asc'
+    _order = 'year_invoice asc'
 
-    month_invoice = fields.Integer(string='Month', readonly=True)
+    year_invoice = fields.Char(string='Year', readonly=True)
     total_target = fields.Float(string='Total Target', readonly=True)
     total_amount = fields.Float(string='Total Amount', readonly=True)
 
@@ -19,12 +19,12 @@ class ProjectSummaryReport(models.Model):
 			CREATE OR REPLACE VIEW report_project_summary AS (
 				SELECT
 					MIN(bpi.id) as id,
-					EXTRACT(MONTH FROM bpi.date_invoice) as month_invoice,
+					EXTRACT(YEAR FROM bpi.date_invoice) as year_invoice,
 					SUM(amount_equivalent + 1000000) as total_target,
 					SUM(amount_equivalent) as total_amount
 				FROM
 					bdo_project_invoice as bpi
 				GROUP BY
-					EXTRACT(MONTH FROM bpi.date_invoice)
+					EXTRACT(YEAR FROM bpi.date_invoice)
 		    )
 		""")

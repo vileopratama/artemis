@@ -48,6 +48,7 @@ return Widget.extend({
         var fields = this.groupbys.slice(0);
         if (this.measure !== '__count__'.slice(0))
             fields = fields.concat(this.measure);
+        console.log("Fields Slice " + fields);
         return this.model
                     .query(fields)
                     .filter(this.domain)
@@ -196,7 +197,7 @@ return Widget.extend({
     display_pie: function () {
         var measure = this.fields[this.measure].string;
         console.log('measure : ' +measure);
-        console.log('data : ' +this.data[1].value);
+        //console.log('data : ' +this.data[0].value);
 
         var chart = new Highcharts.Chart({
 
@@ -211,7 +212,7 @@ return Widget.extend({
         },
 
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: ['Target', 'Amount']
         },
 
         plotOptions: {
@@ -226,7 +227,7 @@ return Widget.extend({
 
         series: [{
             name: 'Browser share Month 2017',
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            data: [20000, 300000],
             title: {
                 align: 'left',
                 text: '<b>Pie 1</b><br>Subtext',
@@ -234,16 +235,6 @@ return Widget.extend({
                 y: -40
             },
             center: ['20%', '50%']
-        }, {
-            name: 'Browser share Month 2018',
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-            title: {
-                align: 'center',
-                text: '<b>Pie 2</b><br>Subtext',
-                verticalAlign: 'top',
-                y: -40
-            },
-            center: ['70%', '50%']
         }]
 
     });

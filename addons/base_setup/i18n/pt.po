@@ -7,6 +7,7 @@
 # Martin Trigaux <mat@odoo.com>, 2016
 # Manuela Silva <inactive+h_manuela_rodsilva@transifex.com>, 2016
 # Ricardo Martins <ricardo.nbs.martins@gmail.com>, 2016
+# Manuela Silva <manuela.silva@sky.com>, 2016
 # Joao Vieira <joao.f.vieira@gmail.com>, 2016
 msgid ""
 msgstr ""
@@ -25,7 +26,7 @@ msgstr ""
 #. module: base_setup
 #: model:ir.ui.view,arch_db:base_setup.view_general_configuration
 msgid "(reload fonts)"
-msgstr "(recarregar fontes)"
+msgstr "(recarregar tipos de letra)"
 
 #. module: base_setup
 #: model:ir.ui.view,arch_db:base_setup.view_general_configuration
@@ -33,6 +34,8 @@ msgid ""
 "<span>(*) This configuration is related to the company you're logged "
 "into.</span>"
 msgstr ""
+"<span>(*) Esta configuração está relacionada com a empresa onde iniciou a "
+"sessão.</span>"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_base_config_settings_module_portal
@@ -65,7 +68,7 @@ msgstr ""
 #. module: base_setup
 #: model:ir.model.fields,help:base_setup.field_base_config_settings_group_multi_currency
 msgid "Allows to work in a multi currency environment"
-msgstr ""
+msgstr "Permite trabalhar num ambiente de múltiplas moedas"
 
 #. module: base_setup
 #: model:ir.ui.view,arch_db:base_setup.view_general_configuration
@@ -107,7 +110,7 @@ msgstr "Configurar servidores de saída de email"
 #. module: base_setup
 #: model:ir.ui.view,arch_db:base_setup.view_general_configuration
 msgid "Configure your company data"
-msgstr "Configurar dados da sua empresa"
+msgstr "Configure os dados da sua empresa"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_base_config_settings_create_uid
@@ -220,7 +223,7 @@ msgstr "Gerir Inter Empresa"
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_base_config_settings_group_multi_company
 msgid "Manage multiple companies"
-msgstr "Gerir várias empresas"
+msgstr "Gerir múltiplas empresas"
 
 #. module: base_setup
 #: model:ir.ui.view,arch_db:base_setup.view_general_configuration

@@ -130,10 +130,11 @@ class IrModel(models.Model):
             for model in self:
                 if model.state != 'manual':
                     raise UserError(_("Model '%s' contains module data and cannot be removed!") % model.name)
+                # prevent screwing up fields that depend on these models' fields
+                model.field_id._prepare_update()
 
-        # prevent screwing up fields that depend on these models' fields
-        for model in self:
-            model.field_id._prepare_update()
+        imc = self.env['ir.model.constraint'].search([('model', 'in', self.ids)])
+        imc.unlink()
 
         self._drop_table()
         res = super(IrModel, self).unlink()
@@ -772,8 +773,6 @@ class IrModelRelation(models.Model):
             self._cr.execute('DROP TABLE %s CASCADE' % table,)
             _logger.info('Dropped table %s', table)
 
-        self._cr.commit()
-
 
 class IrModelAccess(models.Model):
     _name = 'ir.model.access'
@@ -1311,7 +1310,6 @@ class IrModelData(models.Model):
 
         undeletable += unlink_if_refcount(item for item in to_unlink if item[0] == 'ir.model')
 
-        self._cr.commit()
 
         (datas - undeletable).unlink()
 

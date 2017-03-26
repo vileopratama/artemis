@@ -5,18 +5,49 @@
             <field name="name">Summary Analysis</field>
             <field name="res_model">report.project.summary</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,xchart</field>
+            <field name="view_mode">tree,xchart,form,chart-pie</field>
         </record>
 		
 		<record id="project_summary_report_tree" model="ir.ui.view">
             <field name="Summary Analyst Tree"></field>
             <field name="model">report.project.summary</field>
             <field name="arch" type="xml">
-                <tree>
-                    <field name="month_invoice" />
+                <tree create="0">
+                    <field name="year_invoice" />
                     <field name="total_target"/>
                     <field name="total_amount"/>
                 </tree>
+            </field>
+        </record>
+
+        <record id="project_summary_report_form" model="ir.ui.view">
+            <field name="Summary Analyst Form"></field>
+            <field name="model">report.project.summary</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="year_invoice" />
+                            <field name="total_target"/>
+                            <field name="total_amount"/>
+                        </group>
+
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="project_summary_report_chart_pie" model="ir.ui.view">
+            <field name="Summary Analyst Pie Chart"></field>
+            <field name="type">chart-pie</field>
+            <field name="model">report.project.summary</field>
+            <field name="arch" type="xml">
+                <chart-pie string="Summary Analysis">
+                    <field name="year_invoice" type="row"/>
+                    <field name="total_target" type="measure"/>
+                    <field name="total_amount" type="measure"/>
+                </chart-pie>
             </field>
         </record>
 		
@@ -24,7 +55,7 @@
             <field name="model">report.project.summary</field>
             <field name="arch" type="xml">
                 <xchart string="Summary Analysis" type="pie">
-                    <field name="month_invoice" type="row"/>
+                    <field name="year_invoice" type="row"/>
                     <field name="total_target" type="measure"/>
                     <field name="total_amount" type="measure"/>
                 </xchart>

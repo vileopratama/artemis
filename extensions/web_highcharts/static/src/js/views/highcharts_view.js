@@ -14,7 +14,7 @@ var _t = core._t;
 var QWeb = core.qweb;
 
 var ChartView = View.extend({
-    className: 'o_graph',
+    className: 'o_graphxs',
     display_name: _lt('Xchart'),
     icon: 'fa-bar-chart',
     require_fields: true,
@@ -32,6 +32,7 @@ var ChartView = View.extend({
         var fields_def = data_manager.load_fields(this.dataset).then(this.prepare_fields.bind(this));
         this.fields_view.arch.children.forEach(function (field) {
             var name = field.attrs.name;
+            //console.log("Name" + name);
             if (field.attrs.interval) {
                 name += ':' + field.attrs.interval;
             }
@@ -41,6 +42,8 @@ var ChartView = View.extend({
                 self.initial_groupbys.push(name);
             }
         });
+
+        console.log("X Measure : " + self.active_measure);
         return $.when(this._super(), fields_def);
     },
     /**

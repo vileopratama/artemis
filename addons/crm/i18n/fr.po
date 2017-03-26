@@ -40,13 +40,15 @@
 # ShevAbam <shevabam@gmail.com>, 2016
 # Jérémy Donas <LeDistordu@users.noreply.github.com>, 2016
 # Jeanjean Noname <monsieur.spock@gmail.com>, 2016
+# Richard Mathot <rim@odoo.com>, 2017
+# Sébastien Le Ray <sebastien-github@orniz.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-14 13:41+0000\n"
 "PO-Revision-Date: 2016-12-14 13:41+0000\n"
-"Last-Translator: Jeanjean Noname <monsieur.spock@gmail.com>, 2016\n"
+"Last-Translator: Sébastien Le Ray <sebastien-github@orniz.org>, 2017\n"
 "Language-Team: French (https://www.transifex.com/odoo/teams/41243/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,11 +216,13 @@ msgstr ""
 msgid ""
 "<b>Invite coworkers</b> via email.<br/><i>Enter one email per line.</i>"
 msgstr ""
+"<b>Inviter des collègues</b> par courriel.<br/>\n"
+"<i>Saisissez une adresse par ligne.</i>"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "<i class=\"fa fa-envelope-o\"/> Ask Our Experts"
-msgstr ""
+msgstr "<i class=\"fa fa-envelope-o\"/> Demandez à nos experts"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_team_salesteams_view_kanban
@@ -1590,7 +1594,7 @@ msgstr "Créez vos modèles d'offres"
 #: model:ir.model.fields,field_description:crm.field_crm_activity_report_author_id
 #: model:ir.ui.view,arch_db:crm.crm_activity_report_view_search
 msgid "Created By"
-msgstr ""
+msgstr "Créé par"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_base_partner_merge_automatic_wizard_create_uid
@@ -1868,7 +1872,8 @@ msgstr "Pistes en brouillon"
 #. module: crm
 #: selection:sale.config.settings,group_use_lead:0
 msgid "Each mail sent to the alias creates a new opportunity"
-msgstr "Chaque courrier envoyé au pseudonyme crée une nouvelle occasion"
+msgstr ""
+"Chaque courrier envoyé à l'adresse cible crée une nouvelle opportunité"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -4561,7 +4566,7 @@ msgid ""
 "                    a contact form filled in your website, or a file of unqualified\n"
 "                    prospects you import, etc."
 msgstr ""
-"Utiliser leads si vous avez besoin d'une étape de qualification avant de créer une\n"
+"Utiliser les pistes si vous avez besoin d'une étape de qualification avant de créer une\n"
 "opportunité ou un client. Cela peut être une carte de visite reçue,\n"
 "un formulaire de contact remplis sur votre site internet, ou un fichier de prospects non qualifié que vous importez, etc.  "
 
@@ -4571,8 +4576,8 @@ msgid ""
 "Use leads if you need a qualification step before creating an opportunity or"
 " a customer"
 msgstr ""
-"Utiliser leads si vous avez besoin d'une étape de qualification avant de "
-"créer une opportunité ou un client. "
+"Utiliser les pistes si vous avez besoin d'une étape de qualification avant "
+"de créer une opportunité ou un client. "
 
 #. module: crm
 #: model:ir.actions.act_window,help:crm.crm_lost_reason_action

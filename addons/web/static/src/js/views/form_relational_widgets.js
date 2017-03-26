@@ -959,7 +959,8 @@ var X2ManyListView = ListView.extend({
             field.no_rerender = true;
             current_values[field.name] = field.get('value');
         });
-        var cached_records = _.filter(this.dataset.cache, function(item){return !_.isEmpty(item.values) && !item.to_delete;});
+        var ids = _.map(this.records.records, function (item) { return item.attributes.id; });
+        var cached_records = _.filter(this.dataset.cache, function(item){return _.contains(ids, item.id) && !_.isEmpty(item.values) && !item.to_delete;});
         var valid = _.every(cached_records, function(record){
             _.each(fields, function(field){
                 var value = record.values[field.name];
@@ -997,9 +998,7 @@ var X2ManyListView = ListView.extend({
  */
 var X2ManyList = ListView.List.extend({
     pad_table_to: function (count) {
-        var ftype = this.view.x2m.field.type;
-        var is_readonly = this.view.x2m.get('effective_readonly');
-        if (is_readonly || (ftype === 'one2many' && !this.view.is_action_enabled('create'))) {
+        if (!this.view.is_action_enabled('create') || this.view.x2m.get('effective_readonly')) {
             this._super(count);
             return;
         }

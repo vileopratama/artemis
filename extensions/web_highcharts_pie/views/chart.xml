@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="web_highcharts_pie_assets" inherit_id="web.assets_backend">
+            <xpath expr=".">
+                <script type="text/javascript" src="/web_highcharts_pie/static/src/js/chart_widget.js" />
+                <script type="text/javascript" src="/web_highcharts_pie/static/src/js/chart_view.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>

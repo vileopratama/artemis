@@ -9,6 +9,7 @@ return Widget.extend({
     init: function (parent, model, options) {
         this._super(parent);
         this.context = options.context;
+        this.fields = options.fields;
         this.model = new Model(model, {group_by_no_leaf: true});
         this.domain = options.domain || [];
         this.groupbys = options.groupbys || [];
@@ -16,14 +17,18 @@ return Widget.extend({
         this.measure = options.measure || "__count__";
     },
     start: function () {
-        console.log('on start');
+        return this.load_data().then(this.proxy('display_graph'));
+    },
+    update_data: function (domain, groupbys) {
+        this.domain = domain;
+        this.groupbys = groupbys;
         return this.load_data().then(this.proxy('display_graph'));
     },
     load_data: function () {
         var fields = this.groupbys.slice(0);
-        if (this.measure !== '__count__'.slice(0))
-            fields = fields.concat(this.measure);
-        console.log("Fields Slice " + fields);
+        fields = fields.concat(this.measure.slice(0));
+        console.log("Fields Slice : " + fields);
+
         return this.model
                     .query(fields)
                     .filter(this.domain)
@@ -31,9 +36,27 @@ return Widget.extend({
                     .lazy(false)
                     .group_by(this.groupbys.slice(0,2))
                     .then(this.proxy('prepare_data'));
-
     },
     prepare_data: function () {
+        var raw_data = arguments[0],
+            is_count = this.measure === '__count__';
+        var data_pt, j, values, value;
+        this.data = [];
+        var measure;
+        var x,y;
+
+        for (var i = 0; i < raw_data.length; i++) {
+            data_pt = raw_data[i].attributes;
+            for(var j = 0; j < this.measure.slice(0).length; j++) {
+				x = j + 0;
+				y = j + 1;
+                measure = this.measure.slice(x ,y);
+                this.data.push({
+                    name: this.fields[measure].string,
+                    y: data_pt.aggregates[measure],
+                });
+            }
+        }
 
     },
     display_graph: function () {
@@ -57,11 +80,10 @@ return Widget.extend({
             title: {
                 text: '2017'
             },
-            xAxis: {
-                categories: ['Target', 'Amount']
-            },
-
             plotOptions: {
+                allowPointSelect: true,
+	            cursor: 'pointer',
+	            depth: 35,
                 pie: {
                     dataLabels: {
                         enabled: true,
@@ -71,17 +93,11 @@ return Widget.extend({
                 }
             },
 
-            series: [{
-                name: 'Browser share Month 2017',
-                data: [200000, 300000],
-                title: {
-                    align: 'left',
-                    text: '<b>Pie 1</b><br>Subtext',
-                    verticalAlign: 'top',
-                    y: -40
-                },
-                //center: ['20%', '50%']
-            }]
+		    series: [{
+		        name: 'Brands',
+		        colorByPoint: true,
+		        data: this.data,
+		    }],
 
         });
     },

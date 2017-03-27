@@ -43,7 +43,7 @@ var ChartView = View.extend({
             }
         });
 
-        console.log("X Measure : " + self.active_measure);
+        //console.log("X Measure : " + self.active_measure);
         return $.when(this._super(), fields_def);
     },
     /**

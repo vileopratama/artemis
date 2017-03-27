@@ -48,7 +48,7 @@ return Widget.extend({
         var fields = this.groupbys.slice(0);
         if (this.measure !== '__count__'.slice(0))
             fields = fields.concat(this.measure);
-        console.log("Fields Slice " + fields);
+        console.log("Fields Slice : " + fields);
         return this.model
                     .query(fields)
                     .filter(this.domain)
@@ -61,7 +61,7 @@ return Widget.extend({
         var raw_data = arguments[0],
             is_count = this.measure === '__count__';
         var data_pt, j, values, value;
-
+		//console.log('Argument'+ arguments[0]);
         this.data = [];
         for (var i = 0; i < raw_data.length; i++) {
             data_pt = raw_data[i].attributes;

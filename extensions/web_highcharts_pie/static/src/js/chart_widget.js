@@ -59,6 +59,10 @@ return Widget.extend({
         }
 
     },
+    prepare_measure: function () {
+        console.log("widget data " + this.data.length);
+        return this.data;
+    },
     display_graph: function () {
         this.$el.empty();
         var chart = this['display_' + this.mode]();

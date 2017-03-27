@@ -7,6 +7,7 @@ var PieChartWidget = require('web_highcharts_pie.PieChartWidget');
 var View = require('web.View');
 var _lt = core._lt;
 var _t = core._t;
+var QWeb = core.qweb;
 
 var PieChartView = View.extend({
     className: 'o_chart_pie',
@@ -17,6 +18,7 @@ var PieChartView = View.extend({
     init: function () {
         this._super.apply(this, arguments);
         this.measures = [];
+        this.measure = [];
         this.active_measure = [];
         this.initial_groupbys = [];
         this.widget = undefined;
@@ -41,7 +43,24 @@ var PieChartView = View.extend({
         return $.when(this._super(), fields_def);
     },
     render_buttons: function ($node) {
+		var measure = [];
+		if (this.widget) {
+			//var data = this.widget.prepare_measure();
+			//console.log("tahun" + data.length);
+			//measure = this.widget.prepare_measure();
+		}
 
+		if ($node) {
+            //var context = {measures: _.pairs(_.omit(this.measures, '__count__'))};
+            var context = {measures:  _.pairs(_.omit(measure, '__count__'))};
+            this.$buttons = $(QWeb.render('GraphView.buttons', context));
+            //this.$measure_list = this.$buttons.find('.o_graph_measures_list');
+            //this.update_measure();
+            //this.$buttons.find('button').tooltip();
+            //this.$buttons.click(this.on_button_click.bind(this));
+            //this.$buttons.find('.o_graph_button[data-mode="' + this.widget.mode + '"]').addClass('active');
+            this.$buttons.appendTo($node);
+        }
     },
     do_show: function () {
         this.do_push_state({});
@@ -54,6 +73,7 @@ var PieChartView = View.extend({
              if ((name !== 'id') && (field.store === true)) {
                 if (field.type === 'integer' || field.type === 'float' || field.type === 'monetary') {
                     self.measures[name] = field;
+                    console.log("self measure" + field.value);
                 }
              }
         });

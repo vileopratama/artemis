@@ -15,4 +15,17 @@
             <t t-raw="html_error"/>
         </div>
     </t>
+    
+    <t t-name="GraphView.buttons">
+        <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                Measures <span class="caret"/>
+            </button>
+	        <ul class="dropdown-menu o_graph_measures_list">
+		        <li t-foreach="measures" t-as="measure" t-att-data-field="measure.name">
+                    <a href="#"><t t-esc="measure.name"/></a>
+                </li>
+	        </ul>
+        </div>
+    </t>
 </templates>

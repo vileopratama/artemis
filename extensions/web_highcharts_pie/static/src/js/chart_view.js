@@ -31,10 +31,8 @@ var PieChartView = View.extend({
 			if(field.attrs.interval) {
 				name += ':' + field.attrs.interval;
 			}
-			//console.log('type :' + field.attrs.type + ' name:'+name);
+
 			if (field.attrs.type === 'measure') {
-                //self.active_measure = name;
-                //self.active_measure = self.measures[name];
                 self.active_measure.push(name);
             } else {
                 self.initial_groupbys.push(name);
@@ -43,16 +41,12 @@ var PieChartView = View.extend({
         return $.when(this._super(), fields_def);
     },
     render_buttons: function ($node) {
-		var measure = [];
-		if (this.widget) {
-			//var data = this.widget.prepare_measure();
-			//console.log("tahun" + data.length);
-			//measure = this.widget.prepare_measure();
-		}
-
+		console.log('render button : ' + this.widget.mode);
 		if ($node) {
-            //var context = {measures: _.pairs(_.omit(this.measures, '__count__'))};
-            var context = {measures:  _.pairs(_.omit(measure, '__count__'))};
+		    var measures = this.widget.get_measure();
+		    //this.widget.data.push({name:'2017'});
+            var context = {measures:measures};
+            //var context = {measures:  _.pairs(_.omit(this.measure, '__count__'))};
             this.$buttons = $(QWeb.render('GraphView.buttons', context));
             //this.$measure_list = this.$buttons.find('.o_graph_measures_list');
             //this.update_measure();
@@ -80,6 +74,7 @@ var PieChartView = View.extend({
         this.measures.__count__ = {string: _t("Count"), type: "integer"};
     },
     do_search: function (domain, context, group_by) {
+        console.log('render search');
         this.initial_groupbys = context.graph_groupbys || (group_by.length ? group_by : this.initial_groupbys);
         if (!this.widget) {
             this.widget = new PieChartWidget(this, this.model, {
@@ -90,10 +85,11 @@ var PieChartView = View.extend({
                 measure: context.graph_measure || this.active_measure,
             });
             this.widget.appendTo(this.$el);
-        }else {
+        } else {
             var groupbys = group_by.length ? group_by : this.initial_groupbys.slice(0);
             this.widget.update_data(domain, groupbys);
         }
+        //console.log('length' + this.widget.data.length);
     },
     get_context: function () {
         return !this.widget ? {} : {

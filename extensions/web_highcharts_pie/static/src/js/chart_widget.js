@@ -15,6 +15,7 @@ return Widget.extend({
         this.groupbys = options.groupbys || [];
         this.mode = options.mode || "pie";
         this.measure = options.measure || "__count__";
+        this.title = [];
     },
     start: function () {
         return this.load_data().then(this.proxy('display_graph'));
@@ -27,8 +28,6 @@ return Widget.extend({
     load_data: function () {
         var fields = this.groupbys.slice(0);
         fields = fields.concat(this.measure.slice(0));
-        console.log("Fields Slice : " + fields);
-
         return this.model
                     .query(fields)
                     .filter(this.domain)
@@ -45,8 +44,11 @@ return Widget.extend({
         var measure;
         var x,y;
 
+        this.title.length = 0;
+
         for (var i = 0; i < raw_data.length; i++) {
             data_pt = raw_data[i].attributes;
+            this.title.push(data_pt.value);
             for(var j = 0; j < this.measure.slice(0).length; j++) {
 				x = j + 0;
 				y = j + 1;
@@ -57,11 +59,17 @@ return Widget.extend({
                 });
             }
         }
-
     },
-    prepare_measure: function () {
-        console.log("widget data " + this.data.length);
-        return this.data;
+    get_measure: function () {
+        console.log('slice lengh :' + this.title.slice(0).length);
+        var data = [];
+        var x,y;
+        for(var j = 0; j < this.title.slice(0).length; j++) {
+            x = j + 0;
+		    y = j + 1;
+            data.push({name:this.title.slice(x ,y)});
+        }
+        return data;
     },
     display_graph: function () {
         this.$el.empty();
@@ -82,7 +90,7 @@ return Widget.extend({
                 }
             },
             title: {
-                text: '2017'
+                text: this.title.slice(0),
             },
             plotOptions: {
                 allowPointSelect: true,
@@ -93,7 +101,6 @@ return Widget.extend({
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     },
-                    //size: '75%'
                 }
             },
 

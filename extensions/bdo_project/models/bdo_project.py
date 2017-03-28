@@ -15,7 +15,7 @@ class Project(models.Model):
 
     code = fields.Char(string='Project Code', size=60,required=True,
                        help='This Project Code can reference to Timesheeet Project Code')
-    partner_id = fields.Many2one(comodel_name='res.partner', string='Client', required=True, index=True,
+    partner_id = fields.Many2one(comodel_name='res.partner', string='Client',index=True,
                                  domain=[('is_company','=',True)])
     type = fields.Selection(
         [('recurring services', 'Recurring Services'), ('non-recurring services', 'Non-Recurring Services')],

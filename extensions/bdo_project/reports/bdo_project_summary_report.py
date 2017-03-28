@@ -19,7 +19,7 @@ class ProjectSummaryReport(models.Model):
 			CREATE OR REPLACE VIEW report_project_summary AS (
 				SELECT
 					MIN(bpi.id) as id,
-					EXTRACT(YEAR FROM bpi.date_invoice) as year_invoice,
+					date_part('year',bpi.date_invoice) AS year_invoice,
 					SUM(amount_equivalent + 1000000) as total_target,
 					SUM(amount_equivalent) as total_amount
 				FROM

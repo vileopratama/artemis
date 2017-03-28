@@ -6,6 +6,7 @@
             <field name="res_model">report.project.summary</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,xchart,form,chart-pie</field>
+            <field name="context">{"search_default_current_year":1}</field>
         </record>
 
         <record id="project_summary_report_search" model="ir.ui.view">
@@ -14,7 +15,7 @@
             <field name="arch" type="xml">
                 <search string="Domestic Orders">
                     <field name="year_invoice"/>
-                    <filter string="Current Year" name='current_year' domain="[('year_invoice','&gt;=',strftime('%%Y'))]"/>
+                    <filter string="Current Year" name="current_year" domain="[('year_invoice','&gt;=',(context_today()-relativedelta(years=1)).strftime('%%Y')),('year_invoice','&lt;=', time.strftime('%%Y'))]"/>
                 </search>
             </field>
         </record>

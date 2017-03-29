@@ -115,7 +115,7 @@ class ProjectLines(models.Model):
     project_id = fields.Many2one(comodel_name='bdo.project', string='Project Ref', ondelete='cascade')
     client_name = fields.Char(related='project_id.partner_id.name',string='Client')
     date_engagement = fields.Date(related='project_id.date_engagement',string='Date of engagement')
-    service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service', required=True,
+    service_id = fields.Many2one(comodel_name='bdo.project.service', string='Service',
                                  change_default=True,domain = [('state','=','active')])
     currency_id = fields.Char(related='project_id.currency_id.name',string='Currency')
     amount = fields.Float(string='Amount', default=1, store=True)

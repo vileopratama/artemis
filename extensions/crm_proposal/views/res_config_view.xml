@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="crm_proposal.view_sale_config_settings" model="ir.ui.view">
+             <field name="name">crm settings</field>
+             <field name="model">sale.config.settings</field>
+             <field name="inherit_id" ref="crm.view_sale_config_settings"/>
+              <field name="arch" type="xml">
+                  <xpath expr="//group[@name='config_sign']" position="replace" />
+                  <field name="module_crm_voip" position="replace"/>
+                  <xpath expr="//a[@href='https://www.odoo.com/slides/slide/voip-one-click-button-to-automate-calls-272']" position="replace" />
+              </field>
+         </record>
+    </data>
+</odoo>

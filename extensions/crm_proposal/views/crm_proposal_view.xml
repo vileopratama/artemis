@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_proposal.view_crm_proposal_filter" model="ir.ui.view">
+            <field name="name">crm.proposal.search</field>
+            <field name="model">crm.proposal</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Proposal">
+                    <field name="name"/>
+                    <field name="partner_id" operator="child_of" string="Customer"/>
+                    <field name="stage_id" domain="[]"/>
+                    <separator/>
+                    <filter string="Won" name="won"
+                            domain="['&amp;', ('stage_id.probability', '=', 100), ('stage_id.fold', '=', True)]"/>
+                    <filter string="Lost" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By" colspan="16">
+                        <filter string="Client" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="crm_proposal.view_crm_proposal_tree" model="ir.ui.view">
+            <field name="name">crm.proposal.tree</field>
+            <field name="model">crm.proposal</field>
+            <field name="arch" type="xml">
+                <tree string="Proposal">
+                    <field name="create_date"/>
+                    <field name="name"/>
+                    <field name="partner_id" />
+                    <field name="date_end"/>
+                    <field name="stage_id"/>
+                    <field name="currency_id"/>
+                    <field name="total_amount" sum="Total Amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="crm_proposal.view_crm_proposal_form" model="ir.ui.view">
+            <field name="name">crm.proposal.form</field>
+            <field name="model">crm.proposal</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <form string="Proposal" class="o_opportunity_form">
+                    <header>
+                        <button name="action_set_won" string="Mark Won"
+                                type="object" class="oe_highlight o_wow"/>
+                        <button name="%(crm.crm_lead_lost_action)d" string="Mark Lost"
+                                type="action" class="oe_highlight"/>
+                        <field name="stage_id" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object"
+                                context="{'partner_id': partner_id}"
+                                name="action_schedule_meeting" icon="fa-calendar">
+                                <div class="o_stat_info">
+                                    <field name="activity_count" class="o_stat_value"/>
+                                    <span class="o_stat_text"> Activity</span>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="label label-danger pull-right">Lost</div>
+                        <div class="label label-success pull-right">Won</div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Proposal No"/></h1>
+                            <h2 class="o_row">
+                                 <div>
+                                    <label for="currency_id" class="oe_edit_only"/>
+                                    <div class="o_row">
+                                        <field name="currency_id"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="total_amount" class="oe_edit_only" />
+                                    <div class="o_row">
+                                        <field name="total_amount" />
+                                    </div>
+                                </div>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date_create"/>
+                                <field name="partner_id"
+                                    string="Customer" domain="[('customer', '=', True)]"
+                                    context="{'search_default_customer': 1,
+                                        'default_name': partner_name, 'default_street': street,
+                                        'default_street2': street2, 'default_city': city,
+                                        'default_state_id': state_id, 'default_zip': zip,
+                                        'default_country_id': country_id, 'default_function': function,
+                                        'default_phone': phone, 'default_mobile': mobile,
+                                        'default_fax': fax, 'default_email': email_from}"/>
+                            </group>
+
+                            <group>
+                                <field name="date_end"/>
+                                <field name="total_amount"/>
+                            </group>
+                        </group>
+
+                        <notebook colspan="4">
+                        <page name="note" string="Internal Notes">
+                            <field name="description"/>
+                        </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="crm_proposal.action_your_pipeline" model="ir.actions.act_window">
+            <field name="name">Opportunities</field>
+            <field name="res_model">crm.proposal</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="crm_proposal.view_crm_proposal_tree"/>
+            <field name="search_view_id" ref="crm_proposal.view_crm_proposal_filter"/>
+            <field name="help" type="html">
+                <p>
+                    helps you keep track of your sales pipeline/proposal to follow
+                    up potential sales and better forecast your future revenues.
+                </p><p>
+                    You will be able to plan meetings and log activities from
+                    opportunities, convert them into quotations, attach related
+                    documents, track all discussions, and much more.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_crm_proposal"
+                  action="crm_proposal.action_your_pipeline"
+                  parent="sales_team.menu_sales"
+                  sequence="5"/>
+    </data>
+</odoo>

@@ -116,7 +116,7 @@
         </record>
 
         <record id="crm_proposal.action_your_pipeline" model="ir.actions.act_window">
-            <field name="name">Opportunities</field>
+            <field name="name">My Pipeline</field>
             <field name="res_model">crm.proposal</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="crm_proposal.view_crm_proposal_tree"/>

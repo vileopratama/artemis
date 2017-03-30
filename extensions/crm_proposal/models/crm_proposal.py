@@ -9,7 +9,7 @@ class Proposal(models.Model):
     _name = "crm.proposal"
     _inherit = ['mail.thread']
     _description = "CRM/Proposal"
-    _order = "date_action asc"
+    _order = "date_create asc"
 
     def _default_stage_id(self):
         team = self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid)

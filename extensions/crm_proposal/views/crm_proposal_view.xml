@@ -21,6 +21,17 @@
             </field>
         </record>
 
+        <record id="crm_proposal.view_crm_proposal_kanban" model="ir.ui.view">
+            <field name="name">crm.proposal.kanban</field>
+            <field name="model">crm.proposal</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="crm.create_opportunity_simplified">
+                    <templates>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="crm_proposal.view_crm_proposal_tree" model="ir.ui.view">
             <field name="name">crm.proposal.tree</field>
             <field name="model">crm.proposal</field>
@@ -86,18 +97,12 @@
                                 <field name="date_create"/>
                                 <field name="partner_id"
                                     string="Customer" domain="[('customer', '=', True)]"
-                                    context="{'search_default_customer': 1,
-                                        'default_name': partner_name, 'default_street': street,
-                                        'default_street2': street2, 'default_city': city,
-                                        'default_state_id': state_id, 'default_zip': zip,
-                                        'default_country_id': country_id, 'default_function': function,
-                                        'default_phone': phone, 'default_mobile': mobile,
-                                        'default_fax': fax, 'default_email': email_from}"/>
+                                    context="{'search_default_customer': 1}"/>
                             </group>
 
                             <group>
                                 <field name="date_end"/>
-                                <field name="total_amount"/>
+
                             </group>
                         </group>
 
@@ -118,7 +123,7 @@
         <record id="crm_proposal.action_your_pipeline" model="ir.actions.act_window">
             <field name="name">My Pipeline</field>
             <field name="res_model">crm.proposal</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="view_id" ref="crm_proposal.view_crm_proposal_tree"/>
             <field name="search_view_id" ref="crm_proposal.view_crm_proposal_filter"/>
             <field name="help" type="html">

@@ -11,29 +11,23 @@ class Proposal(models.Model):
     _description = "CRM/Proposal"
     _order = "date_create asc"
 
-    def _default_stage_id(self):
-        team = self.env['crm.team'].sudo()._get_default_team_id(user_id=self.env.uid)
-        return self._stage_find(team_id=team.id, domain=[('fold', '=', False)]).id
-
     def _get_currency(self):
         currency = False
         if self.env.user.company_id.currency_id.id:
             currency = self.env.user.company_id.currency_id.id
         return currency
 
-    name = fields.Char('Proposal No', required=True, index=True)
-    date_create = fields.Datetime('Create Date', readonly=True)
+    name = fields.Char(string='Proposal No', required=True, index=True)
+    date_create = fields.Datetime(string='Create Date')
     partner_id = fields.Many2one(comodel_name='res.partner', string='Client', track_visibility='onchange', index=True,
                                  help="Linked partner (optional). Usually created when converting the lead.")
-    date_end = fields.Datetime(string='Year End', readonly=True)
+    date_end = fields.Datetime(string='Year End')
     currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,
                                   default=_get_currency)
     total_amount = fields.Float(string='Total Amount', track_visibility='always')
     description = fields.Text(string='Description')
-    stage_id = fields.Many2one('crm.stage', string='Stage', track_visibility='onchange', index=True,
-                               domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]",
-                               default=lambda self: self._default_stage_id())
-    activity_count = fields.Integer('# Activity', compute='_compute_activity_count')
+    stage_id = fields.Many2one(comodel_name='crm.stage', string='Stage', track_visibility='onchange', index=True)
+    activity_count = fields.Integer(string='# Activity', compute='_compute_activity_count')
 
     @api.multi
     def _compute_activity_count(self):

@@ -79,7 +79,7 @@
             <field name="name">IDR</field>
             <field name="symbol">Rp</field>
             <field name="rounding">0.01</field>
-            <field name="active" eval="False"/>
+            <field name="position">before</field>
         </record>
 
         <record id="LVL" model="res.currency">
@@ -144,7 +144,6 @@
             <field name="symbol">$</field>
             <field name="position">before</field>
             <field name="rounding">0.01</field>
-            <field name="active" eval="False"/>
         </record>
 
         <record id="UAH" model="res.currency">
@@ -1033,7 +1032,6 @@
             <field name="symbol">£</field>
             <field name="rounding">0.01</field>
             <field name="position">before</field>
-            <field name="active" eval="False"/>
         </record>
 
         <record id="SOD" model="res.currency">

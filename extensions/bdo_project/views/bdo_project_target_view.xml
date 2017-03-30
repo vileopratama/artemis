@@ -58,14 +58,16 @@
 									<field name="remarks" />
 								</group>
 							</page>
-							<page name="bdo_project_target_invoice" string="Invoice" autofocus="1">
+							<page name="bdo_project_target_invoice" string="Invoice" autofocus="1" attrs="{'invisible': [('state', '=', 'draft')]}">
 								<group>
 									<field name="name" />
-
 									<field name="total_due" />
 									<field name="date_payment_due" />
+									<field name="name_file" class="oe_edit_only"/>
+									<field widget="binary" height="64" name="name_file_attachment" filename="name_file" />
 								</group>
 							</page>
+							
 						</notebook>
 					</sheet>
 					<div class="oe_chatter">

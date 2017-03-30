@@ -31,8 +31,7 @@
             
             <xpath expr="//div[@class='o_sub_menu_footer']" position="replace">
                 <a class="o_sub_menu_logo" t-att-href="'/web/?debug' if debug else '/web'">
-                    <span class="oe_logo_edit">Edit Company data</span>
-                    <img src='/web/binary/company_logo'/>
+                    <img t-attf-src="/bdo_backend_theme/static/src/img/company_logo.png"/>
                 </a>
             </xpath>
         </template>
@@ -40,6 +39,9 @@
         <template id="login_layout" inherit_id="web.login_layout">
             <xpath expr="//a[@href='https://www.odoo.com']" position="replace">
                 <a href="http://www.bdo.co.id" target="_blank"><span>BDO Konsultan Indonesia</span></a>
+            </xpath>
+            <xpath expr="//img" position="replace">
+                <img t-attf-src="/bdo_backend_theme/static/src/img/company_logo.png"/>
             </xpath>
         </template>
 

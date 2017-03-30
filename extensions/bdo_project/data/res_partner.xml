@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data noupdate="0">
+	<data noupdate="1">
 		<record id="customer_1" model="res.partner">
             <field name="name">Badan Pelaksana Kegiatan Usaha Hulu Minyak Gas Bumi</field>
             <field name="is_company">TRUE</field>

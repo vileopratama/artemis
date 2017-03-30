@@ -54,7 +54,7 @@ return Widget.extend({
 				y = j + 1;
                 measure = this.measure.slice(x ,y);
                 this.data.push({
-                    name: this.fields[measure].string,
+                    name: this.fields[measure].string + ' - ' + data_pt.value,
                     y: data_pt.aggregates[measure],
                 });
             }

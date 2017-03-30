@@ -27,7 +27,8 @@
                 <tree create="0">
                     <field name="year_invoice" />
                     <field name="total_target"/>
-                    <field name="total_amount"/>
+                    <field name="total_pending"/>
+                    <field name="total_paid"/>
                 </tree>
             </field>
         </record>
@@ -40,8 +41,8 @@
                     <sheet>
                         <group>
                             <field name="year_invoice" />
-                            <field name="total_target"/>
-                            <field name="total_amount"/>
+                            <field name="total_pending"/>
+                            <field name="total_paid"/>
                         </group>
 
                     </sheet>
@@ -57,8 +58,8 @@
             <field name="arch" type="xml">
                 <chart-pie string="Summary Analysis">
                     <field name="year_invoice" type="row"/>
-                    <field name="total_target" type="measure"/>
-                    <field name="total_amount" type="measure"/>
+                    <field name="total_pending" type="measure"/>
+                    <field name="total_paid" type="measure"/>
                 </chart-pie>
             </field>
         </record>
@@ -68,8 +69,8 @@
             <field name="arch" type="xml">
                 <xchart string="Summary Analysis" type="pie">
                     <field name="year_invoice" type="row"/>
-                    <field name="total_target" type="measure"/>
-                    <field name="total_amount" type="measure"/>
+                    <field name="total_pending" type="measure"/>
+                    <field name="total_paid" type="measure"/>
                 </xchart>
             </field>
         </record>

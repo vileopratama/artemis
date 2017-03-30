@@ -9,6 +9,8 @@
                     <group>
                         <field name="date_payment_actual" />
                         <field name="tax_invoice_number" />
+                        <field name="tax_invoice_file" class="oe_edit_only"/>
+                        <field widget="binary" height="64" name="tax_invoice_attachment" filename="tax_invoice_file" />
                     </group>
                 </sheet>
                 <footer>

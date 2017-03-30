@@ -10,7 +10,8 @@ class ProjectSummaryReport(models.Model):
 
     year_invoice = fields.Char(string='Year', readonly=True)
     total_target = fields.Float(string='Total Target', readonly=True)
-    total_amount = fields.Float(string='Total Amount', readonly=True)
+    total_pending = fields.Float(string='Total Pending', readonly=True)
+    total_paid = fields.Float(string='Total Paid', readonly=True)
 
     @api.model_cr
     def init(self):
@@ -20,8 +21,9 @@ class ProjectSummaryReport(models.Model):
 				SELECT
 					MIN(bpi.id) as id,
 					date_part('year',bpi.date_invoice) AS year_invoice,
-					SUM(amount_equivalent + 1000000) as total_target,
-					SUM(amount_equivalent) as total_amount
+					SUM(amount_equivalent) as total_target,
+					SUM(CASE WHEN state <> 'paid' THEN amount_equivalent ELSE 0 END) as total_pending,
+					SUM(CASE WHEN state = 'paid' THEN amount_equivalent ELSE 0 END) as total_paid
 				FROM
 					bdo_project_invoice as bpi
 				GROUP BY

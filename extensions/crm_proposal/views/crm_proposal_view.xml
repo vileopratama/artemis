@@ -27,6 +27,8 @@
             <field name="arch" type="xml">
                 <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="crm.create_opportunity_simplified">
                     <templates>
+                        <t t-name="kanban-box">
+                        </t>
                     </templates>
                 </kanban>
             </field>
@@ -124,7 +126,7 @@
             <field name="name">My Pipeline</field>
             <field name="res_model">crm.proposal</field>
             <field name="view_mode">kanban,tree,form</field>
-            <field name="view_id" ref="crm_proposal.view_crm_proposal_tree"/>
+            <field name="view_id" ref="crm_proposal.view_crm_proposal_kanban"/>
             <field name="search_view_id" ref="crm_proposal.view_crm_proposal_filter"/>
             <field name="help" type="html">
                 <p>

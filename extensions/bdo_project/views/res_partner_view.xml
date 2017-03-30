@@ -12,9 +12,16 @@
 			            <button class="oe_stat_button o_res_partner_tip_opp" type="action"
                             attrs="{'invisible': [('customer', '=', False)]}"
                             name="%(bdo_project.bdo_project_view)d"
-                            icon="fa-star"
+                            icon="fa-arrow-alt"
                             context="{'search_default_partner_id': active_id}">
                             <field string="Project" name="project_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button o_res_partner_tip_opp" type="action"
+                            attrs="{'invisible': [('customer', '=', False)]}"
+                            name="%(bdo_project.bdo_project_invoice_view)d"
+                            icon="fa-file"
+                            context="{'search_default_partner_id': active_id}">
+                            <field string="Invoice" name="invoice_count" widget="statinfo"/>
                         </button>
 		            </div>
                 </data>

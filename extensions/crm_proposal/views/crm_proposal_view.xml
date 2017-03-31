@@ -102,8 +102,8 @@
                                         <span class="fa fa-bars fa-lg"/>
                                     </a>
 		                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-			                            <!--<t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
-			                            <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>-->
+			                            <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+			                            <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
 			                            <li t-if="! record.active.value"><a name="action_set_active" type="object">Unarchive</a></li>
 			                            <li t-if="record.active.value"><a name="action_set_unactive" type="object">Archive</a></li>
                                         <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
@@ -152,6 +152,7 @@
                                     attrs="{'invisible': [('active', '=', True), ('probability', '&lt;', 100)]}">
                                 <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                             </button>
+			                <!--
 			                <button class="oe_stat_button" type="object"
                                 context="{'partner_id': partner_id}"
                                 name="action_schedule_activity" icon="fa-calendar">
@@ -161,6 +162,7 @@
                                     <span class="o_stat_text" attrs="{'invisible': [('activity_count', '&gt;', 1)]}"> Activity</span>
                                 </div>
                             </button>
+                            -->
 		                </div>
 		                <div class="label label-danger pull-right" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">Lost</div>
                         <div class="label label-success pull-right" attrs="{'invisible': [('probability', '&lt;', 100)]}">Won</div>
@@ -192,6 +194,7 @@
 
                             <group>
                                 <field name="date_end"/>
+	                            <field name="date_follow_up"/>
 	                            <field name="probability" invisible="1"/>
 	                            <field name="team_id" widget="selection" invisible="1"/>
                             </group>

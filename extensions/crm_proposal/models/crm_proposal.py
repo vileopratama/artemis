@@ -42,6 +42,7 @@ class Proposal(models.Model):
 	                          index=True, track_visibility='onchange',
 	                          help='When sending mails, the default email address is taken from the sales team.')
 	date_end = fields.Date(string='Year End')
+	date_follow_up = fields.Date(string='Year Follow Up')
 	currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,
 	                              default=_get_currency)
 	total_amount = fields.Float(string='Total Amount', track_visibility='always')

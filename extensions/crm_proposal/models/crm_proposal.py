@@ -41,13 +41,12 @@ class Proposal(models.Model):
 		                          user_id=self.env.uid),
 	                          index=True, track_visibility='onchange',
 	                          help='When sending mails, the default email address is taken from the sales team.')
-	date_end = fields.Datetime(string='Year End')
+	date_end = fields.Date(string='Year End')
 	currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,
 	                              default=_get_currency)
 	total_amount = fields.Float(string='Total Amount', track_visibility='always')
 	description = fields.Text(string='Description')
 	stage_id = fields.Many2one(comodel_name='crm.stage', string='Stage', track_visibility='onchange', index=True,
-	                           domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]",
 	                           group_expand='_read_group_stage_ids', default=lambda self: self._default_stage_id())
 	probability = fields.Float('Probability', group_operator="avg", default=lambda self: self._default_probability())
 	activity_count = fields.Integer(string='# Activity', compute='_compute_activity_count')

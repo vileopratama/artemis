@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+	    <record id="crm_proposal.view_create_proposal_simplified" model="ir.ui.view">
+            <field name="name">crm.proposal.form.simple</field>
+            <field name="model">crm.proposal</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <form string="Create an Simple Proposal">
+                    <sheet>
+	                    <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Proposal No"/></h1>
+                            <h2 class="o_row">
+                                 <div>
+                                    <label for="currency_id" class="oe_edit_only"/>
+                                    <div class="o_row">
+                                        <field name="currency_id"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="total_amount" class="oe_edit_only" />
+                                    <div class="o_row">
+                                        <field name="total_amount" />
+                                    </div>
+                                </div>
+                            </h2>
+                        </div>
+	                    
+	                    <group>
+                            <group>
+                                <field name="date_create"/>
+                                <field name="partner_id"
+                                    string="Customer" domain="[('customer', '=', True)]"
+                                    context="{'search_default_customer': 1}"/>
+                            </group>
+
+                            <group>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+
+                        <notebook colspan="4">
+	                        <page name="note" string="Internal Notes">
+	                            <field name="description"/>
+	                        </page>
+                        </notebook>
+	                    
+                        <footer>
+                            <button string="Create" name="close_dialog" type="object" class="btn-primary"/>
+                            <button string="Discard" class="btn-default" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="create_proposal_simplified" model="ir.actions.act_window">
+            <field name="name">Create an Proposal</field>
+            <field name="res_model">crm.proposal</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="crm_proposal.view_create_proposal_simplified"/>
+            <field name="target">new</field>
+        </record>
+        
         <record id="crm_proposal.view_crm_proposal_filter" model="ir.ui.view">
             <field name="name">crm.proposal.search</field>
             <field name="model">crm.proposal</field>
@@ -25,9 +88,45 @@
             <field name="name">crm.proposal.kanban</field>
             <field name="model">crm.proposal</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="crm.create_opportunity_simplified">
-                    <templates>
+                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="crm_proposal.create_proposal_simplified">
+                    <field name="color"/>
+	                <field name="active"/>
+	                <field name="total_amount"/>
+	                <field name="partner_id"/>
+	                <field name="priority"/>
+	                <templates>
                         <t t-name="kanban-box">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click">
+	                            <div class="o_dropdown_kanban dropdown">
+		                            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" >
+                                        <span class="fa fa-bars fa-lg"/>
+                                    </a>
+		                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			                            <t t-if="widget.editable"><li><a type="edit">Edit</a></li></t>
+			                            <t t-if="widget.deletable"><li><a type="delete">Delete</a></li></t>
+			                            <li t-if="! record.active.value"><a name="action_set_active" type="object">Unarchive</a></li>
+			                            <li t-if="record.active.value"><a name="action_set_unactive" type="object">Archive</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+		                            </ul>
+	                            </div>
+	                            <div class="oe_kanban_content">
+		                            <div>
+                                        <strong><field name="name"/></strong>
+                                    </div>
+		                            <div class="text-muted">
+                                        <t t-if="record.total_amount.raw_value">
+	                                        <field name="total_amount" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+	                                        <span t-if="record.partner_id.value">,</span>
+                                        </t>
+			                            <br/>
+			                            <span t-if="record.partner_id.value"> <t t-esc="record.partner_id.value"/></span>
+                                    </div>
+		                            <div class="o_kanban_footer">
+			                            <field name="priority" widget="priority" groups="base.group_user"/>
+		                            </div>
+	                            </div>
+	                            <div class="oe_clear"></div>
+                            </div>
                         </t>
                     </templates>
                 </kanban>
@@ -109,9 +208,9 @@
                         </group>
 
                         <notebook colspan="4">
-                        <page name="note" string="Internal Notes">
+                            <page name="note" string="Internal Notes">
                             <field name="description"/>
-                        </page>
+                            </page>
                         </notebook>
                     </sheet>
                     <div class="oe_chatter">

@@ -13,6 +13,7 @@
         'crm',
     ],
     'data': [
+        'wizard/crm_proposal_lost_view.xml',
         'views/res_config_view.xml',
         'views/crm_proposal_view.xml'
     ],

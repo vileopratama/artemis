@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 import logging
 from odoo import fields, models, api, SUPERUSER_ID
+from odoo.addons.crm.models import crm_stage
 
 _logger = logging.getLogger(__name__)
+
 
 class Proposal(models.Model):
 	_name = "crm.proposal"
@@ -28,13 +30,13 @@ class Proposal(models.Model):
 	
 	name = fields.Char(string='Proposal No', required=True, index=True)
 	active = fields.Boolean('Active', default=True)
-	priority = fields.Selection([('0', 'Normal'), ('1', 'Low'), ('2', 'High'), ('3', 'Very High'), ],
+	priority = fields.Selection(crm_stage.AVAILABLE_PRIORITIES,
 	                            string='Rating', index=True,
-	                            default =0 )
+	                            default=crm_stage.AVAILABLE_PRIORITIES[0][0])
 	date_create = fields.Datetime(string='Create Date')
 	partner_id = fields.Many2one(comodel_name='res.partner', string='Client', track_visibility='onchange', index=True,
 	                             help="Linked partner (optional). Usually created when converting the lead.")
-	team_id = fields.Many2one('crm.team', string='Sales Team', oldname='section_id',
+	team_id = fields.Many2one(comodel_name='crm.team', string='Sales Team', oldname='section_id',
 	                          default=lambda self: self.env['crm.team'].sudo()._get_default_team_id(
 		                          user_id=self.env.uid),
 	                          index=True, track_visibility='onchange',
@@ -50,6 +52,9 @@ class Proposal(models.Model):
 	probability = fields.Float('Probability', group_operator="avg", default=lambda self: self._default_probability())
 	activity_count = fields.Integer(string='# Activity', compute='_compute_activity_count')
 	color = fields.Integer(string='Color Index', default=0)
+	lost_reason = fields.Many2one('crm.proposal.lost.reason', string='Lost Reason', index=True, track_visibility='onchange')
+	user_id = fields.Many2one('res.users', string='PIC', index=True, track_visibility='onchange',
+	                          default=lambda self: self.env.user)
 	
 	_sql_constraints = [
 		('check_probability', 'check(probability >= 0 and probability <= 100)',
@@ -97,3 +102,32 @@ class Proposal(models.Model):
 	@api.multi
 	def close_dialog(self):
 		return {'type': 'ir.actions.act_window_close'}
+	
+	@api.multi
+	def action_set_active(self):
+		return self.write({'active': True})
+	
+	@api.multi
+	def action_set_unactive(self):
+		return self.write({'active': False})
+	
+	@api.multi
+	def action_set_won(self):
+		""" Won semantic: probability = 100 (active untouched) """
+		for proposal in self:
+			stage_id = proposal._stage_find(domain=[('probability', '=', 100.0), ('on_change', '=', True)])
+			proposal.write({'stage_id': stage_id.id, 'probability': 100})
+		return True
+	
+	@api.multi
+	def action_set_lost(self):
+		""" Lost semantic: probability = 0, active = False """
+		return self.write({'probability': 0, 'active': False})
+	
+	
+class LostReason(models.Model):
+    _name = "crm.proposal.lost.reason"
+    _description = 'Reason for loosing proposal'
+
+    name = fields.Char('Name', required=True, translate=True)
+    active = fields.Boolean('Active', default=True)

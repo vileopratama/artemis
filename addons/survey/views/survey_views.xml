@@ -454,6 +454,7 @@
                                     <field name='comments_message' attrs="{'invisible': [('comments_allowed', '=', False)]}"/>
                                     <field name='comment_count_as_answer' attrs="{'invisible': ['|', ('comments_allowed', '=', False), ('type', 'in', ['matrix'])]}" />
                                 </group>
+
                             </page>
                         </notebook>
                     </sheet>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_prospective_client_search" >
+            <field name="name">crm.prospective.client.template.search</field>
+            <field name="model">crm.prospective.client.template</field>
+            <field name="arch" type="xml">
+                <search string="Search Page">
+                    <field name="name" string="Page"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_prospective_client_form">
+            <field name="name">Template</field>
+            <field name="model">crm.prospective.client.template</field>
+            <field name="arch" type="xml">
+                <form string="Template">
+                    <sheet>
+                        <div class="oe_title" style="width: 100%;">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Template Name"/></h1>
+                        </div>
+                        <field name="question_ids" nolabel="1" mode="tree" context="{'default_page_id': active_id}">
+                            <tree>
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="type"/>
+                                <field name="constr_mandatory"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="crm_prospective_client_tree">
+            <field name="name">Template</field>
+            <field name="model">crm.prospective.client.template</field>
+            <field name="arch" type="xml">
+                <tree string="Template">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="question_ids" string="#Questions"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="crm_prospective_client.action_template">
+            <field name="name">Template</field>
+            <field name="res_model">crm.prospective.client.template</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="crm_prospective_client_search"/>
+        </record>
+
+
+        <!-- QUESTIONS -->
+        <record model="ir.ui.view" id="crm_prospective_client_question_form">
+            <field name="name">Form view for question</field>
+            <field name="model">crm.prospective.client.template.question</field>
+            <field name="arch" type="xml">
+                <form string="Question" create="false">
+                    <sheet>
+                        <div class="oe_title" style="width: 100%;">
+                            <label for="name" string="Question" class="oe_edit_only"/>
+                            <h1><field name="name" colspan="4" placeholder="Question"/></h1>
+                            <separator />
+                        </div>
+                        <group>
+                            <group>
+                                <field name="type" widget="radio" />
+                            </group>
+                            <group>
+                                <div class="col-md-6 col-md-offset-3 o_preview_questions">
+                                    <!-- Multiple Lines Text Zone -->
+                                    <div attrs="{'invisible': [('type', '!=', 'free_text')]}">
+                                            <i class="fa fa-align-justify fa-4x"/>
+                                    </div>
+                                    <!-- Single Line Text Zone -->
+                                    <div attrs="{'invisible': [('type', '!=', 'textbox')]}">
+                                        <i class="fa fa-minus fa-4x"/>
+                                    </div>
+                                    <!-- Date and Time -->
+                                    <div attrs="{'invisible': [('type', '!=', 'datetime')]}">
+                                        <p class="o_datetime">YYYY-MM-DD hh:mm:ss
+                                            <i class="fa fa-calendar fa-2x"/>
+                                        </p>
+                                    </div>
+                                    <!-- Multiple choice: only one answer -->
+                                    <div attrs="{'invisible': [('type', '!=', 'simple_choice')]}">
+                                        <div class="row"><i class="fa fa-circle-o  fa-lg"/> answer</div>
+                                        <div class="row"><i class="fa fa-dot-circle-o fa-lg"/> answer</div>
+                                        <div class="row"><i class="fa fa-circle-o  fa-lg"/> answer</div>
+                                    </div>
+                                    <!-- Multiple choice: multiple answers allowed -->
+                                    <div attrs="{'invisible': [('type', '!=', 'multiple_choice')]}">
+                                        <div class="row"><i class="fa fa-square-o fa-lg"/> answer</div>
+                                        <div class="row"><i class="fa fa-check-square-o fa-lg"/> answer</div>
+                                        <div class="row"><i class="fa fa-square-o fa-lg"/> answer</div>
+                                    </div>
+                                    <!-- Matrix -->
+                                    <div attrs="{'invisible': [('type', '!=', 'matrix')]}">
+                                        <div class="row o_matrix_head">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-3">ans</div>
+                                            <div class="col-md-3">ans</div>
+                                            <div class="col-md-3">ans</div>
+                                        </div>
+                                        <div class="row o_matrix_row">
+                                            <div class="col-md-3">Row1</div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-dot-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                        </div>
+                                        <div class="row o_matrix_row">
+                                            <div class="col-md-3">Row2</div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-dot-circle-o fa-lg"/></div>
+                                        </div>
+                                        <div class="row o_matrix_row">
+                                            <div class="col-md-3">Row3</div>
+                                            <div class="col-md-3"><i class="fa fa-dot-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                            <div class="col-md-3"><i class="fa fa-circle-o fa-lg"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Answers">
+                                <field name="validation_email" attrs="{'invisible': [('type', '!=', 'textbox')]}"/>
+                                <label for="validation_email" attrs="{'invisible': [('type', '!=', 'textbox')]}"/>
+                                <separator />
+                                <field name="answer_ids" string="Type of answers" context="{'default_question_id': active_id}"
+                                       attrs="{'invisible': [('type', 'not in', ['simple_choice', 'multiple_choice', 'matrix'])]}">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="value" string="Choices"/>
+                                        <field name="quizz_mark" groups="base.group_no_one"/>
+                                    </tree>
+                                </field>
+                                <separator />
+                                <label for="answer_ids_2" attrs="{'invisible': [('type', '!=', 'matrix')]}" />
+                                <field name="answer_ids_2" context="{'default_question_id_2': active_id}" attrs="{'invisible': [('type', '!=', 'matrix')]}">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="value" string="Rows"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Options">
+                                <group string="Constraints">
+                                    <group colspan="2" col="4">
+                                        <field name="constr_mandatory" string="Mandatory Answer"/>
+                                        <field name="constr_error_msg" attrs="{'invisible': [('constr_mandatory', '=', False)]}"/>
+                                    </group>
+                                    <div colspan="2" attrs="{'invisible': [('type', 'not in', ['textbox', 'numerical_box', 'datetime'])]}">
+                                        <div colspan="2" attrs="{'invisible': [('type', 'not in', ['textbox', 'numerical_box', 'datetime'])]}">
+                                            <group>
+                                                <field name="validation_required" attrs="{'invisible': [('validation_email', '=', True), ('type', '=', 'textbox')]}"/>
+                                            </group>
+                                            <group col="4" attrs="{'invisible': [('validation_required', '=', False)]}">
+                                                <field name="validation_length_min" attrs="{'invisible': [('type', '!=', 'textbox')]}"/>
+                                                <field name="validation_length_max" attrs="{'invisible': [('type', '!=', 'textbox')]}"/>
+                                                <field name="validation_min_float_value" attrs="{'invisible': [('type', '!=', 'numerical_box')]}"/>
+                                                <field name="validation_max_float_value" attrs="{'invisible': [('type', '!=', 'numerical_box')]}"/>
+                                                <field name="validation_min_date" attrs="{'invisible': [('type', '!=', 'datetime')]}"/>
+                                                <field name="validation_max_date" attrs="{'invisible': [('type', '!=', 'datetime')]}"/>
+                                                <field name="validation_error_msg" colspan="4"/>
+                                            </group>
+                                        </div>
+                                    </div>
+                                    <group>
+                                        <field name="matrix_subtype" attrs="{'invisible':[('type','not in',['matrix'])]}"/>
+                                    </group>
+                                </group>
+                                <group string="Display mode" attrs="{'invisible':[('type','not in',['simple_choice', 'multiple_choice'])]}">
+                                    <field name="display_mode" string="Format" attrs="{'invisible':[('type','not in',['simple_choice'])],'required':[('type','=','simple_choice')]}"/>
+                                    <field name="column_nb" string="Number of columns" attrs="{'invisible':[('display_mode','=','dropdown'), ('type','=','simple_choice')]}"/>
+                                </group>
+                                <group string="Allow Comments" attrs="{'invisible':[('type','not in',['simple_choice','multiple_choice', 'matrix'])]}">
+                                    <field name='comments_allowed' />
+                                    <field name='comments_message' attrs="{'invisible': [('comments_allowed', '=', False)]}"/>
+                                    <field name='comment_count_as_answer' attrs="{'invisible': ['|', ('comments_allowed', '=', False), ('type', 'in', ['matrix'])]}" />
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <act_window context="{'search_default_template_id': active_id, 'default_template_id': active_id}"
+                    id="act_crm_prospective_client_question"
+                    name="Questions"
+                    res_model="crm.prospective.client.template.question"
+                    src_model="crm.prospective.client.template"/>
+
+        <menuitem id="menu_crm_prospective_client_root"
+                  name="Prospective Client"
+                  parent="sales_team.menu_sales"
+                  sequence="4"/>
+
+        <menuitem id="crm_prospective_client_template"
+                  action="crm_prospective_client.action_template"
+                  parent="menu_crm_prospective_client_root"
+                  sequence="1"/>
+
+        <menuitem id="crm_prospective_client_result"
+                  parent="menu_crm_prospective_client_root"
+                  sequence="2"/>
+    </data>
+</odoo>

@@ -2,23 +2,24 @@
 <odoo>
 	<data>
 		<record id="project_billing_summary_report_view" model="ir.actions.act_window">
-            <field name="name">BUSINESS SERVICE OUTSOURCING</field>
-            <field name="res_model">report.existing.clients.list</field>
+            <field name="name">Billing Summary</field>
+            <field name="res_model">report.billing.summary</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,gantt</field>
+            <field name="view_mode">billing</field>
         </record>
 
         <record id="project_billing_summary_report_gantt" model="ir.ui.view">
-            <field name="model">report.existing.clients.list</field>
-            <field name="type">gantt</field>
+            <field name="name">Summary Analysis Search</field>
+	        <field name="model">report.billing.summary</field>
             <field name="arch" type="xml">
-                <gantt create="0" date_start="date_engagement_letter" date_stop="date_engagement_letter"  progress="progress_rate" string="Projects">
-                 </gantt>
+                <billing>
+	               
+                </billing>
             </field>
         </record>
 
-		<menuitem id="project_billng_summary_report"
-		          parent="project_report_menu"
+		<menuitem id="bdo_project_billng_summary_report"
+		          parent="bdo_project_report_menu"
 		          name="Billing Summary"
 		          action="project_billing_summary_report_view"
 		          sequence="15"/>

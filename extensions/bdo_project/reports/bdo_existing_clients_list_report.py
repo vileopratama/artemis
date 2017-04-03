@@ -31,7 +31,6 @@ class ExistingClientsListReport(models.Model):
 				SELECT
 					bpi.id as id,
 					rp.name as client_name,
-					bpel.type as type,
 					bpel.date_engagement_letter as date_engagement_letter,
 					bpel.source as source,
 					bpel.name as el_number,
@@ -47,8 +46,6 @@ class ExistingClientsListReport(models.Model):
 					bdo_project_invoice as bpi
 				INNER JOIN
 					res_partner rp  ON (rp.id = bpi.partner_id)
-				INNER JOIN
-					bdo_project_engagement_letter bpel ON (bpel.invoice_id = bpi.id)
 			)
 		""")
 

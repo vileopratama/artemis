@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="bdo_project.assets_backend" name="assets" inherit_id="web.assets_backend">
+            <xpath expr=".">
+                <script type="text/javascript" src="/bdo_project/static/src/js/billing_widget.js" />
+                <script type="text/javascript" src="/bdo_project/static/src/js/billing_view.js" />
+            </xpath>
+        </template>
+    </data>
+</odoo>

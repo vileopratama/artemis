@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="web_highcharts_template" xml:space="preserve">
+	<t t-name="BillingView.buttons">
+        <div class="btn-group btn-group-sm" role="group">
+            <button class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                Service <span class="caret"/>
+            </button>
+	        <ul class="dropdown-menu o_graph_measures_list">
+		        <li t-foreach="measures" t-as="measure" t-att-data-field="measure.name">
+                    <a href="#"><t t-esc="measure.name"/></a>
+                </li>
+	        </ul>
+        </div>
+    </t>
+	<t t-name="BillingView">
+		<div class="table-responsive">
+			<table class="o_list_view table table-condensed table-striped">
+				<thead>
+					<tr>
+						<th data-id="partner_id">Client Name</th>
+						<th>Jan</th>
+						<th>Feb</th>
+						<th>Mar</th>
+						<th>Apr</th>
+						<th>Mei</th>
+						<th>Jun</th>
+						<th>Jul</th>
+						<th>Aug</th>
+						<th>Sept</th>
+						<th>Oct</th>
+						<th>Nov</th>
+						<th>Dec</th>
+					</tr>
+				</thead>
+				<tbody class="line">
+				
+				</tbody>
+			</table>
+		</div>
+		
+	</t>
+	
+	<t t-name="line">
+	
+	</t>
+</templates>

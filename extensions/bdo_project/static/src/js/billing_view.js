@@ -29,7 +29,7 @@ var BillingView = View.extend({
 			var service = new Model('bdo.project.service');
 			service.query().all().then(function (records)  {
 				_.each(records, function (record) {
-                    $( ".o_graph_measures_list" ).append("<li data-field=" + record.name + "><a>" + record.name + "</a></li>");
+                    $( ".o_graph_measures_list" ).append("<li data-field='" + record.name + "'><a href='#'>" + record.name + "</a></li>");
                 });
 			});
 			this.$buttons = $(QWeb.render('BillingView.buttons', {measures:measures}));
@@ -50,7 +50,7 @@ var BillingView = View.extend({
         else if ($target.parents('.o_graph_measures_list').length) {
             var parent = $target.parent();
             var field = parent.data('field');
-            //this.active_measure = field;
+            this.active_measure = field;
             event.preventDefault();
             event.stopPropagation();
             this.update_measure();

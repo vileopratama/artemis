@@ -5,8 +5,7 @@ class ReportBillingSummary(models.Model):
 	_name = "report.billing.summary"
 	_auto = False
 	_order = 'partner_id asc'
-	
-	date_invoice = fields.Date(string='Invoice Date',readonly=True)
+
 	partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
 
 	@api.model_cr

@@ -1,7 +1,11 @@
 odoo.define('bdo_project.BillingWidget', function (require) {
 "use strict";
+
+var core = require('web.core');
 var Widget = require('web.Widget');
 var Model = require('web.DataModel');
+var QWeb = core.qweb;
+var _t = core._t;
 
 return Widget.extend({
 	className: "o_billing",
@@ -12,27 +16,25 @@ return Widget.extend({
         this.groupbys = options.groupbys || [];
         this.context = options.context;
         this.fields = options.fields;
+        this.model = new Model(model, {group_by_no_leaf: true});
     },
     start: function () {
 		return this.load_data().then(this.proxy('_display'));
     },
     load_data:function () {
+        var self = this;
+        self.data = [];
         return this.model
-                    .filter(this.domain)
-                    .context(this.context)
-                    .lazy(false)
-                    .group_by(this.groupbys.slice(0,2))
-                    .then(this.proxy('prepare_data'));
-    },
-    prepare_data: function () {
-        var raw_data = arguments[0],data_pt,partner_id;
-        for (var i = 0; i < raw_data.length; i++) {
-            data_pt = raw_data[i].attributes;
-            partner_id = data_pt.aggregates['partner_id'];
-            this.data.push({
-                partner_id: partner_id,
-            });
-        }
+                    .query()
+                    .all()
+                    .then(function(records) {
+                        _.each(records, function (record) {
+                            self.data.push({
+				                partner_id: record.partner_id
+				            });
+				             console.log('Partner :' + record.partner_id);
+				         });
+                    });
     },
     update_data: function (domain, groupbys) {
         this.domain = domain;
@@ -60,18 +62,10 @@ return Widget.extend({
         }
     },
     display_billing: function () {
-		var data = this.data;
-		var contents = this.$el[0].querySelector('.line');
-		contents.innerHTML = "";
-		for(var i = 0, len = Math.min(data.length,1000); i < len; i++) {
-			var row = data[i];
-			var line_html = QWeb.render('Line',{widget: this, row:row});
-			var line = document.createElement('tbody');
-			line.innerHTML = line_html;
-			line = line.childNodes[1];
-			contents.appendChild(line);
-		}
-
+        //var self = this;
+        //var data = self.data;
+        this.$el.empty();
+        this.$el.append(QWeb.render('BillingView',{rows:this.data}));
     },
 	destroy: function () {
         nv.utils.offWindowResize(this.to_remove);

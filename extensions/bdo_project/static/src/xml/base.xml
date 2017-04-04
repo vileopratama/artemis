@@ -33,7 +33,11 @@
 					</tr>
 				</thead>
 				<tbody class="line">
-				
+					<t t-foreach="rows" t-as="row">
+						<tr>
+							<td><t t-esc="row.partner_id[1]"/></td>
+						</tr>
+					</t>
 				</tbody>
 			</table>
 		</div>

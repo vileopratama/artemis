@@ -8,7 +8,7 @@ var QWeb = core.qweb;
 var _lt = core._lt;
 
 var BillingView = View.extend({
-	template: "BillingView",
+	//template: "BillingView",
 	display_name: _lt('Billing'),
 	view_type: "billing",
 	icon: 'fa-list',
@@ -27,7 +27,6 @@ var BillingView = View.extend({
 		var measures=[];
 
 		if ($node) {
-			console.log('a node: ' + $node);
 			var service = new Model('bdo.project.service');
 			service.query().all().then(function (records)  {
 				_.each(records, function (record) {

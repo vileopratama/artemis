@@ -3,7 +3,7 @@ odoo.define('bdo_project.BillingView', function (require) {
 var View = require('web.View');
 var core = require('web.core');
 var Model = require('web.DataModel');
-var Widget = require('bdo_project.BillingWidget');
+var BillingWidget = require('bdo_project.BillingWidget');
 var QWeb = core.qweb;
 var _lt = core._lt;
 
@@ -15,6 +15,8 @@ var BillingView = View.extend({
 	init: function () {
 		this._super.apply(this, arguments);
 		this.active_measure = '';
+		this.widget = undefined;
+		this.initial_groupbys = [];
 	},
 	willStart: function () {
 		var fields_def = 'id,name';
@@ -68,9 +70,29 @@ var BillingView = View.extend({
         return this._super();
     },
     do_search: function (domain, context, group_by) {
-		var contents = this.$el[0].querySelector('.line');
-		contents.innerHTML = "";
-		//QWeb.render('line',{widget:this, line:this.service});
+        if (!this.widget) {
+            this.initial_groupbys = context.billing_groupbys || (group_by.length ? group_by : this.initial_groupbys);
+            this.widget = new BillingWidget(this,this.model,{
+                measure: context.billing_measure || this.active_measure,
+                domain: domain,
+                groupbys: this.initial_groupbys,
+                context: context,
+                fields: this.fields,
+            });
+            //append widget
+            this.widget.appendTo(this.$el);
+        } else {
+            var groupbys = group_by.length ? group_by : this.initial_groupbys.slice(0);
+            //this.widget.update_data(domain, groupbys);
+        }
+
+
+    },
+    get_context: function () {
+        return !this.widget ? {} : {
+            billing_groupbys: this.widget.groupbys,
+            billing_measure: this.widget.measure,
+        }
     },
     destroy: function () {
         return this._super.apply(this, arguments);

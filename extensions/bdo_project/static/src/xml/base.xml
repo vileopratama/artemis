@@ -40,7 +40,15 @@
 		
 	</t>
 	
-	<t t-name="line">
+	<t t-name="Line">
+        <tr class='line' t-att-data-id='row.id'>
+            <td><t t-esc='row.partner_id' /></td>
+        </tr>
+    </t>
 	
-	</t>
+	<div t-name="BillingView.error" class="oe_view_nocontent" >
+        <p><strong><t t-esc="title"/></strong></p>
+        <p><t t-esc="description"/></p>
+	</div>
+	
 </templates>

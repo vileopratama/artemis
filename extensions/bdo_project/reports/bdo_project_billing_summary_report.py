@@ -15,13 +15,17 @@ class ReportBillingSummary(models.Model):
 		self._cr.execute("""
 			CREATE OR REPLACE VIEW report_billing_summary AS (
 				SELECT
-					bp.id as id,
-					bp.partner_id as partner_id,
-					bp.date_engagement as date_invoice
+					bpi.id AS id,
+				    bp.partner_id AS partner_id
 				FROM
-					bdo_project as bp
+					bdo_project_invoice AS bpi
 				INNER JOIN
-					res_partner rp  ON (rp.id = bp.partner_id)
+					bdo_project_lines AS bpl ON (bpl.id = bpi.project_line_id)
+				INNER JOIN
+					bdo_project AS bp ON (bp.id = bpl.project_id)
+				INNER JOIN
+					res_partner AS rp ON (rp.id = bp.partner_id)
+				ORDER BY rp.name ASC
 			)
 		""")
 

@@ -26,7 +26,7 @@ class ProjectTarget(models.Model):
 	                                readonly=True)
 	date_period_end = fields.Date(string='To', required=True, states={'draft': [('readonly', False)]}, readonly=True)
 	date_period_month_total = fields.Integer(compute='_compute_period_month_total', string='Total Month', readonly=True,
-											 store=True)
+	                                         store=True)
 	year_period = fields.Char(string='Year', size=4, store=True, readonly=True)
 	amount = fields.Float(compute='_compute_period_month_total', string='Amount', readonly=True, store=True,
 	                      digits=(16, 2))

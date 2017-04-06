@@ -15,7 +15,20 @@ class ReportBillingSummary(models.Model):
 			CREATE OR REPLACE VIEW report_billing_summary AS (
 				SELECT
 					bpi.id AS id,
-				    bp.partner_id AS partner_id
+				    bp.partner_id AS partner_id,
+					rp.name as client_name
+					jan_period as jan,
+					feb_period as feb,
+					mar_period as mar,
+					apr_period as apr,
+					may_period as may,
+					jun_period as jun,
+					jul_period as jul,
+					aug_period as aug,
+					sept_period as sept,
+					oct_period as oct,
+					nov_period as nov,
+					dec_period as dec
 				FROM
 					bdo_project_invoice AS bpi
 				INNER JOIN

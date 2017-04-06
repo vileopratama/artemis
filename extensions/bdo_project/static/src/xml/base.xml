@@ -36,6 +36,18 @@
 					<t t-foreach="rows" t-as="row">
 						<tr>
 							<td><t t-esc="row.partner_id[1]"/></td>
+							<td><t t-esc="row.jan"/></td>
+							<td><t t-esc="row.feb"/></td>
+							<td><t t-esc="row.mar"/></td>
+							<td><t t-esc="row.apr"/></td>
+							<td><t t-esc="row.may"/></td>
+							<td><t t-esc="row.jun"/></td>
+							<td><t t-esc="row.jul"/></td>
+							<td><t t-esc="row.aug"/></td>
+							<td><t t-esc="row.sept"/></td>
+							<td><t t-esc="row.oct"/></td>
+							<td><t t-esc="row.nov"/></td>
+							<td><t t-esc="row.dec"/></td>
 						</tr>
 					</t>
 				</tbody>
@@ -43,12 +55,6 @@
 		</div>
 		
 	</t>
-	
-	<t t-name="Line">
-        <tr class='line' t-att-data-id='row.id'>
-            <td><t t-esc='row.partner_id' /></td>
-        </tr>
-    </t>
 	
 	<div t-name="BillingView.error" class="oe_view_nocontent" >
         <p><strong><t t-esc="title"/></strong></p>

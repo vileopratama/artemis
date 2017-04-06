@@ -27,6 +27,18 @@ class ProjectTarget(models.Model):
 	date_period_end = fields.Date(string='To', required=True, states={'draft': [('readonly', False)]}, readonly=True)
 	date_period_month_total = fields.Integer(compute='_compute_period_month_total', string='Total Month', readonly=True,
 	                                         store=True)
+	jan_period = fields.Boolean(compute='_compute_period_month', string='Jan', readonly=True,store=True,default=False)
+	feb_period = fields.Boolean(compute='_compute_period_month', string='Feb', readonly=True,store=True,default=False)
+	mar_period = fields.Boolean(compute='_compute_period_month', string='Mar', readonly=True,store=True,default=False)
+	apr_period = fields.Boolean(compute='_compute_period_month', string='Apr', readonly=True,store=True,default=False)
+	may_period = fields.Boolean(compute='_compute_period_month', string='May', readonly=True,store=True,default=False)
+	jun_period = fields.Boolean(compute='_compute_period_month', string='Jun', readonly=True,store=True,default=False)
+	jul_period = fields.Boolean(compute='_compute_period_month', string='Jul', readonly=True,store=True,default=False)
+	aug_period = fields.Boolean(compute='_compute_period_month', string='Aug', readonly=True,store=True,default=False)
+	sept_period= fields.Boolean(compute='_compute_period_month', string='Sept',readonly=True,store=True,default=False)
+	oct_period = fields.Boolean(compute='_compute_period_month', string='Oct', readonly=True,store=True,default=False)
+	nov_period = fields.Boolean(compute='_compute_period_month', string='Nov', readonly=True,store=True,default=False)
+	dec_period = fields.Boolean(compute='_compute_period_month', string='Dec', readonly=True,store=True,default=False)
 	year_period = fields.Char(string='Year', size=4, store=True, readonly=True)
 	amount = fields.Float(compute='_compute_period_month_total', string='Amount', readonly=True, store=True,
 	                      digits=(16, 2))
@@ -86,6 +98,61 @@ class ProjectTarget(models.Model):
 				target.amount = (koef * month_total) * target.amount_project_total
 				target.amount_equivalent = (koef * month_total) * target.amount_project_equivalent
 	
+	@api.multi
+	@api.depends('date_period_start', 'date_period_end', 'project_line_id')
+	def _compute_period_month(self):
+		for target in self:
+			if target.project_line_id and target.date_period_start and target.date_period_end:
+				#default to false
+				self.jan_period = False
+				self.feb_period = False
+				self.mar_period = False
+				self.apr_period = False
+				self.may_period = False
+				self.jun_period = False
+				self.jul_period = False
+				self.aug_period = False
+				self.sept_period= False
+				self.oct_period = False
+				self.nov_period = False
+				self.dec_period = False
+				
+				month_start = dt.strptime(target.date_period_start,"%Y-%m-%d")
+				month_start = month_start.month
+				#month_start = month_start.strip("0","")
+				month_total = self._month_between(target.date_period_start, target.date_period_end)
+				
+				i = month_start
+				total = i + month_total
+				while (i < total):
+					if i == 1:
+						self.jan_period = True
+					elif i == 2:
+						self.feb_period = True
+					elif i == 3:
+						self.mar_period = True
+					elif i == 4:
+						self.apr_period = True
+					elif i == 5:
+						self.may_period = True
+					elif i == 6:
+						self.jun_period = True
+					elif i == 7:
+						self.jul_period = True
+					elif i == 8:
+						self.aug_period = True
+					elif i == 9:
+						self.sept_period = True
+					elif i == 10:
+						self.oct_period = True
+					elif i == 11:
+						self.nov_period = True
+					elif i == 12:
+						self.dec_period = True
+					
+					i = i + 1
+				
+				
 	def action_set_invoice(self, data):
 		args = {
 			'state': 'invoice',

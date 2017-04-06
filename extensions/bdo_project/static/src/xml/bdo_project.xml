@@ -11,7 +11,7 @@
 	<t t-name="BillingView.buttons">
         <div class="btn-group btn-group-sm" role="group">
             <button class="btn btn-primary btn-sm dropdown-toggle" id="btn-measure" data-toggle="dropdown">
-                <span class="text-measure">Payroll<span> <span class="caret"/>
+                <span class="text-measure">Payroll</span> <span class="caret"/>
             </button>
 	        <ul class="dropdown-menu o_graph_measures_list">
 		        <li t-foreach="measures" t-as="measure" t-att-data-field="measure.name">
@@ -44,18 +44,18 @@
 					<t t-foreach="rows" t-as="row">
 						<tr>
 							<td><t t-esc="row.partner_id[1]"/></td>
-							<td><t t-esc="row.jan"/></td>
-							<td><t t-esc="row.feb"/></td>
-							<td><t t-esc="row.mar"/></td>
-							<td><t t-esc="row.apr"/></td>
-							<td><t t-esc="row.may"/></td>
-							<td><t t-esc="row.jun"/></td>
-							<td><t t-esc="row.jul"/></td>
-							<td><t t-esc="row.aug"/></td>
-							<td><t t-esc="row.sept"/></td>
-							<td><t t-esc="row.oct"/></td>
-							<td><t t-esc="row.nov"/></td>
-							<td><t t-esc="row.dec"/></td>
+							<td><t t-esc='row.jan' /></td>
+							<td><t t-esc='row.feb' /></td>
+							<td><t t-esc='row.mar' /></td>
+							<td><t t-esc='row.apr' /></td>
+							<td><t t-esc='row.may' /></td>
+							<td><t t-esc='row.jun' /></td>
+							<td><t t-esc='row.jul' /></td>
+							<td><t t-esc='row.aug' /></td>
+							<td><t t-esc='row.sept' /></td>
+							<td><t t-esc='row.oct' /></td>
+							<td><t t-esc='row.nov' /></td>
+							<td><t t-esc='row.dec' /></td>
 						</tr>
 					</t>
 				</tbody>

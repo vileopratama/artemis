@@ -39,7 +39,7 @@
         #'reports/bdo_schedule_invoices_report.xml',
     ],
 	"qweb": [
-        'static/src/xml/*.xml',
+        'static/src/xml/bdo_project.xml',
     ],
     'website' : "http://www.bdo.co.id",
     'application' : True,

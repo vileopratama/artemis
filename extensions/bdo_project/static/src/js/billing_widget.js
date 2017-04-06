@@ -11,7 +11,7 @@ return Widget.extend({
 	className: "o_billing",
 	init: function (parent, model, options) {
         this._super(parent);
-        this.measure = options.measure || "";
+        this.measure = options.measure || 'Payroll';
         this.domain = options.domain || [];
         this.groupbys = options.groupbys || [];
         this.context = options.context;
@@ -26,16 +26,86 @@ return Widget.extend({
         self.data = [];
         return this.model
                     .query()
+					.filter([['service_id.name','=',self.measure]])
                     .all()
                     .then(function(records) {
                         _.each(records, function (record) {
                             self.data.push({
-				                partner_id: record.partner_id
+				                partner_id: record.partner_id,
+								jan : self.convert_month_name(record.jan),
+								jan_paid : record.jan_paid,
+								feb : self.convert_month_name(record.feb),
+								feb_paid : record.feb_paid,
+								mar : self.convert_month_name(record.mar),
+								mar_paid : record.mar_paid,
+								apr : self.convert_month_name(record.apr),
+								apr_paid : record.apr_paid,
+								may : self.convert_month_name(record.may),
+								may_paid : record.may_paid,
+								jun : self.convert_month_name(record.jun),
+								jun_paid : record.jun_paid,
+								jul : self.convert_month_name(record.jul),
+								jul_paid : record.jul_paid,
+								aug : self.convert_month_name(record.aug),
+								aug_paid : record.aug_paid,
+								sept : self.convert_month_name(record.sept),
+								sept_paid : record.sept_paid,
+								oct : self.convert_month_name(record.oct),
+								oct_paid : record.oct_paid,
+								nov : self.convert_month_name(record.nov),
+								nov_paid : record.nov_paid,
+								dec : self.convert_month_name(record.dec),
+								dec_paid : record.dec_paid
 				            });
-				             console.log('Partner :' + record.partner_id);
+				             console.log('Partner :' + self.convert_month_name(record.oct));
 				         });
                     });
     },
+	convert_month_name: function(month) {
+		var result;
+		switch(month) {
+			case 1 :
+				result = 'Jan';
+				break;
+			case 2 :
+				result = 'Feb';
+				break;	
+			case 3 :
+				result = 'Mar';
+				break;			
+			case 4 :
+				result = 'Apr';
+				break;	
+			case 5 :
+				result = 'May';
+				break;
+			case 6 :
+				result = 'Jun';
+				break;
+			case 7 :
+				result = 'Jul';
+				break;
+			case 8 :
+				result = 'Aug';
+				break;
+			case 9 :
+				result = 'Sept';
+				break;
+			case 10 :
+				result = 'Oct';
+				break;
+			case 11 :
+				result = 'Nov';
+				break;
+			case 12 :
+				result = 'Dec';
+				break;
+			default : 
+				result = '';
+				break;
+		}
+		return result;	
+	},
     update_data: function (domain, groupbys) {
         this.domain = domain;
         this.groupbys = groupbys;
@@ -62,10 +132,12 @@ return Widget.extend({
         }
     },
     display_billing: function () {
-        //var self = this;
-        //var data = self.data;
         this.$el.empty();
         this.$el.append(QWeb.render('BillingView',{rows:this.data}));
+    },
+	set_measure: function (measure) {
+        this.measure = measure;
+        return this.load_data().then(this.proxy('_display'));
     },
 	destroy: function () {
         nv.utils.offWindowResize(this.to_remove);

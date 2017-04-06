@@ -8,13 +8,12 @@ var QWeb = core.qweb;
 var _lt = core._lt;
 
 var BillingView = View.extend({
-	//template: "BillingView",
 	display_name: _lt('Billing'),
 	view_type: "billing",
 	icon: 'fa-list',
 	init: function () {
 		this._super.apply(this, arguments);
-		this.active_measure = '';
+		this.active_measure = 'Payroll';
 		this.widget = undefined;
 		this.initial_groupbys = [];
 	},
@@ -44,7 +43,6 @@ var BillingView = View.extend({
 	on_button_click: function (event) {
         var $target = $(event.target);
         if ($target.hasClass('o_graph_button')) {
-            //this.widget.set_mode($target.data('mode'));
             this.$buttons.find('.o_graph_button.active').removeClass('active');
             $target.addClass('active');
         }
@@ -55,7 +53,7 @@ var BillingView = View.extend({
             event.preventDefault();
             event.stopPropagation();
             this.update_measure();
-            //this.widget.set_measure(this.active_measure);
+            this.widget.set_measure(this.active_measure);
         }
     },
     update_measure: function () {
@@ -63,6 +61,7 @@ var BillingView = View.extend({
         this.$measure_list.find('li').each(function (index, li) {
             $(li).toggleClass('selected', $(li).data('field') === self.active_measure);
         });
+		$(".text-measure").html(self.active_measure);
     },
 	do_show: function () {
         this.do_push_state({});
@@ -82,7 +81,7 @@ var BillingView = View.extend({
             this.widget.appendTo(this.$el);
         } else {
             var groupbys = group_by.length ? group_by : this.initial_groupbys.slice(0);
-            //this.widget.update_data(domain, groupbys);
+            this.widget.update_data(domain, groupbys);
         }
 
 

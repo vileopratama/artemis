@@ -10,8 +10,15 @@ class ProjectTarget(models.Model):
 	_inherit = ['mail.thread']
 	_order = 'date_period_start desc'
 	
-	project_line_id = fields.Many2one(comodel_name='bdo.project.lines', string='Project Code', required=True,
-	                                  states={'draft': [('readonly', False)]}, readonly=True)
+	def _get_default_project_id(self):
+		for target in self:
+			if target.project_line_id:
+				target.project_id = target.project_line_id.project_id.id
+				
+	project_id = fields.Many2one(comodel_name='bdo.project', string='Project', ondelete='restrict', store=False,
+	                             required=True,default=_get_default_project_id())
+	project_line_id = fields.Many2one(comodel_name='bdo.project.lines', string='Service', required=True,
+	                                  states={'draft': [('readonly', False)]}, readonly=True, store=True)
 	date_invoice = fields.Date(string='Date Invoice', store=True)
 	name = fields.Char(string='Invoice No', readonly=True)
 	name_file = fields.Char(string='File')
@@ -27,18 +34,19 @@ class ProjectTarget(models.Model):
 	date_period_end = fields.Date(string='To', required=True, states={'draft': [('readonly', False)]}, readonly=True)
 	date_period_month_total = fields.Integer(compute='_compute_period_month_total', string='Total Month', readonly=True,
 	                                         store=True)
-	jan_period = fields.Boolean(compute='_compute_period_month', string='Jan', readonly=True,store=True,default=False)
-	feb_period = fields.Boolean(compute='_compute_period_month', string='Feb', readonly=True,store=True,default=False)
-	mar_period = fields.Boolean(compute='_compute_period_month', string='Mar', readonly=True,store=True,default=False)
-	apr_period = fields.Boolean(compute='_compute_period_month', string='Apr', readonly=True,store=True,default=False)
-	may_period = fields.Boolean(compute='_compute_period_month', string='May', readonly=True,store=True,default=False)
-	jun_period = fields.Boolean(compute='_compute_period_month', string='Jun', readonly=True,store=True,default=False)
-	jul_period = fields.Boolean(compute='_compute_period_month', string='Jul', readonly=True,store=True,default=False)
-	aug_period = fields.Boolean(compute='_compute_period_month', string='Aug', readonly=True,store=True,default=False)
-	sept_period= fields.Boolean(compute='_compute_period_month', string='Sept',readonly=True,store=True,default=False)
-	oct_period = fields.Boolean(compute='_compute_period_month', string='Oct', readonly=True,store=True,default=False)
-	nov_period = fields.Boolean(compute='_compute_period_month', string='Nov', readonly=True,store=True,default=False)
-	dec_period = fields.Boolean(compute='_compute_period_month', string='Dec', readonly=True,store=True,default=False)
+	jan_period = fields.Boolean(compute='_compute_period_month', string='Jan', readonly=True, store=True, default=False)
+	feb_period = fields.Boolean(compute='_compute_period_month', string='Feb', readonly=True, store=True, default=False)
+	mar_period = fields.Boolean(compute='_compute_period_month', string='Mar', readonly=True, store=True, default=False)
+	apr_period = fields.Boolean(compute='_compute_period_month', string='Apr', readonly=True, store=True, default=False)
+	may_period = fields.Boolean(compute='_compute_period_month', string='May', readonly=True, store=True, default=False)
+	jun_period = fields.Boolean(compute='_compute_period_month', string='Jun', readonly=True, store=True, default=False)
+	jul_period = fields.Boolean(compute='_compute_period_month', string='Jul', readonly=True, store=True, default=False)
+	aug_period = fields.Boolean(compute='_compute_period_month', string='Aug', readonly=True, store=True, default=False)
+	sept_period = fields.Boolean(compute='_compute_period_month', string='Sept', readonly=True, store=True,
+	                             default=False)
+	oct_period = fields.Boolean(compute='_compute_period_month', string='Oct', readonly=True, store=True, default=False)
+	nov_period = fields.Boolean(compute='_compute_period_month', string='Nov', readonly=True, store=True, default=False)
+	dec_period = fields.Boolean(compute='_compute_period_month', string='Dec', readonly=True, store=True, default=False)
 	year_period = fields.Char(string='Year', size=4, store=True, readonly=True)
 	amount = fields.Float(compute='_compute_period_month_total', string='Amount', readonly=True, store=True,
 	                      digits=(16, 2))
@@ -67,6 +75,13 @@ class ProjectTarget(models.Model):
 			name = record.partner_id + ' > ' + record.service_id
 			result.append((record.id, name))
 		return result
+	
+	@api.onchange('project_id')
+	def _onchange_project_id(self):
+		if self.project_id:
+			return {'domain': {'project_line_id': [('project_id', '=', self.project_id.id)]}}
+		else:
+			return {'domain': {'project_line_id': [('project_id', '=', 0)]}}
 	
 	@api.multi
 	@api.depends('date_period_start', 'date_period_end', 'project_line_id')
@@ -103,7 +118,7 @@ class ProjectTarget(models.Model):
 	def _compute_period_month(self):
 		for target in self:
 			if target.project_line_id and target.date_period_start and target.date_period_end:
-				#default to false
+				# default to false
 				self.jan_period = False
 				self.feb_period = False
 				self.mar_period = False
@@ -112,14 +127,14 @@ class ProjectTarget(models.Model):
 				self.jun_period = False
 				self.jul_period = False
 				self.aug_period = False
-				self.sept_period= False
+				self.sept_period = False
 				self.oct_period = False
 				self.nov_period = False
 				self.dec_period = False
 				
-				month_start = dt.strptime(target.date_period_start,"%Y-%m-%d")
+				month_start = dt.strptime(target.date_period_start, "%Y-%m-%d")
 				month_start = month_start.month
-				#month_start = month_start.strip("0","")
+				# month_start = month_start.strip("0","")
 				month_total = self._month_between(target.date_period_start, target.date_period_end)
 				
 				i = month_start
@@ -151,8 +166,7 @@ class ProjectTarget(models.Model):
 						self.dec_period = True
 					
 					i = i + 1
-				
-				
+	
 	def action_set_invoice(self, data):
 		args = {
 			'state': 'invoice',

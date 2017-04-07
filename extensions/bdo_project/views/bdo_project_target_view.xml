@@ -28,7 +28,7 @@
 					<sheet>
 						<group colspan="12">
 							<field name="project_id"  options="{'no_create':True,'no_edit':True}"
-                                    domain="[('user_id', 'in', [uid])]" default_focus="1" placeholder="Project &amp; Client"/>
+                                    domain="[('user_id', 'in', [uid])]" default_focus="1" placeholder="Project &amp; Client" class="oe_edit_only"/>
 							<field name="project_line_id" options="{'no_create':True,'no_edit':True}"
 							       domain="[('user_id', 'in', [uid])]"  placeholder="Service"/>
 							<field name="user_id" />

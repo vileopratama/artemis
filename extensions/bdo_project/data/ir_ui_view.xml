@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<delete model="ir.ui.view" id="crm.view_partners_form_crm1"></delete>
+	</data>
+</odoo>

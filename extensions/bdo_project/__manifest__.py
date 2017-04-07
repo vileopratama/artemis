@@ -10,9 +10,10 @@
     'category': 'BDO CRM',
     'version': '10.0.1.0.1',
     'depends': [
-        'base','web_highcharts','web_highcharts_pie','hr','crm',
+        'base','web_highcharts','web_highcharts_pie','hr','crm_proposal',
     ],
     'data': [
+        'data/ir_ui_view.xml',
         'security/bdo_project_security.xml',
         'security/ir.model.access.csv',
         'views/bdo_project_menuitem.xml',

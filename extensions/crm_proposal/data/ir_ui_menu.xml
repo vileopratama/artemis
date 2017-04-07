@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<delete model="ir.ui.menu" id="crm.menu_crm_opportunities"></delete>
+		<delete model="ir.ui.menu" id="crm.crm_lead_menu_activities"></delete>
+		<delete model="ir.ui.menu" id="sales_team.menu_sale_report"></delete>
+		<delete model="ir.ui.menu" id="crm.crm_opportunity_report_menu"></delete>
+	</data>
+</odoo>

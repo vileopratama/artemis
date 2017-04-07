@@ -31,7 +31,7 @@
                             <group>
                                 <field name="date_create"/>
                                 <field name="partner_id"
-                                    string="Customer" domain="[('customer', '=', True)]"
+                                     domain="[('customer', '=', True)]"
                                     context="{'search_default_customer': 1}"/>
                             </group>
 
@@ -71,7 +71,7 @@
             <field name="arch" type="xml">
                 <search string="Search Proposal">
                     <field name="name"/>
-                    <field name="partner_id" operator="child_of" string="Customer"/>
+                    <field name="partner_id" operator="child_of" string="Client"/>
                     <field name="stage_id" domain="[]"/>
                     <separator/>
                     <filter string="Won" name="won"
@@ -88,7 +88,8 @@
             <field name="name">crm.proposal.kanban</field>
             <field name="model">crm.proposal</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban" on_create="crm_proposal.create_proposal_simplified">
+	            <!--on_create="crm_proposal.create_proposal_simplified"-->
+                <kanban default_group_by="stage_id" class="o_kanban_small_column o_opportunity_kanban">
                     <field name="color"/>
 	                <field name="active"/>
 	                <field name="total_amount"/>
@@ -187,8 +188,7 @@
 		                <group>
                             <group>
                                 <field name="date_create"/>
-                                <field name="partner_id"
-                                    string="Customer" domain="[('customer', '=', True)]"
+                                <field name="partner_id" domain="[('customer', '=', True)]"
                                     context="{'search_default_customer': 1}"/>
                             </group>
 
@@ -246,7 +246,7 @@
                 </p>
             </field>
         </record>
-
+	    
         <menuitem id="menu_crm_proposal"
                   action="crm_proposal.action_your_pipeline"
                   parent="sales_team.menu_sales"

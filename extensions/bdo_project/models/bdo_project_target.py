@@ -10,7 +10,7 @@ class ProjectTarget(models.Model):
 	_inherit = ['mail.thread']
 	_order = 'date_period_start desc'
 	
-	project_id = fields.Many2one(comodel_name='bdo.project', string='Project', ondelete='restrict', store=False,
+	project_id = fields.Many2one(comodel_name='bdo.project', string='Project', ondelete='restrict', store=True,
 	                             required=True)
 	project_line_id = fields.Many2one(comodel_name='bdo.project.lines', string='Service', required=True,
 	                                  states={'draft': [('readonly', False)]}, readonly=True, store=True)

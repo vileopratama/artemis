@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<templates>
+<templates xml:space="preserve">
 	<div t-name="ActionManager" class="o_content"/>
 	<t t-name="CrashManager.error">
 		<div class="o_error_detail">
@@ -14,9 +14,9 @@
                 <span class="text-measure">Payroll</span> <span class="caret"/>
             </button>
 	        <ul class="dropdown-menu o_graph_measures_list">
-		        <li t-foreach="measures" t-as="measure" t-att-data-field="measure.name">
+		        <!--<li t-foreach="measures" t-as="measure" t-att-data-field="measure.name">
                     <a href="#"><t t-esc="measure.name"/></a>
-                </li>
+                </li>-->
 	        </ul>
         </div>
     </t>
@@ -44,24 +44,23 @@
 					<t t-foreach="rows" t-as="row">
 						<tr>
 							<td><t t-esc="row.partner_id[1]"/></td>
-							<td><t t-esc='row.jan' /></td>
-							<td><t t-esc='row.feb' /></td>
-							<td><t t-esc='row.mar' /></td>
-							<td><t t-esc='row.apr' /></td>
-							<td><t t-esc='row.may' /></td>
-							<td><t t-esc='row.jun' /></td>
-							<td><t t-esc='row.jul' /></td>
-							<td><t t-esc='row.aug' /></td>
-							<td><t t-esc='row.sept' /></td>
-							<td><t t-esc='row.oct' /></td>
-							<td><t t-esc='row.nov' /></td>
-							<td><t t-esc='row.dec' /></td>
+							<td t-attf-class='#{ row.jan_paid ? "paid":""}'><t t-esc='row.jan' /></td>
+							<td t-attf-class='#{ row.feb_paid ? "paid":""}'><t t-esc='row.feb' /></td>
+							<td t-attf-class='#{ row.mar_paid ? "paid":""}'><t t-esc='row.mar' /></td>
+							<td t-attf-class='#{ row.apr_paid ? "paid":""}'><t t-esc='row.apr' /></td>
+							<td t-attf-class='#{ row.may_paid ? "paid":""}'><t t-esc='row.may' /></td>
+							<td t-attf-class='#{ row.jun_paid ? "paid":""}'><t t-esc='row.jun' /></td>
+							<td t-attf-class='#{ row.jul_paid ? "paid":""}'><t t-esc='row.jul' /></td>
+							<td t-attf-class='#{ row.aug_paid ? "paid":""}'><t t-esc='row.aug' /></td>
+							<td t-attf-class='#{ row.sept_paid ? "paid":""}'><t t-esc='row.sept' /></td>
+							<td t-attf-class='#{ row.oct_paid ? "paid":""}'><t t-esc='row.oct' /></td>
+							<td t-attf-class='#{ row.nov_paid ? "paid":""}'><t t-esc='row.nov' /></td>
+							<td t-attf-class='#{ row.dec_paid ? "paid":""}'><t t-esc='row.dec' /></td>
 						</tr>
 					</t>
 				</tbody>
 			</table>
 		</div>
-		
 	</t>
 	
 	<div t-name="BillingView.error" class="oe_view_nocontent" >

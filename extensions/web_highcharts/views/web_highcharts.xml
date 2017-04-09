@@ -6,8 +6,8 @@
                 <script type="text/javascript" src="web_highcharts/static/lib/highcharts.js"></script>
                 <script type="text/javascript" src="web_highcharts/static/lib/highcharts-3d.js"></script>
                 <script type="text/javascript" src="web_highcharts/static/lib/exporting.js"></script>
-                <script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_widget.js" />
-                <script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_view.js" />
+                <!--<script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_widget.js" />
+                <script type="text/javascript" src="/web_highcharts/static/src/js/views/highcharts_view.js" />-->
             </xpath>
         </template>
     </data>

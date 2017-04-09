@@ -23,7 +23,7 @@ class Question(models.Model):
     _order = 'sequence asc'
 
     name = fields.Char('Question', required=True, translate=True)
-    template_id = fields.Many2one(comodel_name='crm.prospective_client.template', string='Template', ondelete='cascade',
+    template_id = fields.Many2one(comodel_name='crm.prospective.client.template', string='Template', ondelete='cascade',
                                   required=True, default=lambda self: self.env.context.get('template_id'))
     sequence = fields.Integer(string='Sequence', default=10)
     description = fields.Html(string='Description', translate=True, oldname='descriptive_text')

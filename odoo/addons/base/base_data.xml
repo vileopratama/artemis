@@ -33,7 +33,7 @@
             <field name="name">BDO Konsultan Indonesia</field>
             <field name="partner_id" ref="main_partner"/>
             <field name="rml_header1">Because Relationship Matters</field>
-            <field name="currency_id" ref="base.USD"/>
+            <field name="currency_id" ref="base.EUR"/>
         </record>
 
         <record model="res.partner" id="base.partner_root">

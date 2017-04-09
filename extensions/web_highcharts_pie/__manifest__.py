@@ -9,7 +9,7 @@
     "website": "https://bdo.co.id",
     "license": "AGPL-3",
     "depends": [
-        "web",
+        "web",'web_highcharts'
     ],
     "data": [
         'views/chart.xml',

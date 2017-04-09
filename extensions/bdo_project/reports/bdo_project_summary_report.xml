@@ -5,7 +5,7 @@
             <field name="name">Summary Analysis</field>
             <field name="res_model">report.project.summary</field>
             <field name="view_type">form</field>
-            <field name="view_mode">tree,xchart,form,chart-pie</field>
+            <field name="view_mode">tree,form,chart-pie</field>
             <field name="context">{"search_default_current_year":1}</field>
         </record>
 
@@ -63,18 +63,7 @@
                 </chart-pie>
             </field>
         </record>
-		
-		<record id="project_summary_report_xchart" model="ir.ui.view">
-            <field name="model">report.project.summary</field>
-            <field name="arch" type="xml">
-                <xchart string="Summary Analysis" type="pie">
-                    <field name="year_invoice" type="row"/>
-                    <field name="total_pending" type="measure"/>
-                    <field name="total_paid" type="measure"/>
-                </xchart>
-            </field>
-        </record>
-		
+
 		<menuitem id="bdo_project_summary_report"
 		          parent="bdo_project_report_menu"
 		          name="Summary Analyst"

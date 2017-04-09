@@ -10,7 +10,7 @@
     'category': 'BDO CRM',
     'version': '10.0.1.0.1',
     'depends': [
-        'base','web_highcharts','web_highcharts_pie','hr','crm_proposal',
+        'base','web_highcharts_pie','hr','crm_proposal','crm_prospective_client',
     ],
     'data': [
         'data/ir_ui_view.xml',
@@ -29,15 +29,9 @@
         'views/bdo_project_target_view.xml',
         'views/bdo_project_invoice_view.xml',
         'views/res_partner_view.xml',
-        #'data/hr_employee.xml',
-        #'data/bdo_project_service.xml',
-        #'data/res_partner.xml',
-        #'reports/bdo_project_menuitem.xml',
-        #'reports/bdo_existing_clients_list_report.xml',
         'reports/bdo_project_summary_report.xml',
         'reports/bdo_project_billing_summary_report.xml',
-        #'reports/bdo_list_of_tax_invoices_report.xml',
-        #'reports/bdo_schedule_invoices_report.xml',
+
     ],
 	"qweb": [
         'static/src/xml/bdo_project.xml',

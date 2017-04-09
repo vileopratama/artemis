@@ -37,6 +37,8 @@
 
                             <group>
                                 <field name="date_end"/>
+                                <field name="name_file" class="oe_edit_only"/>
+                                <field widget="binary" height="64" name="name_file_attachment" filename="name_file" />
                             </group>
                         </group>
 

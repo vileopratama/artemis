@@ -13,6 +13,7 @@
         'crm',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'data/ir_ui_menu.xml',
         'wizard/crm_proposal_lost_view.xml',
         'views/res_config_view.xml',

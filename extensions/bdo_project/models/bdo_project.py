@@ -42,7 +42,7 @@ class Project(models.Model):
     employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,
                                   store=True)
     user_id = fields.Many2one(comodel_name='res.users', string='User Related', compute='_compute_acl', readonly=True,
-                              store=True)
+                              store=True,required=True)
     date_reminder = fields.Date(string='Reminder Date', index=True, default=fields.Datetime.now)
     employees = fields.One2many('bdo.project.employees', inverse_name='project_id', string='Team Member')
     remarks = fields.Text(string='Remarks')
@@ -135,6 +135,9 @@ class ProjectLines(models.Model):
                                      readonly=True)
     employee_id = fields.Integer(related='project_id.employee_id.id', string='Sync Employee ID')
     user_id = fields.Integer(related='project_id.user_id.id', string='Related User')
+
+    _sql_constraints = [('unique_service', 'unique(project_id, service_id)',
+                         'Cannot Use one tracker twice!\nPlease, select a different service')]
 
     @api.multi
     def name_get(self):

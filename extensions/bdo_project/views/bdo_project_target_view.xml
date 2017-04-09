@@ -84,7 +84,7 @@
             <field name="name">Invoice Schedule</field>
             <field name="model">bdo.project.invoice</field>
             <field name="arch" type="xml">
-                <tree string="Project Target" decoration-info="state == 'draft'">
+                <tree string="Project Target" decoration-info="state == 'draft'" decoration-muted="state in ('invoice','paid')">
 					<field name="partner_id"/>
                     <field name="date_invoice"/>
 					<field name="service_id"/>

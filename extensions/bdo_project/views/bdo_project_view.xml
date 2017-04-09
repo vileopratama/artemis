@@ -36,6 +36,7 @@
 						<group>
 							<group>
 								<field name="partner_id"/>
+								<field name="proposal_id" />
 								<field name="name" />
 								<field name="el" readonly="1" class="oe_edit_only"/>
 								<field widget="binary" height="64" name="el_attachment" filename="el" />

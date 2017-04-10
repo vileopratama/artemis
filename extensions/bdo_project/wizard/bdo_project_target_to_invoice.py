@@ -15,20 +15,19 @@ class ProjectInvoice(models.TransientModel):
             return project.id
         return False
     
-    def _default_project_date_invoice(self):
-        active_id = self.env.context.get('active_id')
-        if active_id:
-            project = self.env['bdo.project.invoice'].browse(active_id)
-            return project.date_invoice
-        return False
+    #def _default_project_date_invoice(self):
+    #    active_id = self.env.context.get('active_id')
+    #    if active_id:
+    #        project = self.env['bdo.project.invoice'].browse(active_id)
+    #        return project.date_invoice
+    #    return False
 
     project_invoice_id = fields.Many2one('bdo.project.invoice', string='Project Target', required=True,
                                         readonly=True,store=True, default=_default_project_invoice_id)
     name = fields.Char(string='Invoice No',required=True)
     name_file = fields.Char(string='File')
     name_file_attachment = fields.Binary(string='Attachment')
-    date_invoice = fields.Date(string='Invoice Date',required=True, default=_default_project_date_invoice,store=True,
-                               readonly=True)
+    date_invoice = fields.Date(string='Invoice Date',required=True,store=True)
     total_due = fields.Integer(string='Term of payment (days)',required=True)
     date_payment_due = fields.Date(compute='_compute_date_due', string='Expected payment date',
                                    readonly=True, store=True)

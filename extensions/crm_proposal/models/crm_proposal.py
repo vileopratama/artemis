@@ -28,7 +28,7 @@ class Proposal(models.Model):
             currency = self.env.user.company_id.currency_id.id
         return currency
 
-    name = fields.Char(string='Proposal No', required=True, index=True)
+    name = fields.Char(string='Proposal No', required=True, index=True,default='-')
     name_file = fields.Char(string='File')
     name_file_attachment = fields.Binary(string='Attachment')
     active = fields.Boolean('Active', default=True)

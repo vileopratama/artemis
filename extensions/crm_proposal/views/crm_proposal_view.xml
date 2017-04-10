@@ -155,17 +155,7 @@
                                     attrs="{'invisible': [('active', '=', True), ('probability', '&lt;', 100)]}">
                                 <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                             </button>
-			                <!--
-			                <button class="oe_stat_button" type="object"
-                                context="{'partner_id': partner_id}"
-                                name="action_schedule_activity" icon="fa-calendar">
-                                <div class="o_stat_info">
-                                    <field name="activity_count" class="o_stat_value"/>
-                                    <span class="o_stat_text" attrs="{'invisible': [('activity_count', '&lt;', 2)]}"> Activity's</span>
-                                    <span class="o_stat_text" attrs="{'invisible': [('activity_count', '&gt;', 1)]}"> Activity</span>
-                                </div>
-                            </button>
-                            -->
+			                
 		                </div>
 		                <div class="label label-danger pull-right" attrs="{'invisible': ['|', ('probability', '&gt;', 0), ('active', '=', True)]}">Lost</div>
                         <div class="label label-success pull-right" attrs="{'invisible': [('probability', '&lt;', 100)]}">Won</div>

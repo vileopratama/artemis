@@ -5,7 +5,8 @@ from odoo import models, fields
 class ProjectInvoice(models.Model):
     _name = 'bdo.project.invoice'
     _inherit = 'bdo.project.invoice'
-
+    
+    
     tax_invoice = fields.Char(string='Tax Invoice Number')
     tax_invoice_file = fields.Char(string='File')
     tax_invoice_attachment = fields.Binary(string='Attachment')

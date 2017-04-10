@@ -23,8 +23,8 @@
 	text-align:center;
 	color : #ffffff;
 }
-.paid {
-	background:#b20028;
+.o_list_view.table td.paid {
+    background:#269389;
 	text-align:center;
-	color : #269389;
+    color:#ffffff;
 }

@@ -20,13 +20,13 @@ class ProjectSummaryReport(models.Model):
 			CREATE OR REPLACE VIEW report_project_summary AS (
 				SELECT
 					MIN(bpi.id) as id,
-					date_part('year',bpi.date_invoice) AS year_invoice,
+					date_part('year',bpi.date_on_scheduled) AS year_invoice,
 					SUM(amount_equivalent) as total_target,
 					SUM(CASE WHEN state <> 'paid' THEN amount_equivalent ELSE 0 END) as total_pending,
 					SUM(CASE WHEN state = 'paid' THEN amount_equivalent ELSE 0 END) as total_paid
 				FROM
 					bdo_project_invoice as bpi
 				GROUP BY
-					EXTRACT(YEAR FROM bpi.date_invoice)
+					EXTRACT(YEAR FROM bpi.date_on_scheduled)
 		    )
 		""")

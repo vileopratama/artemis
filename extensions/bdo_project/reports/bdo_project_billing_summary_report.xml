@@ -9,11 +9,11 @@
 			<field name="context">{"search_default_current_year":1}</field>
         </record>
 		
-		<record id="project_summary_report_search" model="ir.ui.view">
+		<record id="project_billing_summary_report_search" model="ir.ui.view">
             <field name="name">Summary Analysis Search</field>
-            <field name="model">report.project.summary</field>
+            <field name="model">report.billing.summary</field>
             <field name="arch" type="xml">
-                <search string="Domestic Orders">
+                <search string="Billing Summary">
                     <field name="year_invoice"/>
                     <filter string="Current Year" name="current_year" domain="[('year_invoice','&gt;=',(context_today()-relativedelta(years=1)).strftime('%%Y')),('year_invoice','&lt;=', time.strftime('%%Y'))]"/>
                 </search>

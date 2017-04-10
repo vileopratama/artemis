@@ -293,21 +293,21 @@ class ProjectTarget(models.Model):
 			month_start = month_start.month
 			month_total = self._month_between(values.get('date_period_start') if values.get('date_period_start') else rec.date_period_start, values.get('date_period_end') if values.get('date_period_end') else rec.date_period_end)
 			
-			if values.get('date_period_start') or values.get('date_period_end'):
-				self.write({
-					'jan_period' : 0,
-					'feb_period' : 0,
-					'mar_period' : 0,
-					'apr_period' : 0,
-					'may_period' : 0,
-					'jun_period' : 0,
-					'jul_period' : 0,
-					'aug_period' : 0,
-					'sept_period' : 0,
-					'oct_period' : 0,
-					'nov_period' : 0,
-					'dec_period' : 0,
-				})
+			#if values.get('date_period_start') or values.get('date_period_end'):
+			#	self.write({
+			#		'jan_period' : 0,
+			#		'feb_period' : 0,
+			#		'mar_period' : 0,
+			#		'apr_period' : 0,
+			#		'may_period' : 0,
+			#		'jun_period' : 0,
+			#		'jul_period' : 0,
+			#		'aug_period' : 0,
+			#		'sept_period' : 0,
+			#		'oct_period' : 0,
+			#		'nov_period' : 0,
+			#		'dec_period' : 0,
+			#	})
 			
 			i = month_start
 			jan = 13

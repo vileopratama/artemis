@@ -26,6 +26,7 @@
 				<thead>
 					<tr>
 						<th data-id="partner_id">Client Name</th>
+						<th data-id="year_invoice">Year</th>
 						<th>Jan</th>
 						<th>Feb</th>
 						<th>Mar</th>
@@ -44,6 +45,7 @@
 					<t t-foreach="rows" t-as="row">
 						<tr>
 							<td><t t-esc="row.partner_id[1]"/></td>
+							<td><t t-esc="row.year_invoice"/></td>
 							<td t-attf-class='#{ row.jan_paid ? "paid":""}'><t t-esc='row.jan' /></td>
 							<td t-attf-class='#{ row.feb_paid ? "paid":""}'><t t-esc='row.feb' /></td>
 							<td t-attf-class='#{ row.mar_paid ? "paid":""}'><t t-esc='row.mar' /></td>

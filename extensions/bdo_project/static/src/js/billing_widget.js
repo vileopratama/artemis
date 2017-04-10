@@ -23,15 +23,17 @@ return Widget.extend({
     },
     load_data:function () {
         var self = this;
+        this.domain = this.domain.concat([['service_id.name','=',self.measure]]);
         self.data = [];
         return this.model
                     .query()
-					.filter([['service_id.name','=',self.measure]])
+					.filter(this.domain)
                     .all()
                     .then(function(records) {
                         _.each(records, function (record) {
                             self.data.push({
 				                partner_id: record.partner_id,
+				                year_invoice: record.year_invoice,
 								jan : self.convert_month_name(record.jan),
 								jan_paid : record.jan_paid,
 								feb : self.convert_month_name(record.feb),
@@ -57,7 +59,7 @@ return Widget.extend({
 								dec : self.convert_month_name(record.dec),
 								dec_paid : record.dec_paid
 				            });
-				             console.log('Partner :' + self.convert_month_name(record.oct));
+				             console.log('Year :' + record.year_invoice + ' partner : ' + record.partner_id);
 				         });
                     });
     },

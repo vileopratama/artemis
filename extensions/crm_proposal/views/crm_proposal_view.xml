@@ -207,8 +207,9 @@
             <field name="name">crm.proposal.tree</field>
             <field name="model">crm.proposal</field>
             <field name="arch" type="xml">
-                <tree string="Proposal" decoration-muted="probability == 100">>
+                <tree string="Proposal" decoration-muted="probability == 100">
                     <field name="create_date"/>
+	                <field name="date_follow_up"/>
                     <field name="name"/>
                     <field name="partner_id" />
                     <field name="date_end"/>

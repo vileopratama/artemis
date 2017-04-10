@@ -23,8 +23,9 @@
 	text-align:center;
 	color : #ffffff;
 }
+
 .o_list_view.table td.paid {
     background:#269389;
-	text-align:center;
+	text-align:left;
     color:#ffffff;
 }

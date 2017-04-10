@@ -42,6 +42,7 @@ class ReportBillingSummary(models.Model):
 					MIN(bp.partner_id) AS id,
 				    bp.partner_id AS partner_id,
 					bpl.service_id AS service_id,
+					EXTRACT(YEAR FROM bpi.date_invoice) as year_invoice,
 					SUM(CASE WHEN bpi.jan_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS jan,
                     SUM(CASE WHEN bpi.jan_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS jan_paid,
                     SUM(CASE WHEN bpi.feb_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS feb,
@@ -55,13 +56,13 @@ class ReportBillingSummary(models.Model):
                     SUM(CASE WHEN bpi.jun_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS jun,
                     SUM(CASE WHEN bpi.jun_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS jun_paid,
                     SUM(CASE WHEN bpi.jul_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS jul,
-                    SUM(CASE WHEN bpi.jun_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS jul_paid,
+                    SUM(CASE WHEN bpi.jul_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS jul_paid,
                     SUM(CASE WHEN bpi.aug_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS aug,
-                    SUM(CASE WHEN bpi.jun_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS aug_paid,
+                    SUM(CASE WHEN bpi.aug_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS aug_paid,
                     SUM(CASE WHEN bpi.sept_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS sept,
-                    SUM(CASE WHEN bpi.jun_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS sept_paid,
+                    SUM(CASE WHEN bpi.sept_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS sept_paid,
                     SUM(CASE WHEN bpi.oct_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS oct,
-                    SUM(CASE WHEN bpi.jun_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS oct_paid,
+                    SUM(CASE WHEN bpi.oct_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS oct_paid,
                     SUM(CASE WHEN bpi.nov_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS nov,
                     SUM(CASE WHEN bpi.nov_period<>0 AND bpi.state='paid' THEN 1 ELSE 0 END) AS nov_paid,
                     SUM(CASE WHEN bpi.dec_period<>0 THEN EXTRACT(MONTH FROM bpi.date_invoice) ELSE 0 END) AS dec,
@@ -75,9 +76,9 @@ class ReportBillingSummary(models.Model):
 				INNER JOIN
 					res_partner AS rp ON (rp.id = bp.partner_id)
 				GROUP BY 
-					bp.partner_id,rp.name,bpl.service_id
+					bp.partner_id,rp.name,bpl.service_id,EXTRACT(YEAR FROM bpi.date_invoice)
 				ORDER BY 
-					rp.name ASC
+					rp.name ASC,EXTRACT(YEAR FROM bpi.date_invoice) ASC
 			)
 		""")
 

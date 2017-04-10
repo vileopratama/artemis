@@ -8,6 +8,7 @@ class ReportBillingSummary(models.Model):
 
 	partner_id = fields.Many2one(comodel_name='res.partner',string='Client')
 	service_id = fields.Many2one(comodel_name='bdo.project.service',string='Service')
+	year_invoice = fields.Char(string='Year',size=8)
 	jan = fields.Integer(string='Jan',default=0,size=1)
 	jan_paid = fields.Integer(string='Jan Paid',default=0,size=1)
 	feb = fields.Integer(string='Feb',default=0,size=1)

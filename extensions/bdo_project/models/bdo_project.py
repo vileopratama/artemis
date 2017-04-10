@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 _logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class Project(models.Model):
     code = fields.Char(string='Project Code', size=60, required=True,
                        help='This Project Code can reference to Timesheeet Project Code')
     partner_id = fields.Many2one(comodel_name='res.partner', string='Client', index=True,
-                                 domain=[('is_company', '=', True)])
+                                 domain=[('is_company', '=', True)],required=True)
     proposal_id = fields.Many2one(comodel_name='crm.proposal', string='Proposal No', index=True)
     type = fields.Selection(
         [('recurring services', 'Recurring Services'), ('non-recurring services', 'Non-Recurring Services')],
@@ -42,7 +42,7 @@ class Project(models.Model):
     employee_id = fields.Many2one(comodel_name='hr.employee', string='PIC', compute='_compute_acl', readonly=True,
                                   store=True)
     user_id = fields.Many2one(comodel_name='res.users', string='User Related', compute='_compute_acl', readonly=True,
-                              store=True,required=True)
+                              store=True)
     date_reminder = fields.Date(string='Reminder Date', index=True, default=fields.Datetime.now)
     employees = fields.One2many('bdo.project.employees', inverse_name='project_id', string='Team Member')
     remarks = fields.Text(string='Remarks')
@@ -117,7 +117,7 @@ class Project(models.Model):
                     # for user in users:
                     el.user_id = users
 
-
+    
 class ProjectLines(models.Model):
     _name = 'bdo.project.lines'
     _description = "Project Line Invoice"

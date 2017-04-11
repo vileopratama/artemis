@@ -1,26 +1,26 @@
-.on_before_30 {
-	background:#3bcf8f;
-	text-align:center;
+.o_list_view.table td.on_before_30 {
+	background:#ffffff;
+	text-align:left;
+	color : #333;
+}
+.o_list_view.table td.on_before_60 {
+	background:#e8f713;
+	text-align:left;
+	color : #333;
+}
+.o_list_view.table td.on_before_90 {
+	background:#ff6060;
+	text-align:left;
 	color : #ffffff;
 }
-.on_before_60 {
-	background:#5be1ff;
-	text-align:center;
+.o_list_view.table td.on_before_120 {
+	background:#e01a1a;
+	text-align:left;
 	color : #ffffff;
 }
-.on_before_90 {
-	background:#fc5d82;
-	text-align:center;
-	color : #ffffff;
-}
-.on_before_120 {
-	background:#ef2b58;
-	text-align:center;
-	color : #ffffff;
-}
-.on_after_120 {
-	background:#b20028;
-	text-align:center;
+.o_list_view.table td.on_after_120 {
+	background:#a30000;
+	text-align:left;
 	color : #ffffff;
 }
 

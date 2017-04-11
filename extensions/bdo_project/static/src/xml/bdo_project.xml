@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<templates xml:space="preserve">
+<templates id="bdo_project.template1" xml:space="preserve">
 	<div t-name="ActionManager" class="o_content"/>
 	<t t-name="CrashManager.error">
 		<div class="o_error_detail">
@@ -46,18 +46,18 @@
 						<tr>
 							<td><t t-esc="row.partner_id[1]"/></td>
 							<td><t t-esc="row.year_invoice"/></td>
-							<td t-attf-class='#{ row.jan_paid ? "paid":""}'><t t-esc='row.jan' /></td>
-							<td t-attf-class='#{ row.feb_paid ? "paid":""}'><t t-esc='row.feb' /></td>
-							<td t-attf-class='#{ row.mar_paid ? "paid":""}'><t t-esc='row.mar' /></td>
-							<td t-attf-class='#{ row.apr_paid ? "paid":""}'><t t-esc='row.apr' /></td>
-							<td t-attf-class='#{ row.may_paid ? "paid":""}'><t t-esc='row.may' /></td>
-							<td t-attf-class='#{ row.jun_paid ? "paid":""}'><t t-esc='row.jun' /></td>
-							<td t-attf-class='#{ row.jul_paid ? "paid":""}'><t t-esc='row.jul' /></td>
-							<td t-attf-class='#{ row.aug_paid ? "paid":""}'><t t-esc='row.aug' /></td>
-							<td t-attf-class='#{ row.sept_paid ? "paid":""}'><t t-esc='row.sept' /></td>
-							<td t-attf-class='#{ row.oct_paid ? "paid":""}'><t t-esc='row.oct' /></td>
-							<td t-attf-class='#{ row.nov_paid ? "paid":""}'><t t-esc='row.nov' /></td>
-							<td t-attf-class='#{ row.dec_paid ? "paid":""}'><t t-esc='row.dec' /></td>
+							<td t-attf-class='#{ row.jan_paid ? "paid":""}#{ row.jan_aging ? row.jan_aging:""}'><t t-esc='row.jan' /></td>
+							<td t-attf-class='#{ row.feb_paid ? "paid":""}#{ row.feb_aging ? row.feb_aging:""}'><t t-esc='row.feb' /></td>
+							<td t-attf-class='#{ row.mar_paid ? "paid":""}#{ row.mar_aging ? row.mar_aging:""}'><t t-esc='row.mar' /></td>
+							<td t-attf-class='#{ row.apr_paid ? "paid":""}#{ row.apr_aging ? row.apr_aging:""}'><t t-esc='row.apr' /></td>
+							<td t-attf-class='#{ row.may_paid ? "paid":""}#{ row.may_aging ? row.may_aging:""}'><t t-esc='row.may' /></td>
+							<td t-attf-class='#{ row.jun_paid ? "paid":""}#{ row.jun_aging ? row.jun_aging:""}'><t t-esc='row.jun' /></td>
+							<td t-attf-class='#{ row.jul_paid ? "paid":""}#{ row.jul_aging ? row.jul_aging:""}'><t t-esc='row.jul' /></td>
+							<td t-attf-class='#{ row.aug_paid ? "paid":""}#{ row.aug_aging ? row.aug_aging:""}'><t t-esc='row.aug' /></td>
+							<td t-attf-class='#{ row.sept_paid ? "paid":""}#{ row.sept_aging ? row.sept_aging:""}'><t t-esc='row.aug' /></td>
+							<td t-attf-class='#{ row.oct_paid ? "paid":""}#{ row.oct_aging ? row.oct_aging:""}'><t t-esc='row.oct' /></td>
+							<td t-attf-class='#{ row.nov_paid ? "paid":""}#{ row.nov_aging ? row.nov_aging:""}'><t t-esc='row.nov' /></td>
+							<td t-attf-class='#{ row.dec_paid ? "paid":""}#{ row.dec_aging ? row.dec_aging:""}'><t t-esc='row.dec' /></td>
 						</tr>
 					</t>
 				</tbody>

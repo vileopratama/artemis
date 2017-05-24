@@ -38,8 +38,9 @@
 								<field name="partner_id"/>
 								<field name="proposal_id" />
 								<field name="name" />
-								<field name="el" readonly="1" class="oe_edit_only"/>
-								<field widget="binary" height="64" name="el_attachment" filename="el" />
+								<field name="el_attachment_ids" widget="many2many_binary"/>
+								<!--<field name="el" readonly="1" class="oe_edit_only"/>
+								<field widget="binary" height="64" name="el_attachment" filename="el" />-->
 								<field name="type" widget="radio" />
 								<field name="source" widget="radio" />
 								<field name="conflict_check" widget="radio" />
@@ -82,11 +83,11 @@
 									</tree>
 								</field>
 							</page>
-							<page string="Attachments">
+							<!--<page string="Attachments">
                                  <group>
                                     <field name="attachment_ids" widget="many2many_binary"/>
                                  </group>
-                            </page>
+                            </page>-->
 							<page string="Notes">
 								<group>
 									<field name="remarks" />

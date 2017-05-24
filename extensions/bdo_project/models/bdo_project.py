@@ -28,8 +28,9 @@ class Project(models.Model):
                               required=True, default='local')
     date_engagement = fields.Date(string='Date of engagement', index=True, default=fields.Datetime.now)
     name = fields.Char(string='No. Of EL', size=100)
-    el = fields.Char(string='EL File')
-    el_attachment = fields.Binary(string='Attachment')
+    #el = fields.Char(string='EL File')
+    #el_attachment = fields.Binary(string='Attachment')
+    el_attachment_ids = fields.Many2many(comodel_name='ir.attachment', string='EL Attachments')
     date_expiry_engagement = fields.Date(string='Expiry date', index=True, default=fields.Datetime.now)
     currency_id = fields.Many2one(comodel_name='res.currency', string='Currency', required=True, index=True,
                                   default=_get_currency)
